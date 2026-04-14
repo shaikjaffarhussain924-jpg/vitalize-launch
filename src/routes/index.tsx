@@ -492,7 +492,7 @@ function HomePage() {
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=450&fit=crop"
+                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=450&fit=crop"
                     alt="Before skin treatment"
                     position="left"
                   />
