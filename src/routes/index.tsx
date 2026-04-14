@@ -186,14 +186,15 @@ function HomePage() {
         </div>
       </section>
 
-      {/* URGENCY BANNER */}
-      <section className="bg-gradient-to-r from-gold via-gold to-gold py-3.5 overflow-hidden">
+      {/* QUIET BANNER */}
+      <section className="bg-navy py-3.5 overflow-hidden">
         <div className="animate-marquee flex gap-16 whitespace-nowrap">
           {Array.from({ length: 4 }).map((_, i) => (
-            <span key={i} className="text-sm font-semibold text-gold-foreground flex items-center gap-2 tracking-wide">
-              🎯 Limited Slots Available This Week — Book Your Free Consultation Today &nbsp;&nbsp; | &nbsp;&nbsp;
-              📞 Call Now: {CLINIC.phone} &nbsp;&nbsp; | &nbsp;&nbsp;
-              ⭐ Rated {CLINIC.rating}/5 by {CLINIC.reviewCount}+ Patients &nbsp;&nbsp; | &nbsp;&nbsp;
+            <span key={i} className="text-xs font-medium text-navy-foreground/60 flex items-center gap-2 tracking-[0.15em] uppercase">
+              Limited Availability This Week &nbsp;&nbsp; · &nbsp;&nbsp;
+              Complimentary Consultation &nbsp;&nbsp; · &nbsp;&nbsp;
+              Rated {CLINIC.rating}/5 by {CLINIC.reviewCount}+ Patients &nbsp;&nbsp; · &nbsp;&nbsp;
+              {CLINIC.phone} &nbsp;&nbsp; · &nbsp;&nbsp;
             </span>
           ))}
         </div>
@@ -329,7 +330,7 @@ function HomePage() {
             <div className="text-center mb-12">
               <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Testimonials</p>
               <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">What Our Patients Say</h2>
-              <p className="text-muted-foreground mt-3">⭐ {CLINIC.rating}/5 based on {CLINIC.reviewCount}+ Google Reviews</p>
+              <p className="text-muted-foreground mt-3">{CLINIC.rating}/5 based on {CLINIC.reviewCount}+ verified reviews</p>
             </div>
           </AnimatedSection>
           <div className="max-w-3xl mx-auto">
@@ -391,7 +392,7 @@ function HomePage() {
                   {isSubmitting ? "Submitting..." : "Book Free Consultation →"}
                 </Button>
               </div>
-              <p className="text-center text-xs text-navy-foreground/40 mt-4 tracking-wide">🔒 Your data is safe • Free consultation • No hidden charges</p>
+              <p className="text-center text-xs text-navy-foreground/40 mt-4 tracking-[0.1em] uppercase">Your data is secure · Complimentary consultation · Transparent pricing</p>
             </form>
           )}
         </div>
@@ -488,11 +489,11 @@ function HomePage() {
                 <h3 className="font-heading text-2xl font-semibold text-navy">{CLINIC.name}</h3>
                 <p className="text-muted-foreground mt-1.5 leading-relaxed">{CLINIC.address}</p>
               </div>
-              <div className="space-y-3 text-sm">
-                <p>📞 <a href={getCallLink()} className="text-gold hover:underline">{CLINIC.phone}</a></p>
-                <p>📧 {CLINIC.email}</p>
-                <p>🕐 {CLINIC.hours}</p>
-                <p>💬 <button onClick={() => openWhatsApp()} className="text-cta hover:underline">WhatsApp Us</button></p>
+              <div className="space-y-3 text-sm text-muted-foreground">
+                <p><a href={getCallLink()} className="text-gold hover:underline">{CLINIC.phone}</a></p>
+                <p>{CLINIC.email}</p>
+                <p>{CLINIC.hours}</p>
+                <p><button onClick={() => openWhatsApp()} className="text-cta hover:underline">Message us on WhatsApp</button></p>
               </div>
               <div className="flex gap-3 pt-3">
                 <a href={`https://maps.google.com/?q=${encodeURIComponent(CLINIC.address)}`} target="_blank" rel="noopener noreferrer">
@@ -506,7 +507,7 @@ function HomePage() {
                   </Button>
                 </Link>
               </div>
-              <p className="text-xs text-muted-foreground">🌐 Available in Hindi & English</p>
+              <p className="text-xs text-muted-foreground tracking-wide">Available in Hindi & English</p>
             </div>
           </div>
         </div>

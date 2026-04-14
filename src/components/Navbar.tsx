@@ -26,12 +26,12 @@ export function Navbar() {
       <div className="hidden md:block bg-navy text-navy-foreground text-sm py-2">
         <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-5">
-            <span className="tracking-wide text-navy-foreground/80">🏥 NABH Accredited</span>
-            <span className="text-navy-foreground/40">|</span>
-            <span className="tracking-wide text-navy-foreground/80">📍 {CLINIC.address}</span>
+            <span className="tracking-wide text-navy-foreground/80">NABH Accredited</span>
+            <span className="text-navy-foreground/20">|</span>
+            <span className="tracking-wide text-navy-foreground/80">{CLINIC.address}</span>
           </div>
           <div className="flex items-center gap-5">
-            <span className="tracking-wide text-navy-foreground/80">🕐 {CLINIC.hours}</span>
+            <span className="tracking-wide text-navy-foreground/80">{CLINIC.hours}</span>
             <span className="text-navy-foreground/40">|</span>
             <a href={getCallLink()} className="flex items-center gap-1.5 text-gold hover:text-gold/80 transition-colors font-medium">
               <Phone className="w-3.5 h-3.5" /> {CLINIC.phone}
@@ -134,7 +134,7 @@ export function Navbar() {
                   <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold rounded-full tracking-wide">Book Appointment</Button>
                 </Link>
                 <a href={getCallLink()} className="block text-center py-2.5 text-sm font-medium text-cta hover:text-cta/80 transition-colors">
-                  📞 Call: {CLINIC.phone}
+                  Call: {CLINIC.phone}
                 </a>
               </div>
             </div>
