@@ -1,19 +1,465 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { AnimatedSection } from "@/components/AnimatedSection";
+import { CLINIC, SERVICES, DOCTORS, TESTIMONIALS, BLOG_POSTS } from "@/lib/constants";
+import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
+import { useCountUp } from "@/hooks/useCountUp";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { submitToWeb3Forms } from "@/lib/forms";
+import { useState, useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: `${CLINIC.name} — Best Multi-Specialty Clinic in ${CLINIC.city}` },
+      { name: "description", content: `${CLINIC.name} is a NABH accredited multi-specialty clinic in ${CLINIC.city}. 25+ expert doctors, 15,000+ happy patients. Book your free consultation today.` },
+      { property: "og:title", content: `${CLINIC.name} — Best Multi-Specialty Clinic in ${CLINIC.city}` },
+      { property: "og:description", content: `NABH accredited clinic with 25+ expert doctors in ${CLINIC.city}. Book free consultation today.` },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "MedicalOrganization",
+          name: CLINIC.name,
+          url: CLINIC.url,
+          telephone: CLINIC.phone,
+          address: { "@type": "PostalAddress", streetAddress: "123, Jubilee Hills", addressLocality: CLINIC.city, addressRegion: "Telangana", postalCode: "500033", addressCountry: "IN" },
+          openingHours: CLINIC.hoursSchema,
+          priceRange: "₹₹",
+          aggregateRating: { "@type": "AggregateRating", ratingValue: CLINIC.rating, reviewCount: CLINIC.reviewCount },
+        }),
+      },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+const SERVICE_ICONS: Record<string, React.ElementType> = {
+  Stethoscope, Heart, Sparkles, Bone: Shield, Baby: Users, HeartHandshake: Award,
+};
+
+// Booking form
+const bookingSchema = z.object({
+  name: z.string().min(2).max(100),
+  phone: z.string().min(10).max(15),
+  service: z.string().min(1),
+  date: z.string().min(1),
+});
+type BookingData = z.infer<typeof bookingSchema>;
+
+function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string; label: string }) {
+  const { count, ref } = useCountUp(end);
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
+    <div ref={ref} className="text-center">
+      <div className="text-4xl md:text-5xl font-heading font-bold text-gold">{count.toLocaleString()}{suffix}</div>
+      <div className="text-sm text-navy-foreground/70 mt-2">{label}</div>
     </div>
   );
 }
 
-function Index() {
-  return <PlaceholderIndex />;
+function HomePage() {
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingData>({ resolver: zodResolver(bookingSchema) });
+  const [testimonialIdx, setTestimonialIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => setTestimonialIdx((i) => (i + 1) % TESTIMONIALS.length), 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const onBookingSubmit = async (data: BookingData) => {
+    await submitToWeb3Forms(data, "Homepage Booking Form");
+    setBookingSubmitted(true);
+  };
+
+  return (
+    <div>
+      {/* HERO */}
+      <section className="relative min-h-[90vh] flex items-center bg-cream overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-navy/5 hidden lg:block" />
+        <div className="max-w-7xl mx-auto px-4 py-16 md:py-20 relative z-20 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 bg-gold/10 text-gold px-3 py-1.5 rounded-full text-sm font-medium mb-6">
+                <Shield className="w-4 h-4" /> NABH Accredited Hospital
+              </div>
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-navy leading-tight">
+                {CLINIC.tagline.split(",")[0]},<br />
+                <span className="text-gold">{CLINIC.tagline.split(",")[1]}</span>
+              </h1>
+              <p className="text-lg text-muted-foreground mt-6 max-w-lg">
+                Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 mt-8">
+                <Link to="/book-appointment">
+                  <Button className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-7 py-6 rounded-xl">
+                    Book Free Consultation <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+                <Button variant="outline" className="border-cta text-cta hover:bg-cta hover:text-cta-foreground font-semibold text-base px-7 py-6 rounded-xl" onClick={() => openWhatsApp()}>
+                  WhatsApp Us
+                </Button>
+              </div>
+              <a href={getCallLink()} className="inline-flex items-center gap-2 mt-4 text-sm text-muted-foreground hover:text-navy transition-colors">
+                <Phone className="w-4 h-4" /> Or call us: {CLINIC.phone}
+              </a>
+            </div>
+            <div className="hidden lg:block">
+              <div className="w-full aspect-[4/5] bg-navy/10 rounded-2xl flex items-center justify-center text-muted-foreground">
+                Doctor / Clinic Image
+              </div>
+            </div>
+          </div>
+
+          {/* Trust bar */}
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { icon: Users, label: "15,000+ Happy Patients" },
+              { icon: Clock, label: "15+ Years Experience" },
+              { icon: Shield, label: "NABH Accredited" },
+              { icon: Star, label: "4.9/5 Google Rating" },
+            ].map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-2.5 bg-card rounded-xl px-4 py-3 shadow-sm">
+                <Icon className="w-5 h-5 text-gold shrink-0" />
+                <span className="text-sm font-medium">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* URGENCY BANNER */}
+      <section className="bg-gold py-3 overflow-hidden">
+        <div className="animate-marquee flex gap-16 whitespace-nowrap">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <span key={i} className="text-sm font-semibold text-gold-foreground flex items-center gap-2">
+              🎯 Limited Slots Available This Week — Book Your Free Consultation Today &nbsp;&nbsp; | &nbsp;&nbsp;
+              📞 Call Now: {CLINIC.phone} &nbsp;&nbsp; | &nbsp;&nbsp;
+              ⭐ Rated {CLINIC.rating}/5 by {CLINIC.reviewCount}+ Patients &nbsp;&nbsp; | &nbsp;&nbsp;
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* SERVICES GRID */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Our Specialties</h2>
+              <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SERVICES.map((service, i) => (
+              <AnimatedSection key={service.slug} delay={i * 100}>
+                <Link to="/services/$slug" params={{ slug: service.slug }} className="group block bg-card rounded-xl p-6 shadow-sm border hover:border-gold hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                  <div className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-gold-foreground transition-colors">
+                    <Stethoscope className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-heading text-xl font-semibold text-navy">{service.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{service.description}</p>
+                  <span className="inline-flex items-center gap-1 mt-4 text-sm font-medium text-gold group-hover:gap-2 transition-all">
+                    Learn More <ArrowRight className="w-3 h-3" />
+                  </span>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="py-16 md:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Why Choose {CLINIC.name}?</h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: Shield, title: "NABH Accredited", desc: "Recognized for maintaining the highest standards of quality and patient safety." },
+              { icon: Users, title: "Expert Doctors", desc: "25+ highly qualified specialists with decades of combined experience." },
+              { icon: Stethoscope, title: "Modern Equipment", desc: "State-of-the-art diagnostic and treatment technology for precise care." },
+              { icon: Heart, title: "Affordable Care", desc: "Transparent pricing, EMI options, and insurance support for all patients." },
+            ].map(({ icon: Icon, title, desc }, i) => (
+              <AnimatedSection key={title} delay={i * 100}>
+                <div className="text-center p-6">
+                  <div className="w-14 h-14 rounded-full bg-gold/10 flex items-center justify-center text-gold mx-auto mb-4">
+                    <Icon className="w-7 h-7" />
+                  </div>
+                  <h3 className="font-heading text-lg font-semibold text-navy">{title}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DOCTOR SPOTLIGHT */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Meet Our Doctors</h2>
+              <p className="text-muted-foreground mt-3">Experienced specialists dedicated to your health</p>
+            </div>
+          </AnimatedSection>
+          <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
+            {DOCTORS.slice(0, 3).map((doc, i) => (
+              <AnimatedSection key={doc.id} delay={i * 100} className="min-w-[300px] flex-1 snap-start">
+                <div className="bg-card rounded-xl border overflow-hidden group">
+                  <div className="aspect-[3/4] bg-navy/10 flex items-center justify-center text-muted-foreground group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                    Doctor Photo
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-heading text-lg font-semibold text-navy">{doc.name}</h3>
+                    <p className="text-sm text-gold font-medium">{doc.designation}</p>
+                    <p className="text-xs text-muted-foreground mt-1">{doc.qualification}</p>
+                    <p className="text-xs text-muted-foreground">{doc.experience} years experience</p>
+                    <Link to="/book-appointment" className="mt-3 block">
+                      <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground text-sm">
+                        Book with {doc.name.split(" ")[0]} {doc.name.split(" ")[1]}
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/doctors">
+              <Button variant="outline" className="border-navy text-navy hover:bg-navy hover:text-navy-foreground">
+                View All Doctors <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section className="py-16 md:py-20 bg-navy text-navy-foreground">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <StatCounter end={15000} suffix="+" label="Patients Treated" />
+            <StatCounter end={98} suffix="%" label="Patient Satisfaction" />
+            <StatCounter end={25} suffix="+" label="Expert Doctors" />
+            <StatCounter end={15} suffix="+" label="Years of Excellence" />
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="py-16 md:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">What Our Patients Say</h2>
+              <p className="text-muted-foreground mt-2">⭐ {CLINIC.rating}/5 based on {CLINIC.reviewCount}+ Google Reviews</p>
+            </div>
+          </AnimatedSection>
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-card rounded-2xl p-8 shadow-sm border relative overflow-hidden">
+              <div className="text-gold flex gap-1 mb-4">
+                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
+              </div>
+              <p className="text-lg italic text-foreground/90 leading-relaxed">"{TESTIMONIALS[testimonialIdx].text}"</p>
+              <div className="mt-6 flex items-center justify-between">
+                <div>
+                  <p className="font-semibold text-navy">{TESTIMONIALS[testimonialIdx].name}</p>
+                  <p className="text-sm text-muted-foreground">{TESTIMONIALS[testimonialIdx].city} • {TESTIMONIALS[testimonialIdx].treatment}</p>
+                </div>
+                <div className="flex gap-2">
+                  {TESTIMONIALS.map((_, i) => (
+                    <button key={i} onClick={() => setTestimonialIdx(i)} className={`w-2.5 h-2.5 rounded-full transition-colors ${i === testimonialIdx ? "bg-gold" : "bg-border"}`} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BOOKING FORM */}
+      <section className="py-16 md:py-20 bg-navy text-navy-foreground">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold">Book Your Free Consultation</h2>
+              <p className="text-navy-foreground/70 mt-2">Fill in your details and we'll get back to you within 2 hours</p>
+            </div>
+          </AnimatedSection>
+
+          {bookingSubmitted ? (
+            <div className="text-center py-8">
+              <CheckCircle className="w-16 h-16 text-cta mx-auto mb-4" />
+              <h3 className="text-2xl font-heading font-bold">Appointment Requested!</h3>
+              <p className="text-navy-foreground/70 mt-2">We'll call you shortly to confirm your slot.</p>
+              <Link to="/thank-you" className="mt-4 inline-block">
+                <Button className="bg-cta hover:bg-cta/90 text-cta-foreground">Continue on WhatsApp →</Button>
+              </Link>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit(onBookingSubmit)} className="max-w-4xl mx-auto">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <Input placeholder="Full Name *" {...register("name")} className="bg-navy-foreground/10 border-navy-foreground/20 text-navy-foreground placeholder:text-navy-foreground/40 text-base py-5" />
+                <Input placeholder="Phone Number *" type="tel" {...register("phone")} className="bg-navy-foreground/10 border-navy-foreground/20 text-navy-foreground placeholder:text-navy-foreground/40 text-base py-5" />
+                <select {...register("service")} className="flex h-11 w-full rounded-md border bg-navy-foreground/10 border-navy-foreground/20 px-3 py-2 text-sm text-navy-foreground">
+                  <option value="">Select Service *</option>
+                  {SERVICES.map((s) => <option key={s.slug} value={s.name}>{s.name}</option>)}
+                </select>
+                <Input type="date" {...register("date")} className="bg-navy-foreground/10 border-navy-foreground/20 text-navy-foreground text-base py-5" />
+              </div>
+              <div className="mt-4 text-center">
+                <Button type="submit" disabled={isSubmitting} className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-10 py-5">
+                  {isSubmitting ? "Submitting..." : "Book Free Consultation →"}
+                </Button>
+              </div>
+              <p className="text-center text-xs text-navy-foreground/50 mt-3">🔒 Your data is safe • Free consultation • No hidden charges</p>
+            </form>
+          )}
+        </div>
+      </section>
+
+      {/* AWARDS */}
+      <section className="py-12 border-y">
+        <div className="max-w-7xl mx-auto px-4">
+          <p className="text-center text-sm text-muted-foreground mb-6">As Seen In & Accreditations</p>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "Best Clinic Award", "Healthcare Excellence"].map((badge) => (
+              <div key={badge} className="w-24 h-14 rounded-lg bg-accent flex items-center justify-center text-xs text-muted-foreground text-center px-2 font-medium">
+                {badge}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BEFORE/AFTER TEASER */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Patient Results</h2>
+              <p className="text-muted-foreground mt-3">Real results from real patients</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((i) => (
+              <AnimatedSection key={i} delay={i * 100}>
+                <div className="group relative rounded-xl overflow-hidden cursor-pointer border">
+                  <div className="aspect-square bg-accent flex items-center justify-center">
+                    <div className="text-center text-sm text-muted-foreground">
+                      <p className="font-medium">Before</p>
+                      <p className="text-xs mt-1">Hover to see After</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-cta/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-center text-cta-foreground">
+                      <p className="font-medium">After</p>
+                      <p className="text-xs mt-1">Amazing Results ✨</p>
+                    </div>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/gallery">
+              <Button variant="outline" className="border-navy text-navy hover:bg-navy hover:text-navy-foreground">
+                View All Results <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG TEASER */}
+      <section className="py-16 md:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Health Articles</h2>
+              <p className="text-muted-foreground mt-3">Stay informed with expert medical advice</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-6">
+            {BLOG_POSTS.slice(0, 3).map((post, i) => (
+              <AnimatedSection key={post.slug} delay={i * 100}>
+                <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block bg-card rounded-xl overflow-hidden border hover:shadow-lg transition-all">
+                  <div className="aspect-video bg-navy/10 flex items-center justify-center text-muted-foreground">Blog Image</div>
+                  <div className="p-5">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-xs font-medium bg-gold/10 text-gold px-2 py-0.5 rounded-full">{post.category}</span>
+                      <span className="text-xs text-muted-foreground">{post.readTime}</span>
+                    </div>
+                    <h3 className="font-heading font-semibold text-navy group-hover:text-gold transition-colors">{post.title}</h3>
+                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{post.excerpt}</p>
+                    <div className="mt-3 text-xs text-muted-foreground">{post.author} • {post.date}</div>
+                  </div>
+                </Link>
+              </AnimatedSection>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/blog">
+              <Button variant="outline" className="border-navy text-navy hover:bg-navy hover:text-navy-foreground">
+                Read All Articles <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* LOCATION */}
+      <section className="py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-navy">Visit Us</h2>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="aspect-video bg-accent rounded-xl flex items-center justify-center text-muted-foreground border">
+              Google Maps Embed
+            </div>
+            <div className="flex flex-col justify-center space-y-4">
+              <div>
+                <h3 className="font-heading text-xl font-semibold text-navy">{CLINIC.name}</h3>
+                <p className="text-muted-foreground mt-1">{CLINIC.address}</p>
+              </div>
+              <div className="space-y-2 text-sm">
+                <p>📞 <a href={getCallLink()} className="text-gold hover:underline">{CLINIC.phone}</a></p>
+                <p>📧 {CLINIC.email}</p>
+                <p>🕐 {CLINIC.hours}</p>
+                <p>💬 <button onClick={() => openWhatsApp()} className="text-cta hover:underline">WhatsApp Us</button></p>
+              </div>
+              <div className="flex gap-3 pt-2">
+                <a href={`https://maps.google.com/?q=${encodeURIComponent(CLINIC.address)}`} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" className="border-navy text-navy hover:bg-navy hover:text-navy-foreground">
+                    Get Directions
+                  </Button>
+                </a>
+                <Link to="/book-appointment">
+                  <Button className="bg-gold hover:bg-gold/90 text-gold-foreground">
+                    Book Appointment
+                  </Button>
+                </Link>
+              </div>
+              <p className="text-xs text-muted-foreground">🌐 Available in Hindi & English</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
 }
