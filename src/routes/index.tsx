@@ -3,6 +3,10 @@ import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, C
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { ShinyButton } from "@/components/ui/shiny-button";
+import { BorderRotate } from "@/components/ui/animated-gradient-border";
+import { Logos3 } from "@/components/blocks/logos3";
+import { Gallery4 } from "@/components/blocks/gallery4";
 import { CLINIC, SERVICES, DOCTORS, TESTIMONIALS, BLOG_POSTS } from "@/lib/constants";
 import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
 import { useCountUp } from "@/hooks/useCountUp";
