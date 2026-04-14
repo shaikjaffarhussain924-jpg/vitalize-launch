@@ -4,6 +4,7 @@ import { Glow } from "@/components/ui/glow";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { CLINIC } from "@/lib/constants";
 
 export const Route = createFileRoute("/about")({
@@ -98,11 +99,28 @@ function AboutPage() {
             <h2 className="font-heading text-3xl font-bold text-navy text-center mb-12">Our Team</h2>
           </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <div key={i} className="aspect-square bg-accent rounded-xl flex items-center justify-center text-muted-foreground text-sm">
-                Team Photo {i + 1}
-              </div>
-            ))}
+            {Array.from({ length: 8 }).map((_, i) => {
+              const teamImages = [
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=400&q=80",
+              ];
+              const teamNames = ["Dr. Sharma", "Dr. Priya", "Dr. Rajan", "Dr. Meera", "Dr. Vijay", "Dr. Anita", "Nurse Rekha", "Admin Suresh"];
+              return (
+                <div key={i} className="aspect-square relative rounded-xl overflow-hidden group">
+                  <img src={teamImages[i]} alt={teamNames[i]} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.4} className="absolute inset-x-0 bottom-0 h-1/2" />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3">
+                    <p className="text-sm font-medium text-white">{teamNames[i]}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -114,10 +132,19 @@ function AboutPage() {
             <h2 className="font-heading text-3xl font-bold text-navy mb-8">Certifications & Awards</h2>
           </AnimatedSection>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {["NABH Certificate", "ISO 9001:2015", "Best Clinic 2024", "Healthcare Excellence Award"].map((cert) => (
-              <AnimatedSection key={cert}>
-                <div className="aspect-[4/3] bg-card rounded-xl border flex items-center justify-center text-sm text-muted-foreground p-4 text-center">
-                  {cert}
+            {[
+              { name: "NABH Certificate", img: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=400&q=80" },
+              { name: "ISO 9001:2015", img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=400&q=80" },
+              { name: "Best Clinic 2024", img: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=400&q=80" },
+              { name: "Healthcare Excellence", img: "https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&w=400&q=80" },
+            ].map((cert) => (
+              <AnimatedSection key={cert.name}>
+                <div className="aspect-[4/3] relative rounded-xl overflow-hidden border group">
+                  <img src={cert.img} alt={cert.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.3} className="absolute inset-x-0 bottom-0 h-1/2" />
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                    <p className="text-sm font-semibold text-white text-center">{cert.name}</p>
+                  </div>
                 </div>
               </AnimatedSection>
             ))}

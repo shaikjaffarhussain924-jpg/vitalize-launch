@@ -53,7 +53,17 @@ function ThankYouPage() {
           <div className="grid gap-4">
             {BLOG_POSTS.slice(0, 3).map((post) => (
               <Link key={post.slug} to="/blog/$slug" params={{ slug: post.slug }} className="flex gap-3 bg-card rounded-lg border p-3 hover:shadow-sm transition-all group">
-                <div className="w-16 h-16 bg-navy/10 rounded-lg shrink-0 flex items-center justify-center text-xs text-muted-foreground">Img</div>
+                <div className="w-16 h-16 rounded-lg shrink-0 overflow-hidden">
+                  <img
+                    src={[
+                      "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=150&q=80",
+                      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=150&q=80",
+                      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=150&q=80",
+                    ][BLOG_POSTS.slice(0, 3).indexOf(post) % 3]}
+                    alt={post.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
                 <div>
                   <h4 className="text-sm font-semibold text-navy group-hover:text-gold transition-colors line-clamp-1">{post.title}</h4>
                   <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{post.excerpt}</p>
