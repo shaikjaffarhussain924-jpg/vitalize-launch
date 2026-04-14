@@ -13,7 +13,7 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { Logos3 } from "@/components/blocks/logos3";
 import { Gallery4 } from "@/components/blocks/gallery4";
-import { CLINIC, SERVICES, DOCTORS, TESTIMONIALS, BLOG_POSTS } from "@/lib/constants";
+import { CLINIC, SERVICES, DOCTORS, BLOG_POSTS } from "@/lib/constants";
 import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useForm } from "react-hook-form";
@@ -72,12 +72,6 @@ function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string
 function HomePage() {
   const [bookingSubmitted, setBookingSubmitted] = useState(false);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingData>({ resolver: zodResolver(bookingSchema) });
-  const [testimonialIdx, setTestimonialIdx] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => setTestimonialIdx((i) => (i + 1) % TESTIMONIALS.length), 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   const onBookingSubmit = async (data: BookingData) => {
     await submitToWeb3Forms(data, "Homepage Booking Form");
