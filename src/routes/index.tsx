@@ -523,30 +523,26 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
-            {BLOG_POSTS.slice(0, 3).map((post, i) => (
-              <AnimatedSection key={post.slug} delay={i * 100}>
-                <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block bg-card rounded-2xl overflow-hidden border premium-card">
-                  <img
-                    src={[
-                      "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-                      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
-                      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
-                    ][i]}
-                    alt={post.title}
-                    className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs font-medium bg-gold-light text-gold px-2.5 py-1 rounded-full">{post.category}</span>
-                      <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                    </div>
-                    <h3 className="font-heading font-semibold text-navy group-hover:text-gold transition-colors duration-300">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2 leading-relaxed">{post.excerpt}</p>
-                    <div className="mt-4 text-xs text-muted-foreground">{post.author} • {post.date}</div>
-                  </div>
-                </Link>
-              </AnimatedSection>
-            ))}
+            {BLOG_POSTS.slice(0, 3).map((post, i) => {
+              const blogImages = [
+                "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+              ];
+              return (
+                <AnimatedSection key={post.slug} delay={i * 100}>
+                  <Link to="/blog/$slug" params={{ slug: post.slug }}>
+                    <DestinationCard
+                      imageUrl={blogImages[i]}
+                      title={post.title}
+                      subtitle={post.excerpt}
+                      stats={`${post.category} • ${post.readTime} • ${post.author}`}
+                      themeColor="30 40% 20%"
+                    />
+                  </Link>
+                </AnimatedSection>
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <Link to="/blog">
