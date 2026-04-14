@@ -90,6 +90,7 @@ function HomePage() {
           <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/70 to-navy/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
+          <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.6} className="absolute inset-x-0 bottom-0 h-24" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
