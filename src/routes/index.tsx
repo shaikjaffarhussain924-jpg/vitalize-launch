@@ -107,13 +107,13 @@ function HomePage() {
               <p className="text-base md:text-lg text-white/70 mt-5 md:mt-7 max-w-lg leading-relaxed font-light">
                 Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mt-9">
+              <div className="flex flex-col sm:flex-row gap-3 mt-6 md:mt-9">
                 <Link to="/book-appointment">
                   <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.62_0.10_65/0.5)]">
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
                   </ShinyButton>
                 </Link>
-                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
+                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-6 md:px-8 py-5 md:py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
                   WhatsApp Us
                 </Button>
               </div>
