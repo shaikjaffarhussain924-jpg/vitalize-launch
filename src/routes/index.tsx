@@ -212,7 +212,8 @@ function HomePage() {
       </section>
 
       {/* SERVICES GRID */}
-      <section className="py-20 md:py-24">
+      <section className="py-20 md:py-24 relative overflow-hidden">
+        <Glow variant="center" className="h-[400px] opacity-30" />
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -241,7 +242,8 @@ function HomePage() {
       </section>
 
       {/* WHY CHOOSE US */}
-      <section className="py-20 md:py-24 bg-cream relative grain">
+      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+        <Glow variant="top" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -343,7 +345,8 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-20 md:py-24 bg-cream relative grain">
+      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+        <Glow variant="bottom" className="h-[350px] opacity-25" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-12">
