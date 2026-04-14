@@ -2,10 +2,14 @@ import { useEffect, useRef, useState } from "react";
 
 export function useScrollAnimation(threshold: number = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Default visible for SSR
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    // On client mount, hide element to prepare for animation
+    // but only if it hasn't been observed yet
+    setIsVisible(false);
+    
     const el = ref.current;
     if (!el) return;
 
@@ -13,6 +17,7 @@ export function useScrollAnimation(threshold: number = 0.15) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
+          setHasAnimated(true);
           observer.unobserve(el);
         }
       },
