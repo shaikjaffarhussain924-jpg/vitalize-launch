@@ -44,16 +44,16 @@ export function Navbar() {
       <nav
         className={`sticky top-0 z-50 transition-all duration-500 ease-out ${
           scrolled
-            ? "bg-navy/98 backdrop-blur-xl shadow-[0_4px_30px_-5px_oklch(0.20_0.045_255/0.08)] py-2"
-            : "bg-navy/95 backdrop-blur-md py-3.5"
+            ? "bg-card/98 backdrop-blur-xl shadow-[0_4px_30px_-5px_oklch(0.20_0.045_255/0.08)] py-2"
+            : "bg-card/95 backdrop-blur-md py-3.5"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gold flex items-center justify-center text-gold-foreground font-heading font-bold text-xl group-hover:bg-gold/80 transition-colors duration-300">H</div>
+            <div className="w-11 h-11 rounded-xl bg-navy flex items-center justify-center text-navy-foreground font-heading font-bold text-xl group-hover:bg-gold transition-colors duration-300">H</div>
             <div>
-              <span className="font-heading font-bold text-xl text-navy-foreground tracking-tight">{CLINIC.name}</span>
-              <span className="hidden lg:block text-[11px] text-navy-foreground/60 tracking-wider uppercase mt-0.5">{CLINIC.tagline}</span>
+              <span className="font-heading font-bold text-xl text-navy tracking-tight">{CLINIC.name}</span>
+              <span className="hidden lg:block text-[11px] text-muted-foreground tracking-wider uppercase mt-0.5">{CLINIC.tagline}</span>
             </div>
           </Link>
 
@@ -63,12 +63,12 @@ export function Navbar() {
               { to: "/", label: "Home" },
               { to: "/about", label: "About" },
             ].map(({ to, label }) => (
-              <Link key={to} to={to} className="text-sm font-medium text-navy-foreground/80 hover:text-gold transition-colors duration-300 tracking-wide" activeProps={{ className: "text-gold" }}>
+              <Link key={to} to={to} className="text-sm font-medium text-foreground/80 hover:text-gold transition-colors duration-300 tracking-wide" activeProps={{ className: "text-gold" }}>
                 {label}
               </Link>
             ))}
             <div className="relative group">
-              <button className="text-sm font-medium text-navy-foreground/80 hover:text-gold transition-colors duration-300 flex items-center gap-1.5 tracking-wide">
+              <button className="text-sm font-medium text-foreground/80 hover:text-gold transition-colors duration-300 flex items-center gap-1.5 tracking-wide">
                 Services <ChevronDown className="w-3 h-3 transition-transform group-hover:rotate-180 duration-300" />
               </button>
               <div className="absolute top-full left-0 mt-3 w-60 bg-card rounded-xl shadow-[0_20px_50px_-12px_oklch(0.20_0.045_255/0.15)] border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 py-2 -translate-y-2 group-hover:translate-y-0">
@@ -86,16 +86,13 @@ export function Navbar() {
               { to: "/blog", label: "Blog" },
               { to: "/contact", label: "Contact" },
             ].map(({ to, label }) => (
-              <Link key={to} to={to as any} className="text-sm font-medium text-navy-foreground/80 hover:text-gold transition-colors duration-300 tracking-wide" activeProps={{ className: "text-gold" }}>
+              <Link key={to} to={to as any} className="text-sm font-medium text-foreground/80 hover:text-gold transition-colors duration-300 tracking-wide" activeProps={{ className: "text-gold" }}>
                 {label}
               </Link>
             ))}
           </div>
 
-          <div className="hidden lg:flex items-center gap-4">
-            <a href={getCallLink()} className="flex items-center gap-1.5 text-sm text-navy-foreground/70 hover:text-gold transition-colors">
-              <Phone className="w-3.5 h-3.5" /> {CLINIC.phone}
-            </a>
+          <div className="hidden lg:flex items-center gap-3">
             <Link to="/book-appointment">
               <Button className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold px-6 rounded-full tracking-wide shadow-[0_4px_15px_-3px_oklch(0.72_0.10_75/0.4)] hover:shadow-[0_6px_20px_-3px_oklch(0.72_0.10_75/0.5)] transition-all duration-300 hover:scale-[1.02]">
                 Book Appointment
@@ -104,7 +101,7 @@ export function Navbar() {
           </div>
 
           {/* Mobile toggle */}
-          <button className="lg:hidden p-2 hover:bg-navy-foreground/10 rounded-lg transition-colors text-navy-foreground" onClick={() => setMobileOpen(!mobileOpen)}>
+          <button className="lg:hidden p-2 hover:bg-accent rounded-lg transition-colors" onClick={() => setMobileOpen(!mobileOpen)}>
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
