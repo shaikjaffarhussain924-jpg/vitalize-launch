@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone } from "lucide-react";
+import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -112,9 +112,59 @@ function HomePage() {
                 <Phone className="w-4 h-4" /> Or call us: {CLINIC.phone}
               </a>
             </div>
-            <div className="hidden lg:block">
-              <div className="w-full aspect-[4/5] bg-gradient-to-br from-navy/10 to-navy/5 rounded-3xl flex items-center justify-center text-muted-foreground border border-navy/10">
-                Doctor / Clinic Image
+            <div className="hidden lg:flex flex-col gap-5">
+              {/* Glassmorphism Stats Card */}
+              <div className="relative rounded-2xl border border-border bg-card/80 backdrop-blur-lg p-7 shadow-xl overflow-hidden">
+                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+                <div className="relative z-10">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-light">
+                      <Target className="h-6 w-6 text-gold" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-heading font-bold text-foreground">{CLINIC.patientCount}+</p>
+                      <p className="text-sm text-muted-foreground">Patients Treated</p>
+                    </div>
+                  </div>
+                  <div className="mb-5">
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-muted-foreground">Patient Satisfaction</span>
+                      <span className="font-semibold text-foreground">98%</span>
+                    </div>
+                    <div className="h-2.5 w-full rounded-full bg-muted">
+                      <div className="h-full rounded-full bg-gradient-to-r from-gold to-cta" style={{ width: "98%" }} />
+                    </div>
+                  </div>
+                  <div className="h-px w-full bg-border my-4" />
+                  <div className="grid grid-cols-3 gap-3 text-center">
+                    <div><p className="text-lg font-bold text-foreground">25+</p><p className="text-xs text-muted-foreground">Doctors</p></div>
+                    <div><p className="text-lg font-bold text-foreground">15+</p><p className="text-xs text-muted-foreground">Years</p></div>
+                    <div><p className="text-lg font-bold text-foreground">{CLINIC.rating}</p><p className="text-xs text-muted-foreground">Rating</p></div>
+                  </div>
+                  <div className="mt-5 flex gap-3">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cta/10 px-3 py-1.5 text-xs font-semibold text-cta">
+                      <span className="h-1.5 w-1.5 rounded-full bg-cta animate-pulse" /> OPEN NOW
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                      <Crown className="h-3 w-3" /> NABH
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Trusted marquee card */}
+              <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-lg p-5 shadow-lg overflow-hidden">
+                <p className="text-xs text-muted-foreground mb-3 uppercase tracking-[0.15em] font-medium">Accreditations & Affiliations</p>
+                <div className="overflow-hidden">
+                  <div className="animate-marquee flex gap-8">
+                    {[...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"], ...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"], ...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"]].map((name, i) => (
+                      <div key={i} className="flex shrink-0 items-center gap-2 text-muted-foreground/60">
+                        <Shield className="h-4 w-4" />
+                        <span className="whitespace-nowrap text-sm font-medium">{name}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
