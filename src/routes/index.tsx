@@ -6,6 +6,7 @@ import { Glow } from "@/components/ui/glow";
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion";
 import { DestinationCard } from "@/components/ui/card-21";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
