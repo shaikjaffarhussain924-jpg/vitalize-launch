@@ -33,7 +33,7 @@ export function FloatingHeader({ className }: FloatingHeaderProps) {
             H
           </div>
           <div className="hidden sm:block">
-            <span className="text-lg font-heading font-bold tracking-tight text-navy">
+            <span className="text-lg font-heading font-bold tracking-tight text-white drop-shadow-sm">
               {CLINIC.name}
             </span>
           </div>
@@ -45,7 +45,7 @@ export function FloatingHeader({ className }: FloatingHeaderProps) {
             <Link
               key={link.label}
               to={link.to as any}
-              className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-gold tracking-wide"
+              className="text-sm font-medium text-white/80 transition-colors duration-200 hover:text-gold tracking-wide drop-shadow-sm"
               activeProps={{ className: 'text-gold' }}
             >
               {link.label}
