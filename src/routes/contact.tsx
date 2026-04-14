@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, MessageCircle, CheckCircle, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -94,7 +94,7 @@ function ContactPage() {
               <h2 className="font-heading text-2xl font-bold text-navy mb-6">Send Us a Message</h2>
               {submitted ? (
                 <div className="bg-cream rounded-xl p-8 text-center">
-                  <div className="text-4xl mb-3">✅</div>
+                  <div className="w-12 h-12 rounded-full bg-cta/10 flex items-center justify-center mx-auto mb-3"><CheckCircle className="w-6 h-6 text-cta" /></div>
                   <h3 className="font-heading text-xl font-bold text-navy">Message Sent!</h3>
                   <p className="text-sm text-muted-foreground mt-2">We'll get back to you within 24 hours.</p>
                 </div>
@@ -119,7 +119,7 @@ function ContactPage() {
                   <Button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base py-5">
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
-                  <p className="text-xs text-center text-muted-foreground">🔒 100% Confidential • We respect your privacy</p>
+                  <p className="text-xs text-center text-muted-foreground flex items-center justify-center gap-1"><Lock className="w-3 h-3" /> 100% Confidential · We respect your privacy</p>
                 </form>
               )}
             </div>

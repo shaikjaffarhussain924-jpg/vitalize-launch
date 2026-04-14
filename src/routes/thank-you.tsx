@@ -30,7 +30,7 @@ function ThankYouPage() {
           </svg>
         </div>
 
-        <h1 className="font-heading text-3xl md:text-4xl font-bold text-navy">Your Appointment is Confirmed! 🎉</h1>
+        <h1 className="font-heading text-3xl md:text-4xl font-bold text-navy">Your Appointment is Confirmed</h1>
         <p className="text-muted-foreground mt-4">
           We'll call you within 2 hours to confirm your slot. Meanwhile, join our WhatsApp for instant updates.
         </p>

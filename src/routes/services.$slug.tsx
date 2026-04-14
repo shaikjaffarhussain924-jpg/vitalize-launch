@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, Phone, CreditCard, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/interfaces-accordion";
 import { Input } from "@/components/ui/input";
@@ -266,9 +266,9 @@ function ServicePage() {
                   <h2 className="font-heading text-2xl font-bold text-navy">Affordable {service.name} Treatment</h2>
                   <p className="text-3xl font-bold text-gold mt-3">Starting from {service.price}</p>
                   <div className="flex flex-wrap justify-center gap-3 mt-4">
-                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border">💳 EMI Available</span>
-                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border">🏥 Insurance Accepted</span>
-                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border">💰 No Hidden Charges</span>
+                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border flex items-center gap-1.5"><CreditCard className="w-3 h-3 text-gold" /> EMI Available</span>
+                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border flex items-center gap-1.5"><Shield className="w-3 h-3 text-gold" /> Insurance Accepted</span>
+                    <span className="text-xs bg-card px-3 py-1.5 rounded-full border flex items-center gap-1.5"><CheckCircle className="w-3 h-3 text-gold" /> No Hidden Charges</span>
                   </div>
                   <Link to="/book-appointment" className="inline-block mt-6">
                     <Button className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold px-8 py-5">
@@ -310,7 +310,7 @@ function ServicePage() {
                       <Button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold">
                         {isSubmitting ? "Sending..." : "Book Now →"}
                       </Button>
-                      <p className="text-xs text-center text-muted-foreground">🔒 100% Confidential</p>
+                      <p className="text-xs text-center text-muted-foreground flex items-center justify-center gap-1"><Lock className="w-3 h-3" /> 100% Confidential</p>
                     </form>
                   )}
                 </div>
