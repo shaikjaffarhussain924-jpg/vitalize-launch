@@ -236,7 +236,7 @@ function HomePage() {
       />
 
       {/* WHY CHOOSE US */}
-      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-14 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="top" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -245,7 +245,7 @@ function HomePage() {
               <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Why Choose {CLINIC.name}?</h2>
             </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
             {[
               { icon: Shield, title: "NABH Accredited", desc: "Recognized for maintaining the highest standards of quality and patient safety." },
               { icon: Users, title: "Expert Doctors", desc: "25+ highly qualified specialists with decades of combined experience." },
@@ -276,7 +276,7 @@ function HomePage() {
       </section>
 
       {/* DOCTOR SPOTLIGHT */}
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -285,7 +285,7 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Experienced specialists dedicated to your health</p>
             </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {DOCTORS.slice(0, 3).map((doc, i) => {
               const docImages = [
                 "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
@@ -322,7 +322,7 @@ function HomePage() {
       </section>
 
       {/* INTERACTIVE IMAGE ACCORDION */}
-      <section className="py-20 md:py-24 bg-cream relative overflow-hidden grain">
+      <section className="py-14 md:py-24 bg-cream relative overflow-hidden grain">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -337,10 +337,10 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
+      <section className="py-12 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.72_0.10_75/0.08),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
             <StatCounter end={15000} suffix="+" label="Patients Treated" />
             <StatCounter end={98} suffix="%" label="Patient Satisfaction" />
             <StatCounter end={25} suffix="+" label="Expert Doctors" />
@@ -350,7 +350,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-14 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="bottom" className="h-[350px] opacity-25" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
@@ -363,7 +363,7 @@ function HomePage() {
       </section>
 
       {/* BOOKING FORM */}
-      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
+      <section className="py-14 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,oklch(0.72_0.10_75/0.06),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -421,7 +421,7 @@ function HomePage() {
       />
 
       {/* BEFORE/AFTER COMPARISON */}
-      <section className="py-20 md:py-24 relative overflow-hidden">
+      <section className="py-14 md:py-24 relative overflow-hidden">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-14">
@@ -429,7 +429,7 @@ function HomePage() {
             <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
             <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
@@ -494,7 +494,7 @@ function HomePage() {
       </div>
 
       {/* BLOG TEASER */}
-      <section className="py-20 md:py-24 bg-cream relative grain">
+      <section className="py-14 md:py-24 bg-cream relative grain">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -503,7 +503,7 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Stay informed with expert medical advice</p>
             </div>
           </AnimatedSection>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {BLOG_POSTS.slice(0, 3).map((post, i) => {
               const blogImages = [
                 "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
@@ -536,7 +536,7 @@ function HomePage() {
       </section>
 
       {/* CONSULTATION FORM */}
-      <section className="py-20 md:py-24 bg-muted/30">
+      <section className="py-14 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -550,7 +550,7 @@ function HomePage() {
       </section>
 
 
-      <section className="py-20 md:py-24">
+      <section className="py-14 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
