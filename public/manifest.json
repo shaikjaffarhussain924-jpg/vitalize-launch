@@ -1,0 +1,13 @@
+{
+  "name": "HealthFirst Clinic",
+  "short_name": "HealthFirst",
+  "description": "Advanced Care, Compassionate Healing — Multi-specialty clinic in Hyderabad",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8F6F2",
+  "theme_color": "#0D2137",
+  "icons": [
+    { "src": "/placeholder.svg", "sizes": "192x192", "type": "image/svg+xml" },
+    { "src": "/placeholder.svg", "sizes": "512x512", "type": "image/svg+xml" }
+  ]
+}

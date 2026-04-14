@@ -4,7 +4,7 @@ import { Breadcrumb } from "@/components/Breadcrumb";
 import { CLINIC, BLOG_POSTS } from "@/lib/constants";
 import { useState } from "react";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: `Health Blog | ${CLINIC.name} — ${CLINIC.city}` },

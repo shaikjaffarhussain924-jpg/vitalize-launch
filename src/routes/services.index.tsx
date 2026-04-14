@@ -5,7 +5,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CLINIC, SERVICES } from "@/lib/constants";
 
-export const Route = createFileRoute("/services")({
+export const Route = createFileRoute("/services/")({
   head: () => ({
     meta: [
       { title: `Our Services | ${CLINIC.name} — ${CLINIC.city}` },

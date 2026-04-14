@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://healthfirstclinic.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://healthfirstclinic.com/about</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services</loc><priority>0.9</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/general-medicine</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/cardiology</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/dermatology</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/orthopedics</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/gynecology</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/services/pediatrics</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/doctors</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/gallery</loc><priority>0.6</priority></url>
+  <url><loc>https://healthfirstclinic.com/blog</loc><priority>0.7</priority></url>
+  <url><loc>https://healthfirstclinic.com/faq</loc><priority>0.7</priority></url>
+  <url><loc>https://healthfirstclinic.com/contact</loc><priority>0.8</priority></url>
+  <url><loc>https://healthfirstclinic.com/book-appointment</loc><priority>0.9</priority></url>
+</urlset>
