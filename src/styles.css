@@ -60,49 +60,49 @@
 :root {
   --radius: 0.625rem;
 
-  /* Soft luxury palette — muted, warm, restrained */
-  --background: oklch(0.98 0.003 75);
-  --foreground: oklch(0.18 0.015 45);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.015 45);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.015 45);
-  --primary: oklch(0.22 0.02 50);
-  --primary-foreground: oklch(0.97 0.003 75);
-  --secondary: oklch(0.965 0.005 75);
-  --secondary-foreground: oklch(0.22 0.02 50);
-  --muted: oklch(0.96 0.005 75);
-  --muted-foreground: oklch(0.52 0.01 50);
-  --accent: oklch(0.965 0.005 75);
-  --accent-foreground: oklch(0.22 0.02 50);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.97 0.003 75);
-  --border: oklch(0.93 0.005 75);
-  --input: oklch(0.93 0.005 75);
-  --ring: oklch(0.68 0.06 70);
+  /* Soft luxury palette — warm ivory, deep espresso, champagne */
+  --background: oklch(0.975 0.005 80);
+  --foreground: oklch(0.20 0.02 55);
+  --card: oklch(0.995 0.002 80);
+  --card-foreground: oklch(0.20 0.02 55);
+  --popover: oklch(0.995 0.002 80);
+  --popover-foreground: oklch(0.20 0.02 55);
+  --primary: oklch(0.25 0.025 55);
+  --primary-foreground: oklch(0.97 0.005 80);
+  --secondary: oklch(0.955 0.008 80);
+  --secondary-foreground: oklch(0.25 0.025 55);
+  --muted: oklch(0.95 0.008 80);
+  --muted-foreground: oklch(0.48 0.015 55);
+  --accent: oklch(0.955 0.008 80);
+  --accent-foreground: oklch(0.25 0.025 55);
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(0.97 0.005 80);
+  --border: oklch(0.915 0.008 80);
+  --input: oklch(0.915 0.008 80);
+  --ring: oklch(0.62 0.08 65);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.22 0.02 50);
-  --sidebar-foreground: oklch(0.97 0.003 75);
-  --sidebar-primary: oklch(0.68 0.06 70);
-  --sidebar-primary-foreground: oklch(0.18 0.015 45);
-  --sidebar-accent: oklch(0.30 0.02 50);
-  --sidebar-accent-foreground: oklch(0.97 0.003 75);
-  --sidebar-border: oklch(0.34 0.02 50);
-  --sidebar-ring: oklch(0.68 0.06 70);
+  --sidebar: oklch(0.25 0.025 55);
+  --sidebar-foreground: oklch(0.97 0.005 80);
+  --sidebar-primary: oklch(0.62 0.08 65);
+  --sidebar-primary-foreground: oklch(0.20 0.02 55);
+  --sidebar-accent: oklch(0.33 0.025 55);
+  --sidebar-accent-foreground: oklch(0.97 0.005 80);
+  --sidebar-border: oklch(0.37 0.025 55);
+  --sidebar-ring: oklch(0.62 0.08 65);
 
-  /* Brand tokens — soft luxury: champagne gold, warm charcoal, muted sage */
-  --gold: oklch(0.68 0.06 70);
-  --gold-foreground: oklch(0.18 0.015 45);
-  --gold-light: oklch(0.95 0.02 75);
-  --cta: oklch(0.42 0.08 160);
+  /* Brand — rich champagne, deep walnut, ivory, sage */
+  --gold: oklch(0.62 0.10 65);
+  --gold-foreground: oklch(0.995 0.002 80);
+  --gold-light: oklch(0.94 0.03 75);
+  --cta: oklch(0.50 0.10 155);
   --cta-foreground: oklch(1 0 0);
-  --cream: oklch(0.975 0.004 75);
-  --navy: oklch(0.22 0.02 50);
-  --navy-foreground: oklch(0.97 0.003 75);
+  --cream: oklch(0.97 0.006 80);
+  --navy: oklch(0.25 0.025 55);
+  --navy-foreground: oklch(0.97 0.005 80);
 
   --font-heading: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', system-ui, sans-serif;
