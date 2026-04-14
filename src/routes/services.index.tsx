@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Stethoscope } from "lucide-react";
+import { Glow } from "@/components/ui/glow";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -20,7 +21,8 @@ export const Route = createFileRoute("/services/")({
 function ServicesPage() {
   return (
     <div>
-      <section className="bg-cream py-16">
+      <section className="bg-cream py-16 relative overflow-hidden">
+        <Glow variant="center" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Services" }]} />
           <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">Our Medical Services</h1>
@@ -30,7 +32,8 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-16 relative overflow-hidden">
+        <Glow variant="bottom" className="h-[400px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((service, i) => (
