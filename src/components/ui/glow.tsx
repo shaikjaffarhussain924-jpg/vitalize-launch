@@ -30,13 +30,13 @@ const Glow = React.forwardRef<
       aria-hidden="true"
       className="absolute inset-0 overflow-hidden"
     >
-      <div className="pointer-events-none absolute -inset-[10px] opacity-50 mix-blend-multiply [background-image:radial-gradient(at_51%_52%,oklch(0.30_0.06_55)_0px,transparent_50%),radial-gradient(at_80%_0%,oklch(0.25_0.05_50)_0px,transparent_50%),radial-gradient(at_0%_95%,oklch(0.28_0.07_58)_0px,transparent_50%),radial-gradient(at_0%_20%,oklch(0.22_0.04_48)_0px,transparent_50%),radial-gradient(at_30%_82%,oklch(0.32_0.06_55)_0px,transparent_50%)] blur-[80px]" />
+      <div className="pointer-events-none absolute -inset-[10px] opacity-70 mix-blend-multiply [background-image:radial-gradient(at_51%_52%,oklch(0.18_0.05_50)_0px,transparent_50%),radial-gradient(at_80%_0%,oklch(0.15_0.04_45)_0px,transparent_50%),radial-gradient(at_0%_95%,oklch(0.20_0.06_55)_0px,transparent_50%),radial-gradient(at_0%_20%,oklch(0.14_0.04_42)_0px,transparent_50%),radial-gradient(at_30%_82%,oklch(0.22_0.05_52)_0px,transparent_50%)] blur-[80px]" />
     </div>
     <div
       aria-hidden="true"
       className="absolute inset-0 overflow-hidden"
     >
-      <div className="pointer-events-none absolute -inset-[10px] opacity-30 mix-blend-multiply [background-image:radial-gradient(at_51%_52%,oklch(0.30_0.06_55)_0px,transparent_50%),radial-gradient(at_80%_0%,oklch(0.25_0.05_50)_0px,transparent_50%),radial-gradient(at_0%_95%,oklch(0.28_0.07_58)_0px,transparent_50%)] blur-[120px]" />
+      <div className="pointer-events-none absolute -inset-[10px] opacity-50 mix-blend-multiply [background-image:radial-gradient(at_51%_52%,oklch(0.18_0.05_50)_0px,transparent_50%),radial-gradient(at_80%_0%,oklch(0.15_0.04_45)_0px,transparent_50%),radial-gradient(at_0%_95%,oklch(0.20_0.06_55)_0px,transparent_50%)] blur-[120px]" />
     </div>
   </div>
 ));
