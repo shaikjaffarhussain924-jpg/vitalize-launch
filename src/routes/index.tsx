@@ -435,18 +435,73 @@ function HomePage() {
         ]}
       />
 
-      {/* BEFORE/AFTER GALLERY */}
-      <Gallery4
-        title="Patient Results"
-        description="Real results from real patients — see the transformations achieved at our clinic."
-        items={[
-          { id: "result-1", title: "Dental Restoration", description: "Complete smile makeover with advanced dental implants and cosmetic procedures.", image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=400&fit=crop" },
-          { id: "result-2", title: "Skin Treatment", description: "Dramatic improvement in skin clarity and texture with our dermatology treatments.", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" },
-          { id: "result-3", title: "Orthopedic Recovery", description: "Full mobility restored after advanced orthopedic surgery and rehabilitation.", image: "https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=400&fit=crop" },
-          { id: "result-4", title: "Eye Care Results", description: "Vision restored with precision laser eye surgery performed by our ophthalmologists.", image: "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&h=400&fit=crop" },
-          { id: "result-5", title: "Cardiac Care", description: "Successful cardiac procedures with state-of-the-art cardiology equipment.", image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=600&h=400&fit=crop" },
-        ]}
-      />
+      {/* BEFORE/AFTER COMPARISON */}
+      <section className="py-20 md:py-24 relative overflow-hidden">
+        <Glow variant="center" className="h-[400px] opacity-40" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <AnimatedSection>
+            <div className="text-center mb-14">
+              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Real Results</p>
+              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
+              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-8">
+            <AnimatedSection>
+              <div className="rounded-2xl overflow-hidden border shadow-lg">
+                <ImageComparison className="aspect-[4/3] w-full" enableHover>
+                  <ImageComparisonImage
+                    src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=450&fit=crop"
+                    alt="Before dental treatment"
+                    position="left"
+                  />
+                  <ImageComparisonImage
+                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=450&fit=crop"
+                    alt="After dental treatment"
+                    position="right"
+                  />
+                  <ImageComparisonSlider className="w-1">
+                    <div className="flex h-full flex-col items-center justify-center">
+                      <div className="h-full w-0.5 bg-gold shadow-[0_0_8px_oklch(0.62_0.10_65/0.5)]" />
+                      <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-gold border-2 border-gold-foreground shadow-lg flex items-center justify-center">
+                        <ArrowRight className="w-3 h-3 text-gold-foreground -rotate-180" />
+                        <ArrowRight className="w-3 h-3 text-gold-foreground" />
+                      </div>
+                    </div>
+                  </ImageComparisonSlider>
+                </ImageComparison>
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Dental Restoration</p>
+            </AnimatedSection>
+            <AnimatedSection delay={150}>
+              <div className="rounded-2xl overflow-hidden border shadow-lg">
+                <ImageComparison className="aspect-[4/3] w-full" enableHover>
+                  <ImageComparisonImage
+                    src="https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=450&fit=crop"
+                    alt="Before skin treatment"
+                    position="left"
+                  />
+                  <ImageComparisonImage
+                    src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&h=450&fit=crop"
+                    alt="After skin treatment"
+                    position="right"
+                  />
+                  <ImageComparisonSlider className="w-1">
+                    <div className="flex h-full flex-col items-center justify-center">
+                      <div className="h-full w-0.5 bg-gold shadow-[0_0_8px_oklch(0.62_0.10_65/0.5)]" />
+                      <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-gold border-2 border-gold-foreground shadow-lg flex items-center justify-center">
+                        <ArrowRight className="w-3 h-3 text-gold-foreground -rotate-180" />
+                        <ArrowRight className="w-3 h-3 text-gold-foreground" />
+                      </div>
+                    </div>
+                  </ImageComparisonSlider>
+                </ImageComparison>
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Skin Treatment Results</p>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
       <div className="text-center -mt-10 mb-16">
         <Link to="/gallery">
           <Button variant="outline" className="border-2 border-navy text-navy hover:bg-navy hover:text-navy-foreground rounded-full">
