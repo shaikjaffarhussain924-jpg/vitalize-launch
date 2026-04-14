@@ -4,7 +4,22 @@ import { Glow } from "@/components/ui/glow";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { DestinationCard } from "@/components/ui/card-21";
 import { CLINIC, SERVICES } from "@/lib/constants";
+
+const serviceImages = [
+  "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
+];
+
+const themeColors = [
+  "30 50% 25%", "0 40% 30%", "200 40% 25%",
+  "150 40% 20%", "280 30% 30%", "45 50% 30%",
+];
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -38,24 +53,16 @@ function ServicesPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {SERVICES.map((service, i) => (
               <AnimatedSection key={service.slug} delay={i * 100}>
-                <div className="bg-card rounded-xl border p-6 hover:shadow-lg hover:border-gold transition-all duration-300 group">
-                  <div className="w-14 h-14 rounded-xl bg-gold/10 flex items-center justify-center text-gold mb-4 group-hover:bg-gold group-hover:text-gold-foreground transition-colors">
-                    <Stethoscope className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-heading text-xl font-semibold text-navy">{service.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-2">{service.description}</p>
-                  <p className="text-sm font-semibold text-gold mt-3">Starting from {service.price}</p>
-                  <div className="flex gap-3 mt-4">
-                    <Link to="/services/$slug" params={{ slug: service.slug }}>
-                      <Button variant="outline" className="border-navy text-navy hover:bg-navy hover:text-navy-foreground text-sm">
-                        Learn More <ArrowRight className="w-3 h-3 ml-1" />
-                      </Button>
-                    </Link>
-                    <Link to="/book-appointment">
-                      <Button className="bg-gold hover:bg-gold/90 text-gold-foreground text-sm">Book Now</Button>
-                    </Link>
-                  </div>
-                </div>
+                <Link to="/services/$slug" params={{ slug: service.slug }}>
+                  <DestinationCard
+                    imageUrl={serviceImages[i % serviceImages.length]}
+                    title={service.name}
+                    subtitle={service.description}
+                    stats={`Starting from ${service.price}`}
+                    themeColor={themeColors[i % themeColors.length]}
+                    icon={<Stethoscope className="w-5 h-5" />}
+                  />
+                </Link>
               </AnimatedSection>
             ))}
           </div>
