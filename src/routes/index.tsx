@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
+import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
 import { LocationMap } from "@/components/ui/expand-map";
 import { Glow } from "@/components/ui/glow";
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
@@ -365,32 +366,12 @@ function HomePage() {
       <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="bottom" className="h-[350px] opacity-25" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <AnimatedSection>
-            <div className="text-center mb-12">
-              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Testimonials</p>
-              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">What Our Patients Say</h2>
-              <p className="text-muted-foreground mt-3">{CLINIC.rating}/5 based on {CLINIC.reviewCount}+ verified reviews</p>
-            </div>
-          </AnimatedSection>
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-card rounded-3xl p-10 shadow-[0_20px_60px_-15px_oklch(0.20_0.045_255/0.08)] border relative overflow-hidden quote-mark">
-              <div className="text-gold flex gap-1 mb-5 relative z-10">
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
-              </div>
-              <p className="text-lg italic text-foreground/90 leading-relaxed relative z-10">"{TESTIMONIALS[testimonialIdx].text}"</p>
-              <div className="mt-7 flex items-center justify-between relative z-10">
-                <div>
-                  <p className="font-semibold text-navy">{TESTIMONIALS[testimonialIdx].name}</p>
-                  <p className="text-sm text-muted-foreground">{TESTIMONIALS[testimonialIdx].city} • {TESTIMONIALS[testimonialIdx].treatment}</p>
-                </div>
-                <div className="flex gap-2">
-                  {TESTIMONIALS.map((_, i) => (
-                    <button key={i} onClick={() => setTestimonialIdx(i)} className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === testimonialIdx ? "bg-gold scale-125" : "bg-border hover:bg-muted-foreground/30"}`} />
-                  ))}
-                </div>
-              </div>
-            </div>
+          <div className="text-center mb-8">
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Testimonials</p>
+            <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">What Our Patients Say</h2>
+            <p className="text-muted-foreground mt-3">{CLINIC.rating}/5 based on {CLINIC.reviewCount}+ verified reviews</p>
           </div>
+          <StaggerTestimonials />
         </div>
       </section>
 
