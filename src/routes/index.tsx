@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
 import { LocationMap } from "@/components/ui/expand-map";
+import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -82,85 +83,92 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+        {/* Hero background */}
         <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80" alt="Modern clinic interior" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/95 to-cream/60" />
+          <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
+          <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/70 to-navy/40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
         </div>
+
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left — Text */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-gold-light text-gold px-4 py-2 rounded-full text-sm font-medium mb-8 shadow-sm">
-                <Shield className="w-4 h-4" /> NABH Accredited Hospital
+              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
+                <Shield className="w-4 h-4 text-gold" /> NABH Accredited Hospital
               </div>
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-navy leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
                 {CLINIC.tagline.split(",")[0]},<br />
-                <span className="text-gold-gradient">{CLINIC.tagline.split(",")[1]}</span>
+                <span className="text-gold">{CLINIC.tagline.split(",")[1]}</span>
               </h1>
-              <p className="text-lg text-muted-foreground mt-7 max-w-lg leading-relaxed">
+              <p className="text-lg text-white/70 mt-7 max-w-lg leading-relaxed font-light">
                 Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mt-9">
                 <Link to="/book-appointment">
-                  <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.72_0.10_75/0.4)]">
+                  <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.62_0.10_65/0.5)]">
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
                   </ShinyButton>
                 </Link>
-                <Button variant="outline" className="border-2 border-cta text-cta hover:bg-cta hover:text-cta-foreground font-semibold text-base px-8 py-6 rounded-full" onClick={() => openWhatsApp()}>
+                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
                   WhatsApp Us
                 </Button>
               </div>
-              <a href={getCallLink()} className="inline-flex items-center gap-2 mt-5 text-sm text-muted-foreground hover:text-navy transition-colors duration-300">
+              <a href={getCallLink()} className="inline-flex items-center gap-2 mt-5 text-sm text-white/50 hover:text-white/80 transition-colors duration-300">
                 <Phone className="w-4 h-4" /> Or call us: {CLINIC.phone}
               </a>
             </div>
+
+            {/* Right — Glassmorphism Cards */}
             <div className="hidden lg:flex flex-col gap-5">
-              {/* Glassmorphism Stats Card */}
-              <div className="relative rounded-2xl border border-border bg-card/80 backdrop-blur-lg p-7 shadow-xl overflow-hidden">
-                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+              {/* Stats Card */}
+              <div className="relative rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl p-7 shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden">
+                <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-gold/15 blur-3xl" />
+                <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-light">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/20 backdrop-blur-sm border border-gold/20">
                       <Target className="h-6 w-6 text-gold" />
                     </div>
                     <div>
-                      <p className="text-2xl font-heading font-bold text-foreground">{CLINIC.patientCount}+</p>
-                      <p className="text-sm text-muted-foreground">Patients Treated</p>
+                      <p className="text-2xl font-heading font-bold text-white">{CLINIC.patientCount}+</p>
+                      <p className="text-sm text-white/60">Patients Treated</p>
                     </div>
                   </div>
                   <div className="mb-5">
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-muted-foreground">Patient Satisfaction</span>
-                      <span className="font-semibold text-foreground">98%</span>
+                      <span className="text-white/60">Patient Satisfaction</span>
+                      <span className="font-semibold text-white">98%</span>
                     </div>
-                    <div className="h-2.5 w-full rounded-full bg-muted">
-                      <div className="h-full rounded-full bg-gold" style={{ width: "98%" }} />
+                    <div className="h-2.5 w-full rounded-full bg-white/10">
+                      <div className="h-full rounded-full bg-gradient-to-r from-gold/80 to-gold" style={{ width: "98%" }} />
                     </div>
                   </div>
-                  <div className="h-px w-full bg-border my-4" />
+                  <div className="h-px w-full bg-white/10 my-4" />
                   <div className="grid grid-cols-3 gap-3 text-center">
-                    <div><p className="text-lg font-bold text-foreground">25+</p><p className="text-xs text-muted-foreground">Doctors</p></div>
-                    <div><p className="text-lg font-bold text-foreground">15+</p><p className="text-xs text-muted-foreground">Years</p></div>
-                    <div><p className="text-lg font-bold text-foreground">{CLINIC.rating}</p><p className="text-xs text-muted-foreground">Rating</p></div>
+                    <div><p className="text-lg font-bold text-white">25+</p><p className="text-xs text-white/50">Doctors</p></div>
+                    <div><p className="text-lg font-bold text-white">15+</p><p className="text-xs text-white/50">Years</p></div>
+                    <div><p className="text-lg font-bold text-white">{CLINIC.rating}</p><p className="text-xs text-white/50">Rating</p></div>
                   </div>
                   <div className="mt-5 flex gap-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cta/10 px-3 py-1.5 text-xs font-semibold text-cta">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cta/20 px-3 py-1.5 text-xs font-semibold text-cta backdrop-blur-sm border border-cta/20">
                       <span className="h-1.5 w-1.5 rounded-full bg-cta animate-pulse" /> OPEN NOW
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 px-3 py-1.5 text-xs font-semibold text-gold">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1.5 text-xs font-semibold text-gold backdrop-blur-sm border border-gold/20">
                       <Crown className="h-3 w-3" /> NABH
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Trusted marquee card */}
-              <div className="rounded-2xl border border-border bg-card/80 backdrop-blur-lg p-5 shadow-lg overflow-hidden">
-                <p className="text-xs text-muted-foreground mb-3 uppercase tracking-[0.15em] font-medium">Accreditations & Affiliations</p>
+              {/* Accreditations marquee */}
+              <div className="rounded-2xl border border-white/15 bg-white/8 backdrop-blur-xl p-5 shadow-lg overflow-hidden">
+                <p className="text-xs text-white/40 mb-3 uppercase tracking-[0.15em] font-medium">Accreditations & Affiliations</p>
                 <div className="overflow-hidden">
                   <div className="animate-marquee flex gap-8">
                     {[...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"], ...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"], ...["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "FICCI", "IMA"]].map((name, i) => (
-                      <div key={i} className="flex shrink-0 items-center gap-2 text-muted-foreground/60">
+                      <div key={i} className="flex shrink-0 items-center gap-2 text-white/40">
                         <Shield className="h-4 w-4" />
                         <span className="whitespace-nowrap text-sm font-medium">{name}</span>
                       </div>
@@ -179,9 +187,9 @@ function HomePage() {
               { icon: Shield, label: "NABH Accredited" },
               { icon: Star, label: "4.9/5 Google Rating" },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-3 bg-card rounded-xl px-4 py-3.5 shadow-sm border-l-[3px] border-l-gold premium-card">
+              <div key={label} className="flex items-center gap-3 bg-white/8 backdrop-blur-md rounded-xl px-4 py-3.5 border border-white/10">
                 <Icon className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-sm font-medium">{label}</span>
+                <span className="text-sm font-medium text-white/80">{label}</span>
               </div>
             ))}
           </div>
