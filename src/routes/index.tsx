@@ -3,6 +3,7 @@ import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, C
 import { LocationMap } from "@/components/ui/expand-map";
 import { Glow } from "@/components/ui/glow";
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
+import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -332,7 +333,22 @@ function HomePage() {
         </div>
       </section>
 
-      {/* STATS */}
+      {/* INTERACTIVE IMAGE ACCORDION */}
+      <section className="py-20 md:py-24 bg-cream relative overflow-hidden grain">
+        <Glow variant="center" className="h-[400px] opacity-40" />
+        <div className="max-w-7xl mx-auto px-4 relative z-10">
+          <AnimatedSection>
+            <InteractiveImageAccordion
+              heading="Comprehensive Care Under One Roof"
+              description="From expert consultations to advanced diagnostics and surgical excellence — experience seamless, world-class healthcare at every step of your journey."
+              ctaText="Book Free Consultation"
+              ctaHref="/book-appointment"
+              defaultActive={2}
+            />
+          </AnimatedSection>
+        </div>
+      </section>
+
       <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.72_0.10_75/0.08),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
