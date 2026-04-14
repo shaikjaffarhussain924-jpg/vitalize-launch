@@ -49,7 +49,7 @@ const Gallery4 = ({
   }, [carouselApi]);
 
   return (
-    <section className="py-20 md:py-24">
+    <section className="overflow-x-hidden py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4">
         <div className="mb-10 flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
@@ -83,18 +83,23 @@ const Gallery4 = ({
           </div>
         </div>
       </div>
-      <div className="w-full">
+
+      <div className="w-full overflow-x-hidden">
         <Carousel
           setApi={setCarouselApi}
           opts={{
+            align: "start",
             breakpoints: {
               "(max-width: 768px)": { dragFree: true },
             },
           }}
         >
-          <CarouselContent className="ml-[max(1rem,calc((100vw-80rem)/2+1rem))] mr-4">
+          <CarouselContent className="ml-0 mr-0 px-4 md:ml-[max(1rem,calc((100vw-80rem)/2+1rem))] md:mr-4 md:px-0">
             {items.map((item) => (
-              <CarouselItem key={item.id} className="max-w-[420px] pl-4">
+              <CarouselItem
+                key={item.id}
+                className="basis-[88%] pl-4 sm:basis-[72%] md:max-w-[420px] md:basis-auto"
+              >
                 <Link to={item.href || "#"} className="block group">
                   <div className="rounded-2xl border bg-card overflow-hidden premium-card">
                     <div className="overflow-hidden">
@@ -121,7 +126,8 @@ const Gallery4 = ({
             ))}
           </CarouselContent>
         </Carousel>
-        <div className="mt-6 flex justify-center gap-2">
+
+        <div className="mt-6 flex justify-center gap-2 px-4">
           {items.map((_, index) => (
             <button
               key={index}
