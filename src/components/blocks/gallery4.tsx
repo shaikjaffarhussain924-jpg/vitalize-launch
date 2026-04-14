@@ -1,5 +1,6 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -94,23 +95,28 @@ const Gallery4 = ({
           <CarouselContent className="ml-[max(1rem,calc((100vw-80rem)/2+1rem))] mr-4">
             {items.map((item) => (
               <CarouselItem key={item.id} className="max-w-[420px] pl-4">
-                <div className="group rounded-2xl border bg-card overflow-hidden premium-card">
-                  <div className="overflow-hidden">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
+                <Link to={item.href || "#"} className="block group">
+                  <div className="rounded-2xl border bg-card overflow-hidden premium-card">
+                    <div className="overflow-hidden">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-heading text-lg font-semibold text-navy mb-2">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+                        {item.description}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-sm font-medium text-gold mt-3 group-hover:gap-2 transition-all">
+                        Learn more <ArrowRight className="w-4 h-4" />
+                      </span>
+                    </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="font-heading text-lg font-semibold text-navy mb-2">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
+                </Link>
               </CarouselItem>
             ))}
           </CarouselContent>
