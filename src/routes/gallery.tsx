@@ -79,11 +79,11 @@ function GalleryPage() {
 
   return (
     <div>
-      <section className="bg-cream py-16">
+      <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Gallery" }]} />
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">Our Gallery</h1>
-          <p className="text-lg text-muted-foreground mt-4">Explore our clinic, results, and events.</p>
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy-foreground">Our Gallery</h1>
+          <p className="text-lg text-navy-foreground/70 mt-4">Explore our clinic, results, and events.</p>
         </div>
       </section>
 

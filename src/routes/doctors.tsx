@@ -35,11 +35,11 @@ function DoctorsPage() {
 
   return (
     <div>
-      <section className="bg-cream py-16">
+      <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Our Doctors" }]} />
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">Our Expert Doctors</h1>
-          <p className="text-lg text-muted-foreground mt-4 max-w-2xl">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy-foreground">Our Expert Doctors</h1>
+          <p className="text-lg text-navy-foreground/70 mt-4 max-w-2xl">
             25+ highly qualified specialists committed to delivering the best medical care in {CLINIC.city}.
           </p>
         </div>

@@ -49,7 +49,7 @@ function BlogPostPage() {
 
   return (
     <div>
-      <section className="bg-cream py-12">
+      <section className="bg-navy py-12">
         <div className="max-w-4xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Blog", to: "/blog" }, { label: post.title }]} />
         </div>

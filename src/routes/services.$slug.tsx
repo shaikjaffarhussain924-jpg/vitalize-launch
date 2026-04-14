@@ -109,13 +109,13 @@ function ServicePage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-cream py-16">
+      <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Services", to: "/services" }, { label: service.name }]} />
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
             <div>
-              <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">{service.name}</h1>
-              <p className="text-lg text-muted-foreground mt-3">{service.description}. Expert care at {CLINIC.name}, {CLINIC.city}.</p>
+              <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy-foreground">{service.name}</h1>
+              <p className="text-lg text-navy-foreground/70 mt-3">{service.description}. Expert care at {CLINIC.name}, {CLINIC.city}.</p>
             </div>
             <div className="flex gap-3">
               <Link to="/book-appointment">
