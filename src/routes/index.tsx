@@ -304,35 +304,31 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Experienced specialists dedicated to your health</p>
             </div>
           </AnimatedSection>
-          <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
-            {DOCTORS.slice(0, 3).map((doc, i) => (
-              <AnimatedSection key={doc.id} delay={i * 100} className="min-w-[300px] flex-1 snap-start">
-                <div className="bg-card rounded-2xl border overflow-hidden premium-card">
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img
-                      src={[
-                        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
-                        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
-                        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
-                      ][i]}
-                      alt={doc.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-heading text-lg font-semibold text-navy">{doc.name}</h3>
-                    <p className="text-sm text-gold font-medium mt-1">{doc.designation}</p>
-                    <p className="text-xs text-muted-foreground mt-1.5">{doc.qualification}</p>
-                    <p className="text-xs text-muted-foreground">{doc.experience} years experience</p>
-                    <Link to="/book-appointment" className="mt-4 block">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {DOCTORS.slice(0, 3).map((doc, i) => {
+              const docImages = [
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+              ];
+              return (
+                <AnimatedSection key={doc.id} delay={i * 100}>
+                  <DestinationCard
+                    imageUrl={docImages[i]}
+                    title={doc.name}
+                    subtitle={`${doc.designation} • ${doc.specialization}`}
+                    stats={`${doc.experience} years experience • ${doc.qualification}`}
+                    themeColor="220 40% 20%"
+                  >
+                    <Link to="/book-appointment" className="mt-2 block" onClick={(e) => e.stopPropagation()}>
                       <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground text-sm rounded-full">
-                        Book with {doc.name.split(" ")[0]} {doc.name.split(" ")[1]}
+                        Book with {doc.name.split(" ")[0]}
                       </Button>
                     </Link>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                  </DestinationCard>
+                </AnimatedSection>
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <Link to="/doctors">
