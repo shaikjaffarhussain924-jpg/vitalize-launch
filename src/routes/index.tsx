@@ -222,20 +222,34 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((service, i) => (
-              <AnimatedSection key={service.slug} delay={i * 100}>
-                <Link to="/services/$slug" params={{ slug: service.slug }} className="group block bg-card rounded-2xl p-7 border premium-card">
-                  <div className="w-14 h-14 rounded-xl bg-gold-light flex items-center justify-center text-gold mb-5 group-hover:bg-gold group-hover:text-gold-foreground transition-all duration-300">
-                    <Stethoscope className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-heading text-xl font-semibold text-navy">{service.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{service.description}</p>
-                  <span className="inline-flex items-center gap-1.5 mt-5 text-sm font-medium text-gold group-hover:gap-3 transition-all duration-300">
-                    Learn More <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              </AnimatedSection>
-            ))}
+            {SERVICES.map((service, i) => {
+              const serviceImages = [
+                "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
+              ];
+              const themeColors = [
+                "30 50% 25%", "0 40% 30%", "200 40% 25%",
+                "150 40% 20%", "280 30% 30%", "45 50% 30%",
+              ];
+              return (
+                <AnimatedSection key={service.slug} delay={i * 100}>
+                  <Link to="/services/$slug" params={{ slug: service.slug }}>
+                    <DestinationCard
+                      imageUrl={serviceImages[i % serviceImages.length]}
+                      title={service.name}
+                      subtitle={service.description}
+                      stats={`Starting from ${service.price}`}
+                      themeColor={themeColors[i % themeColors.length]}
+                      icon={<Stethoscope className="w-5 h-5" />}
+                    />
+                  </Link>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
