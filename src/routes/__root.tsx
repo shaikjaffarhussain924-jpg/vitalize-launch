@@ -17,7 +17,7 @@ function NotFoundComponent() {
         <h2 className="mt-4 text-xl font-semibold">Page not found</h2>
         <p className="mt-2 text-sm text-muted-foreground">The page you're looking for doesn't exist.</p>
         <div className="mt-6">
-          <Link to="/" className="inline-flex items-center justify-center rounded-lg bg-gold px-6 py-2.5 text-sm font-semibold text-gold-foreground hover:bg-gold/90 transition-colors">
+          <Link to="/" className="inline-flex items-center justify-center rounded-full bg-gold px-6 py-2.5 text-sm font-semibold text-gold-foreground hover:bg-gold/90 transition-all duration-300">
             Go Home
           </Link>
         </div>
