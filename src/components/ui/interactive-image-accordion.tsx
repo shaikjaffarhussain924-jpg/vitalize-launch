@@ -20,8 +20,9 @@ const AccordionItemPanel = ({
     <div
       onMouseEnter={onMouseEnter}
       className={cn(
-        'relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 ease-in-out h-[350px] md:h-[450px]',
-        isActive ? 'flex-[4]' : 'flex-[0.8]'
+        'relative overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 ease-in-out',
+        'h-[120px] sm:h-[350px] md:h-[450px]',
+        isActive ? 'flex-[4] h-[250px] sm:h-[350px]' : 'flex-[0.8]'
       )}
     >
       <img
@@ -92,7 +93,7 @@ export function InteractiveImageAccordion({
         )}
       </div>
 
-      <div className="flex gap-2 md:gap-3">
+      <div className="flex flex-col sm:flex-row gap-2 md:gap-3">
         {data.map((item, index) => (
           <AccordionItemPanel
             key={item.id}

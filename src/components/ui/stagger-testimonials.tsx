@@ -113,7 +113,8 @@ export function StaggerTestimonials({
   }, []);
 
   return (
-    <div className="relative h-[450px] w-full overflow-hidden">
+    <div className="relative h-[450px] sm:h-[450px] w-full overflow-hidden hidden sm:block">
+      {/* Desktop: stagger layout */}
       {testimonialsList.map((testimonial, index) => {
         const position =
           testimonialsList.length % 2
