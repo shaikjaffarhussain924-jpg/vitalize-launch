@@ -1,9 +1,9 @@
 import React from "react";
-import { motion, type AnimationProps } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
-const animationProps: AnimationProps = {
+const animationProps = {
   initial: { "--x": "100%", scale: 0.8 } as any,
   animate: { "--x": "-100%", scale: 1 } as any,
   whileTap: { scale: 0.95 },
