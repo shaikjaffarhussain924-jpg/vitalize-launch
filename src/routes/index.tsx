@@ -464,7 +464,7 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
-            <AnimatedSection>
+            <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
@@ -489,8 +489,8 @@ function HomePage() {
                 </ImageComparison>
               </div>
               <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Dental Restoration</p>
-            </AnimatedSection>
-            <AnimatedSection delay={150}>
+            </div>
+            <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
@@ -515,7 +515,7 @@ function HomePage() {
                 </ImageComparison>
               </div>
               <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Skin Treatment Results</p>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
