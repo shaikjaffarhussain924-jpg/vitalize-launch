@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 
 interface DestinationCardProps extends React.HTMLAttributes<HTMLDivElement> {
   imageUrl: string;
@@ -34,9 +35,17 @@ const DestinationCard = React.forwardRef<HTMLDivElement, DestinationCardProps>(
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out will-change-transform group-hover:scale-110"
           />
 
-          {/* Themed Gradient Overlay */}
+          {/* Progressive Blur overlay on bottom half */}
+          <ProgressiveBlur
+            direction="bottom"
+            blurLayers={6}
+            blurIntensity={0.5}
+            className="absolute inset-x-0 bottom-0 h-[70%]"
+          />
+
+          {/* Themed Gradient Overlay (lighter, works with blur) */}
           <div
-            className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--theme-color)/0.95)] via-[hsl(var(--theme-color)/0.4)] to-transparent"
+            className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--theme-color)/0.85)] via-[hsl(var(--theme-color)/0.2)] to-transparent"
           />
 
           {/* Content */}
