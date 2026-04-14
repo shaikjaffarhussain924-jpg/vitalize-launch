@@ -1,5 +1,5 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { Navbar } from "@/components/Navbar";
+import { FloatingHeader } from "@/components/ui/floating-header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { MobileCTABar } from "@/components/MobileCTABar";
