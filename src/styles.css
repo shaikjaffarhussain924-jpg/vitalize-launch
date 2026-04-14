@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -59,51 +59,53 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.985 0.004 85);
-  --foreground: oklch(0.14 0.035 265);
+
+  /* Soft luxury palette — muted, warm, restrained */
+  --background: oklch(0.98 0.003 75);
+  --foreground: oklch(0.18 0.015 45);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.14 0.035 265);
+  --card-foreground: oklch(0.18 0.015 45);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.035 265);
-  --primary: oklch(0.20 0.045 255);
-  --primary-foreground: oklch(0.985 0.004 85);
-  --secondary: oklch(0.96 0.008 85);
-  --secondary-foreground: oklch(0.20 0.045 255);
-  --muted: oklch(0.96 0.008 85);
-  --muted-foreground: oklch(0.50 0.02 255);
-  --accent: oklch(0.96 0.008 85);
-  --accent-foreground: oklch(0.20 0.045 255);
+  --popover-foreground: oklch(0.18 0.015 45);
+  --primary: oklch(0.22 0.02 50);
+  --primary-foreground: oklch(0.97 0.003 75);
+  --secondary: oklch(0.965 0.005 75);
+  --secondary-foreground: oklch(0.22 0.02 50);
+  --muted: oklch(0.96 0.005 75);
+  --muted-foreground: oklch(0.52 0.01 50);
+  --accent: oklch(0.965 0.005 75);
+  --accent-foreground: oklch(0.22 0.02 50);
   --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0.004 85);
-  --border: oklch(0.92 0.008 85);
-  --input: oklch(0.92 0.008 85);
-  --ring: oklch(0.72 0.10 75);
+  --destructive-foreground: oklch(0.97 0.003 75);
+  --border: oklch(0.93 0.005 75);
+  --input: oklch(0.93 0.005 75);
+  --ring: oklch(0.68 0.06 70);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.20 0.045 255);
-  --sidebar-foreground: oklch(0.985 0.004 85);
-  --sidebar-primary: oklch(0.72 0.10 75);
-  --sidebar-primary-foreground: oklch(0.14 0.035 265);
-  --sidebar-accent: oklch(0.28 0.04 255);
-  --sidebar-accent-foreground: oklch(0.985 0.004 85);
-  --sidebar-border: oklch(0.32 0.04 255);
-  --sidebar-ring: oklch(0.72 0.10 75);
+  --sidebar: oklch(0.22 0.02 50);
+  --sidebar-foreground: oklch(0.97 0.003 75);
+  --sidebar-primary: oklch(0.68 0.06 70);
+  --sidebar-primary-foreground: oklch(0.18 0.015 45);
+  --sidebar-accent: oklch(0.30 0.02 50);
+  --sidebar-accent-foreground: oklch(0.97 0.003 75);
+  --sidebar-border: oklch(0.34 0.02 50);
+  --sidebar-ring: oklch(0.68 0.06 70);
 
-  /* Brand tokens — refined premium */
-  --gold: oklch(0.72 0.10 75);
-  --gold-foreground: oklch(0.14 0.035 265);
-  --gold-light: oklch(0.94 0.04 80);
-  --cta: oklch(0.48 0.14 155);
+  /* Brand tokens — soft luxury: champagne gold, warm charcoal, muted sage */
+  --gold: oklch(0.68 0.06 70);
+  --gold-foreground: oklch(0.18 0.015 45);
+  --gold-light: oklch(0.95 0.02 75);
+  --cta: oklch(0.42 0.08 160);
   --cta-foreground: oklch(1 0 0);
-  --cream: oklch(0.975 0.006 85);
-  --navy: oklch(0.20 0.045 255);
-  --navy-foreground: oklch(0.985 0.004 85);
+  --cream: oklch(0.975 0.004 75);
+  --navy: oklch(0.22 0.02 50);
+  --navy-foreground: oklch(0.97 0.003 75);
 
-  --font-heading: 'DM Serif Display', serif;
-  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Outfit', system-ui, sans-serif;
 }
 
 @layer base {
@@ -115,24 +117,24 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-body);
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    font-weight: 500;
   }
 
-  /* Premium selection color */
   ::selection {
-    background-color: oklch(0.72 0.10 75 / 0.25);
-    color: oklch(0.14 0.035 265);
+    background-color: oklch(0.68 0.06 70 / 0.18);
+    color: oklch(0.18 0.015 45);
   }
 
-  /* Focus ring — gold-tinted */
   :focus-visible {
-    outline: 2px solid oklch(0.72 0.10 75 / 0.5);
+    outline: 1.5px solid oklch(0.68 0.06 70 / 0.4);
     outline-offset: 2px;
   }
 }
@@ -167,8 +169,8 @@
 
 /* Animations */
 @keyframes pulse-whatsapp {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.48 0.14 155 / 0.4); }
-  50% { box-shadow: 0 0 0 14px oklch(0.48 0.14 155 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.42 0.08 160 / 0.3); }
+  50% { box-shadow: 0 0 0 12px oklch(0.42 0.08 160 / 0); }
 }
 
 @keyframes marquee {
@@ -187,7 +189,7 @@
 }
 
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(30px); }
+  from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -197,15 +199,15 @@
 }
 
 .animate-pulse-whatsapp {
-  animation: pulse-whatsapp 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse-whatsapp 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 0.6s ease-out both;
+  animation: fade-in-up 0.7s ease-out both;
 }
 
 .animate-checkmark {
@@ -213,42 +215,42 @@
   animation: checkmark-draw 0.6s ease-out 0.3s both;
 }
 
-/* Premium scrollbar */
-::-webkit-scrollbar { width: 6px; }
+/* Refined scrollbar */
+::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: oklch(0.20 0.045 255 / 0.3); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: oklch(0.20 0.045 255 / 0.5); }
+::-webkit-scrollbar-thumb { background: oklch(0.22 0.02 50 / 0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.22 0.02 50 / 0.3); }
 
 html { scroll-behavior: smooth; }
 
-/* Premium card hover system */
+/* Premium card hover */
 .premium-card {
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.4s ease;
 }
 .premium-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px -12px oklch(0.20 0.045 255 / 0.12), 0 0 0 1px oklch(0.72 0.10 75 / 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px -12px oklch(0.22 0.02 50 / 0.08), 0 0 0 1px oklch(0.68 0.06 70 / 0.12);
 }
 
-/* Glass-morphism helper */
+/* Glass-morphism */
 .glass {
-  background: oklch(1 0 0 / 0.7);
-  backdrop-filter: blur(16px) saturate(1.5);
-  -webkit-backdrop-filter: blur(16px) saturate(1.5);
+  background: oklch(1 0 0 / 0.65);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
 }
 
-/* Subtle grain texture overlay */
+/* Grain texture */
 .grain::after {
   content: '';
   position: absolute;
   inset: 0;
-  opacity: 0.03;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
 }
 
-/* Section divider curve */
+/* Section divider */
 .section-curve {
   position: relative;
 }
@@ -266,7 +268,7 @@ html { scroll-behavior: smooth; }
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, oklch(0.72 0.10 75), oklch(0.80 0.12 80));
+  background: linear-gradient(135deg, oklch(0.68 0.06 70), oklch(0.75 0.07 75));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -274,13 +276,14 @@ html { scroll-behavior: smooth; }
 
 /* Decorative quote marks */
 .quote-mark::before {
-  content: '"';
-  font-family: 'DM Serif Display', serif;
-  font-size: 5rem;
+  content: '\201C';
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 6rem;
+  font-weight: 300;
   line-height: 1;
   position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  color: oklch(0.72 0.10 75 / 0.15);
+  top: -0.25rem;
+  left: 1.5rem;
+  color: oklch(0.68 0.06 70 / 0.1);
   pointer-events: none;
 }
