@@ -9,6 +9,7 @@ import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import MultistepConsultationForm from "@/components/ui/multistep-form";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { Logos3 } from "@/components/blocks/logos3";
@@ -546,7 +547,21 @@ function HomePage() {
         </div>
       </section>
 
-      {/* LOCATION */}
+      {/* CONSULTATION FORM */}
+      <section className="py-20 md:py-24 bg-muted/30">
+        <div className="max-w-7xl mx-auto px-4">
+          <AnimatedSection>
+            <div className="text-center mb-14">
+              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Get Started</p>
+              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Book a Consultation</h2>
+              <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Fill out this quick form and our team will reach out to schedule your appointment.</p>
+            </div>
+          </AnimatedSection>
+          <MultistepConsultationForm />
+        </div>
+      </section>
+
+
       <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
