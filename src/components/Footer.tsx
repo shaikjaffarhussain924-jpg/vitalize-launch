@@ -109,8 +109,8 @@ export function Footer() {
             </ul>
 
             {/* Map placeholder */}
-            <div className="mt-5 w-full h-32 bg-navy-foreground/5 rounded-xl flex items-center justify-center text-xs text-navy-foreground/30 border border-navy-foreground/8">
-              Google Maps Embed
+            <div className="mt-5 w-full h-32 rounded-xl overflow-hidden border border-navy-foreground/8">
+              <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=400&q=60" alt="Clinic exterior" className="w-full h-full object-cover opacity-40" />
             </div>
           </div>
         </div>
