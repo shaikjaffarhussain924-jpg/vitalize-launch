@@ -134,7 +134,7 @@ function HomePage() {
                       <span className="font-semibold text-foreground">98%</span>
                     </div>
                     <div className="h-2.5 w-full rounded-full bg-muted">
-                      <div className="h-full rounded-full bg-gradient-to-r from-gold to-cta" style={{ width: "98%" }} />
+                      <div className="h-full rounded-full bg-gold" style={{ width: "98%" }} />
                     </div>
                   </div>
                   <div className="h-px w-full bg-border my-4" />
