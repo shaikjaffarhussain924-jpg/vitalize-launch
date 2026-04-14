@@ -9,6 +9,7 @@ import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import MultistepConsultationForm from "@/components/ui/multistep-form";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { Logos3 } from "@/components/blocks/logos3";
