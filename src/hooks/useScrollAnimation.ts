@@ -3,9 +3,10 @@ import { useEffect, useRef, useState } from "react";
 export function useScrollAnimation(threshold: number = 0.15) {
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    setMounted(true);
     const el = ref.current;
     if (!el) return;
 
@@ -23,5 +24,6 @@ export function useScrollAnimation(threshold: number = 0.15) {
     return () => observer.disconnect();
   }, [threshold]);
 
-  return { ref, isVisible };
+  // If not mounted yet (SSR), return visible=true so content is visible in SSR HTML
+  return { ref, isVisible: !mounted || isVisible };
 }
