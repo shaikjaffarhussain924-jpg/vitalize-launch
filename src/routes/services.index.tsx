@@ -36,12 +36,12 @@ export const Route = createFileRoute("/services/")({
 function ServicesPage() {
   return (
     <div>
-      <section className="bg-cream py-16 relative overflow-hidden">
+      <section className="bg-navy py-16 relative overflow-hidden">
         <Glow variant="center" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "Services" }]} />
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">Our Medical Services</h1>
-          <p className="text-lg text-muted-foreground mt-4 max-w-2xl">
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy-foreground">Our Medical Services</h1>
+          <p className="text-lg text-navy-foreground/70 mt-4 max-w-2xl">
             Comprehensive medical care across 6+ specialties with experienced doctors and state-of-the-art equipment.
           </p>
         </div>

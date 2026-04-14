@@ -43,18 +43,18 @@ function FAQPage() {
 
   return (
     <div>
-      <section className="bg-cream py-16">
+      <section className="bg-navy py-16">
         <div className="max-w-7xl mx-auto px-4">
           <Breadcrumb items={[{ label: "FAQ" }]} />
-          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy">Frequently Asked Questions</h1>
+          <h1 className="font-heading text-4xl md:text-5xl font-bold text-navy-foreground">Frequently Asked Questions</h1>
           <div className="relative mt-6 max-w-lg">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy-foreground/50" />
             <input
               type="text"
               placeholder="Search questions..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border rounded-xl bg-card text-base"
+              className="w-full pl-10 pr-4 py-3 border-navy-foreground/15 rounded-xl bg-navy-foreground/10 text-navy-foreground placeholder:text-navy-foreground/40 text-base"
             />
           </div>
         </div>

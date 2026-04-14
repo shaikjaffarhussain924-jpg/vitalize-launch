@@ -8,7 +8,7 @@ interface BreadcrumbItem {
 
 export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-muted-foreground mb-4">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-1.5 text-sm text-navy-foreground/60 mb-4">
       <RouterLink to="/" className="hover:text-gold transition-colors">Home</RouterLink>
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-1.5">
@@ -16,7 +16,7 @@ export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
           {item.to ? (
             <RouterLink to={item.to as any} className="hover:text-gold transition-colors">{item.label}</RouterLink>
           ) : (
-            <span className="text-foreground">{item.label}</span>
+            <span className="text-navy-foreground/80">{item.label}</span>
           )}
         </span>
       ))}
