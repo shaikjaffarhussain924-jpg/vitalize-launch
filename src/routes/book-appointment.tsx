@@ -95,7 +95,7 @@ function BookingPage() {
               <div className="w-20 h-20 rounded-full bg-cta/10 flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-10 h-10 text-cta" />
               </div>
-              <h2 className="font-heading text-2xl font-bold text-navy">Appointment Requested! ✅</h2>
+              <h2 className="font-heading text-2xl font-bold text-navy">Appointment Requested</h2>
               <p className="text-muted-foreground mt-2">Dr. will confirm shortly. Redirecting to WhatsApp...</p>
             </div>
           ) : (

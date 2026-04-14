@@ -69,14 +69,14 @@ export function ExitIntentPopup() {
 
         {submitted ? (
           <div className="text-center py-6">
-            <div className="text-4xl mb-3">🎉</div>
+            <div className="w-12 h-12 rounded-full bg-cta/10 flex items-center justify-center mx-auto mb-3"><CheckCircle className="w-6 h-6 text-cta" /></div>
             <h3 className="font-heading text-xl font-bold">Offer Claimed!</h3>
             <p className="text-sm text-muted-foreground mt-2">We'll call you shortly with your ₹500 discount code.</p>
           </div>
         ) : (
           <>
             <div className="text-center mb-4">
-              <div className="text-3xl mb-2">⏰</div>
+              <div className="w-10 h-10 rounded-full bg-gold/10 flex items-center justify-center mx-auto mb-2"><Clock className="w-5 h-5 text-gold" /></div>
               <h3 className="font-heading text-2xl font-bold text-navy">Wait! Get ₹500 OFF</h3>
               <p className="text-sm text-muted-foreground mt-1">Your first consultation — Limited time offer</p>
             </div>
@@ -92,7 +92,7 @@ export function ExitIntentPopup() {
               <Button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base py-5">
                 {isSubmitting ? "Claiming..." : "Claim ₹500 OFF →"}
               </Button>
-              <p className="text-xs text-center text-muted-foreground">🔒 100% Confidential • No spam</p>
+              <p className="text-xs text-center text-muted-foreground flex items-center justify-center gap-1"><Lock className="w-3 h-3" /> 100% Confidential · No spam</p>
             </form>
           </>
         )}
