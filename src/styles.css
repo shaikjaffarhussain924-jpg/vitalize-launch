@@ -268,7 +268,7 @@ html { scroll-behavior: smooth; }
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, oklch(0.55 0.12 55), oklch(0.65 0.10 65));
+  background: linear-gradient(135deg, oklch(0.48 0.12 55), oklch(0.58 0.11 65));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
