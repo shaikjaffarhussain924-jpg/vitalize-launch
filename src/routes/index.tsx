@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
+import { LocationMap } from "@/components/ui/expand-map";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -81,10 +82,11 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center bg-cream overflow-hidden grain">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,oklch(0.72_0.10_75/0.06),transparent_60%)]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/95 to-transparent z-10" />
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-navy/5 hidden lg:block" />
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80" alt="Modern clinic interior" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-r from-cream via-cream/95 to-cream/60" />
+        </div>
         <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -282,8 +284,16 @@ function HomePage() {
             {DOCTORS.slice(0, 3).map((doc, i) => (
               <AnimatedSection key={doc.id} delay={i * 100} className="min-w-[300px] flex-1 snap-start">
                 <div className="bg-card rounded-2xl border overflow-hidden premium-card">
-                  <div className="aspect-[3/4] bg-gradient-to-b from-navy/10 to-navy/5 flex items-center justify-center text-muted-foreground group-hover:scale-105 transition-transform duration-500 overflow-hidden">
-                    Doctor Photo
+                  <div className="aspect-[3/4] overflow-hidden">
+                    <img
+                      src={[
+                        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+                        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+                        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+                      ][i]}
+                      alt={doc.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
                   <div className="p-6">
                     <h3 className="font-heading text-lg font-semibold text-navy">{doc.name}</h3>
@@ -447,7 +457,15 @@ function HomePage() {
             {BLOG_POSTS.slice(0, 3).map((post, i) => (
               <AnimatedSection key={post.slug} delay={i * 100}>
                 <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block bg-card rounded-2xl overflow-hidden border premium-card">
-                  <div className="aspect-video bg-gradient-to-br from-navy/10 to-navy/5 flex items-center justify-center text-muted-foreground">Blog Image</div>
+                  <img
+                    src={[
+                      "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+                      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+                      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+                    ][i]}
+                    alt={post.title}
+                    className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                   <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-xs font-medium bg-gold-light text-gold px-2.5 py-1 rounded-full">{post.category}</span>
@@ -481,9 +499,11 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-10">
-            <div className="aspect-video bg-accent rounded-2xl flex items-center justify-center text-muted-foreground border">
-              Google Maps Embed
-            </div>
+            <LocationMap
+              location={CLINIC.address}
+              coordinates="17.4326° N, 78.4071° E"
+              className="w-full"
+            />
             <div className="flex flex-col justify-center space-y-5">
               <div>
                 <h3 className="font-heading text-2xl font-semibold text-navy">{CLINIC.name}</h3>
