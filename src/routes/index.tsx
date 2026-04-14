@@ -113,7 +113,7 @@ function HomePage() {
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
                   </ShinyButton>
                 </Link>
-                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
+                <Button variant="outline" className="border border-white/20 bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 font-semibold text-base px-8 py-6 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.2)] hover:border-white/30" onClick={() => openWhatsApp()}>
                   WhatsApp Us
                 </Button>
               </div>
