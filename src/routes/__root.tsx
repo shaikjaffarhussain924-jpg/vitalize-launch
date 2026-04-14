@@ -72,10 +72,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
     <>
       <FloatingHeader />
-      <main className="pb-16 md:pb-0">
+      <main className={`pb-16 md:pb-0 ${isHome ? '' : 'pt-20'}`}>
         <Outlet />
       </main>
       <Footer />
