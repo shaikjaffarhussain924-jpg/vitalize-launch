@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/interfaces-accordion";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -243,16 +244,19 @@ function ServicePage() {
               {/* FAQ */}
               <AnimatedSection>
                 <h2 className="font-heading text-2xl font-bold text-navy mb-6">Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {faqs.map((faq, i) => (
-                    <details key={i} className="bg-card rounded-lg border p-4 group">
-                      <summary className="font-medium text-navy cursor-pointer list-none flex justify-between items-center">
-                        {faq.q}
-                        <span className="text-gold group-open:rotate-45 transition-transform text-xl">+</span>
-                      </summary>
-                      <p className="text-sm text-muted-foreground mt-3">{faq.a}</p>
-                    </details>
-                  ))}
+                <div className="bg-card rounded-2xl border p-6">
+                  <Accordion type="single" collapsible className="w-full">
+                    {faqs.map((faq, i) => (
+                      <AccordionItem key={i} value={`faq-${i}`}>
+                        <AccordionTrigger className="text-navy font-medium">
+                          {faq.q}
+                        </AccordionTrigger>
+                        <AccordionContent className="text-muted-foreground">
+                          {faq.a}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
                 </div>
               </AnimatedSection>
 

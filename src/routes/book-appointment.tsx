@@ -1,6 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, Shield, Clock, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GetStartedButton } from "@/components/ui/get-started-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Breadcrumb } from "@/components/Breadcrumb";
@@ -166,9 +167,9 @@ function BookingPage() {
                       <option>Other</option>
                     </select>
                   </div>
-                  <Button type="button" onClick={nextStep} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base py-5">
-                    Continue <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                  <GetStartedButton type="button" onClick={nextStep} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base py-5">
+                    Continue
+                  </GetStartedButton>
                 </div>
               )}
 

@@ -3,6 +3,10 @@ import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, C
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { ShinyButton } from "@/components/ui/shiny-button";
+import { BorderRotate } from "@/components/ui/animated-gradient-border";
+import { Logos3 } from "@/components/blocks/logos3";
+import { Gallery4 } from "@/components/blocks/gallery4";
 import { CLINIC, SERVICES, DOCTORS, TESTIMONIALS, BLOG_POSTS } from "@/lib/constants";
 import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -96,9 +100,9 @@ function HomePage() {
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mt-9">
                 <Link to="/book-appointment">
-                  <Button className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-6 rounded-full shadow-[0_6px_24px_-6px_oklch(0.72_0.10_75/0.4)] hover:shadow-[0_8px_30px_-6px_oklch(0.72_0.10_75/0.5)] hover:scale-[1.02]">
-                    Book Free Consultation <ArrowRight className="w-4 h-4 ml-1" />
-                  </Button>
+                  <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.72_0.10_75/0.4)]">
+                    Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
+                  </ShinyButton>
                 </Link>
                 <Button variant="outline" className="border-2 border-cta text-cta hover:bg-cta hover:text-cta-foreground font-semibold text-base px-8 py-6 rounded-full" onClick={() => openWhatsApp()}>
                   WhatsApp Us
@@ -191,13 +195,22 @@ function HomePage() {
               { icon: Heart, title: "Affordable Care", desc: "Transparent pricing, EMI options, and insurance support for all patients." },
             ].map(({ icon: Icon, title, desc }, i) => (
               <AnimatedSection key={title} delay={i * 100}>
-                <div className="text-center p-8 rounded-2xl bg-card/50 hover:bg-card transition-colors duration-300">
-                  <div className="w-16 h-16 rounded-2xl bg-gold-light flex items-center justify-center text-gold mx-auto mb-5">
-                    <Icon className="w-8 h-8" />
+                <BorderRotate
+                  animationMode="stop-rotate-on-hover"
+                  animationSpeed={8}
+                  gradientColors={{ primary: '#1a1a3e', secondary: '#c7a03c', accent: '#f9de90' }}
+                  backgroundColor="white"
+                  borderRadius={16}
+                  borderWidth={2}
+                >
+                  <div className="text-center p-8">
+                    <div className="w-16 h-16 rounded-2xl bg-gold-light flex items-center justify-center text-gold mx-auto mb-5">
+                      <Icon className="w-8 h-8" />
+                    </div>
+                    <h3 className="font-heading text-lg font-semibold text-navy">{title}</h3>
+                    <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{desc}</p>
                   </div>
-                  <h3 className="font-heading text-lg font-semibold text-navy">{title}</h3>
-                  <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{desc}</p>
-                </div>
+                </BorderRotate>
               </AnimatedSection>
             ))}
           </div>
@@ -335,58 +348,39 @@ function HomePage() {
       </section>
 
       {/* AWARDS */}
-      <section className="py-14 border-y">
-        <div className="max-w-7xl mx-auto px-4">
-          <p className="text-center text-xs uppercase tracking-[0.25em] text-muted-foreground mb-7">As Seen In & Accreditations</p>
-          <div className="flex flex-wrap justify-center items-center gap-6">
-            {["NABH", "ISO 9001", "Govt. Recognized", "Times Health", "Best Clinic Award", "Healthcare Excellence"].map((badge) => (
-              <div key={badge} className="px-5 py-3 rounded-full bg-gold-light text-sm text-navy font-medium tracking-wide">
-                {badge}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <Logos3
+        heading="As Seen In & Accreditations"
+        logos={[
+          { id: "nabh", description: "NABH", text: "NABH" },
+          { id: "iso", description: "ISO 9001", text: "ISO 9001" },
+          { id: "govt", description: "Govt. Recognized", text: "Govt. Recognized" },
+          { id: "times", description: "Times Health", text: "Times Health" },
+          { id: "best", description: "Best Clinic Award", text: "Best Clinic Award" },
+          { id: "excellence", description: "Healthcare Excellence", text: "Healthcare Excellence" },
+          { id: "nabh2", description: "NABH", text: "NABH" },
+          { id: "iso2", description: "ISO 9001", text: "ISO 9001" },
+        ]}
+      />
 
-      {/* BEFORE/AFTER TEASER */}
-      <section className="py-20 md:py-24">
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Results</p>
-              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Patient Results</h2>
-              <p className="text-muted-foreground mt-4 leading-relaxed">Real results from real patients</p>
-            </div>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <AnimatedSection key={i} delay={i * 100}>
-                <div className="group relative rounded-2xl overflow-hidden cursor-pointer border premium-card">
-                  <div className="aspect-square bg-accent flex items-center justify-center">
-                    <div className="text-center text-sm text-muted-foreground">
-                      <p className="font-medium">Before</p>
-                      <p className="text-xs mt-1">Hover to see After</p>
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-cta/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <div className="text-center text-cta-foreground">
-                      <p className="font-medium">After</p>
-                      <p className="text-xs mt-1">Amazing Results ✨</p>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-          <div className="text-center mt-10">
-            <Link to="/gallery">
-              <Button variant="outline" className="border-2 border-navy text-navy hover:bg-navy hover:text-navy-foreground rounded-full">
-                View All Results <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* BEFORE/AFTER GALLERY */}
+      <Gallery4
+        title="Patient Results"
+        description="Real results from real patients — see the transformations achieved at our clinic."
+        items={[
+          { id: "result-1", title: "Dental Restoration", description: "Complete smile makeover with advanced dental implants and cosmetic procedures.", image: "https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=400&fit=crop" },
+          { id: "result-2", title: "Skin Treatment", description: "Dramatic improvement in skin clarity and texture with our dermatology treatments.", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" },
+          { id: "result-3", title: "Orthopedic Recovery", description: "Full mobility restored after advanced orthopedic surgery and rehabilitation.", image: "https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=400&fit=crop" },
+          { id: "result-4", title: "Eye Care Results", description: "Vision restored with precision laser eye surgery performed by our ophthalmologists.", image: "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&h=400&fit=crop" },
+          { id: "result-5", title: "Cardiac Care", description: "Successful cardiac procedures with state-of-the-art cardiology equipment.", image: "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?w=600&h=400&fit=crop" },
+        ]}
+      />
+      <div className="text-center -mt-10 mb-16">
+        <Link to="/gallery">
+          <Button variant="outline" className="border-2 border-navy text-navy hover:bg-navy hover:text-navy-foreground rounded-full">
+            View All Results <ArrowRight className="w-4 h-4 ml-2" />
+          </Button>
+        </Link>
+      </div>
 
       {/* BLOG TEASER */}
       <section className="py-20 md:py-24 bg-cream relative grain">
