@@ -1,4 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
 import { FloatingHeader } from "@/components/ui/floating-header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -72,10 +72,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
     <>
       <FloatingHeader />
-      <main className="pt-20 pb-16 md:pb-0">
+      <main className={`pb-16 md:pb-0 ${isHome ? '' : 'pt-20'}`}>
         <Outlet />
       </main>
       <Footer />
