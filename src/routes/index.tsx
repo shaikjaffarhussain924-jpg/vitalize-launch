@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
 import { LocationMap } from "@/components/ui/expand-map";
 import { Glow } from "@/components/ui/glow";
+import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
