@@ -1,5 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle, Shield, Clock, CreditCard, ChevronDown } from "lucide-react";
+import { format } from "date-fns";
+import { CalendarScheduler } from "@/components/ui/calendar-scheduler";
 import { Button } from "@/components/ui/button";
 import { GetStartedButton } from "@/components/ui/get-started-button";
 import { Input } from "@/components/ui/input";
