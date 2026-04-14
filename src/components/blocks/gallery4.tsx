@@ -49,9 +49,9 @@ const Gallery4 = ({
   }, [carouselApi]);
 
   return (
-    <section className="py-14 md:py-24">
+    <section className="py-20 md:py-24">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="mb-8 md:mb-10 flex flex-col items-center justify-between gap-4 md:gap-6 md:flex-row">
+        <div className="mb-10 flex flex-col items-center justify-between gap-6 md:flex-row">
           <div className="text-center md:text-left">
             <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Results</p>
             <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">
@@ -92,20 +92,19 @@ const Gallery4 = ({
             },
           }}
         >
-          <CarouselContent className="ml-4 md:ml-[max(1rem,calc((100vw-80rem)/2+1rem))] mr-4">
+          <CarouselContent className="ml-[max(1rem,calc((100vw-80rem)/2+1rem))] mr-4">
             {items.map((item) => (
-              <CarouselItem key={item.id} className="basis-[80%] sm:basis-[60%] md:max-w-[420px] pl-3 md:pl-4">
+              <CarouselItem key={item.id} className="max-w-[420px] pl-4">
                 <Link to={item.href || "#"} className="block group">
                   <div className="rounded-2xl border bg-card overflow-hidden premium-card">
                     <div className="overflow-hidden">
                       <img
                         src={item.image}
                         alt={item.title}
-                        loading="lazy"
                         className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
-                    <div className="p-4 md:p-6">
+                    <div className="p-6">
                       <h3 className="font-heading text-lg font-semibold text-navy mb-2">
                         {item.title}
                       </h3>

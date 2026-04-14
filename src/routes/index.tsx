@@ -66,7 +66,7 @@ function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string
   const { count, ref } = useCountUp(end);
   return (
     <div ref={ref} className="text-center">
-      <div className="text-3xl md:text-5xl font-heading font-bold text-gold-gradient">{count.toLocaleString()}{suffix}</div>
+      <div className="text-4xl md:text-5xl font-heading font-bold text-gold-gradient">{count.toLocaleString()}{suffix}</div>
       <div className="text-sm text-navy-foreground/60 mt-2 tracking-wide">{label}</div>
     </div>
   );
@@ -84,36 +84,36 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[80vh] md:min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
         {/* Hero background */}
         <div className="absolute inset-0">
-          <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} loading="eager" fetchPriority="high" />
+          <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/70 to-navy/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
           <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.6} className="absolute inset-x-0 bottom-0 h-24" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-10 md:py-24 relative z-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left — Text */}
             <div>
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
                 <Shield className="w-4 h-4 text-gold" /> NABH Accredited Hospital
               </div>
-              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
                 {CLINIC.tagline.split(",")[0]},<br />
                 <span className="text-gold">{CLINIC.tagline.split(",")[1]}</span>
               </h1>
-              <p className="text-base md:text-lg text-white/70 mt-5 md:mt-7 max-w-lg leading-relaxed font-light">
+              <p className="text-lg text-white/70 mt-7 max-w-lg leading-relaxed font-light">
                 Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mt-6 md:mt-9">
+              <div className="flex flex-col sm:flex-row gap-3 mt-9">
                 <Link to="/book-appointment">
                   <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.62_0.10_65/0.5)]">
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
                   </ShinyButton>
                 </Link>
-                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-6 md:px-8 py-5 md:py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
+                <Button variant="outline" className="border-2 border-white/30 text-white hover:bg-white/10 font-semibold text-base px-8 py-6 rounded-full backdrop-blur-sm" onClick={() => openWhatsApp()}>
                   WhatsApp Us
                 </Button>
               </div>
@@ -182,16 +182,16 @@ function HomePage() {
           </div>
 
           {/* Trust bar */}
-          <div className="mt-8 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4">
+          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { icon: Users, label: "15,000+ Happy Patients" },
               { icon: Clock, label: "15+ Years Experience" },
               { icon: Shield, label: "NABH Accredited" },
               { icon: Star, label: "4.9/5 Google Rating" },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-2 md:gap-3 bg-white/8 backdrop-blur-md rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 border border-white/10">
-                <Icon className="w-4 h-4 md:w-5 md:h-5 text-gold shrink-0" />
-                <span className="text-xs md:text-sm font-medium text-white/80">{label}</span>
+              <div key={label} className="flex items-center gap-3 bg-white/8 backdrop-blur-md rounded-xl px-4 py-3.5 border border-white/10">
+                <Icon className="w-5 h-5 text-gold shrink-0" />
+                <span className="text-sm font-medium text-white/80">{label}</span>
               </div>
             ))}
           </div>
@@ -236,7 +236,7 @@ function HomePage() {
       />
 
       {/* WHY CHOOSE US */}
-      <section className="py-14 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="top" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -245,7 +245,7 @@ function HomePage() {
               <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Why Choose {CLINIC.name}?</h2>
             </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               { icon: Shield, title: "NABH Accredited", desc: "Recognized for maintaining the highest standards of quality and patient safety." },
               { icon: Users, title: "Expert Doctors", desc: "25+ highly qualified specialists with decades of combined experience." },
@@ -276,7 +276,7 @@ function HomePage() {
       </section>
 
       {/* DOCTOR SPOTLIGHT */}
-      <section className="py-14 md:py-24">
+      <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -285,7 +285,7 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Experienced specialists dedicated to your health</p>
             </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {DOCTORS.slice(0, 3).map((doc, i) => {
               const docImages = [
                 "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
@@ -322,7 +322,7 @@ function HomePage() {
       </section>
 
       {/* INTERACTIVE IMAGE ACCORDION */}
-      <section className="py-14 md:py-24 bg-cream relative overflow-hidden grain">
+      <section className="py-20 md:py-24 bg-cream relative overflow-hidden grain">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -337,10 +337,10 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="py-12 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
+      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.72_0.10_75/0.08),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
             <StatCounter end={15000} suffix="+" label="Patients Treated" />
             <StatCounter end={98} suffix="%" label="Patient Satisfaction" />
             <StatCounter end={25} suffix="+" label="Expert Doctors" />
@@ -350,7 +350,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-14 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="bottom" className="h-[350px] opacity-25" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
@@ -363,7 +363,7 @@ function HomePage() {
       </section>
 
       {/* BOOKING FORM */}
-      <section className="py-14 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
+      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,oklch(0.72_0.10_75/0.06),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -421,7 +421,7 @@ function HomePage() {
       />
 
       {/* BEFORE/AFTER COMPARISON */}
-      <section className="py-14 md:py-24 relative overflow-hidden">
+      <section className="py-20 md:py-24 relative overflow-hidden">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-14">
@@ -429,7 +429,7 @@ function HomePage() {
             <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
@@ -494,7 +494,7 @@ function HomePage() {
       </div>
 
       {/* BLOG TEASER */}
-      <section className="py-14 md:py-24 bg-cream relative grain">
+      <section className="py-20 md:py-24 bg-cream relative grain">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -503,7 +503,7 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Stay informed with expert medical advice</p>
             </div>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {BLOG_POSTS.slice(0, 3).map((post, i) => {
               const blogImages = [
                 "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
@@ -536,7 +536,7 @@ function HomePage() {
       </section>
 
       {/* CONSULTATION FORM */}
-      <section className="py-14 md:py-24 bg-muted/30">
+      <section className="py-20 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -550,7 +550,7 @@ function HomePage() {
       </section>
 
 
-      <section className="py-14 md:py-24">
+      <section className="py-20 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">

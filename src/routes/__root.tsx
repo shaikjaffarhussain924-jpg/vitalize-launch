@@ -1,5 +1,5 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { Navbar } from "@/components/Navbar";
+import { Outlet, Link, createRootRoute, HeadContent, Scripts, useLocation } from "@tanstack/react-router";
+import { FloatingHeader } from "@/components/ui/floating-header";
 import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { MobileCTABar } from "@/components/MobileCTABar";
@@ -39,12 +39,6 @@ export const Route = createRootRoute({
       { property: "og:locale", content: "en_IN" },
       { property: "og:site_name", content: CLINIC.name },
       { name: "twitter:card", content: "summary_large_image" },
-      { title: "Lovable App" },
-      { property: "og:title", content: "Lovable App" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { property: "og:description", content: "Lovable Generated Project" },
-      { name: "twitter:description", content: "Lovable Generated Project" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -78,10 +72,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
     <>
-      <Navbar />
-      <main className="pb-16 md:pb-0">
+      <FloatingHeader />
+      <main className={`pb-16 md:pb-0 ${isHome ? '' : 'pt-20'}`}>
         <Outlet />
       </main>
       <Footer />
