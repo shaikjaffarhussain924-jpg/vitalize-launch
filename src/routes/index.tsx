@@ -84,27 +84,27 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[80vh] md:min-h-[92vh] flex items-center overflow-hidden">
         {/* Hero background */}
         <div className="absolute inset-0">
-          <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
+          <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} loading="eager" fetchPriority="high" />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/70 to-navy/40" />
           <div className="absolute inset-0 bg-gradient-to-t from-navy/60 via-transparent to-transparent" />
           <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.6} className="absolute inset-x-0 bottom-0 h-24" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-4 py-10 md:py-24 relative z-20 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Left — Text */}
             <div>
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
                 <Shield className="w-4 h-4 text-gold" /> NABH Accredited Hospital
               </div>
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
                 {CLINIC.tagline.split(",")[0]},<br />
                 <span className="text-gold">{CLINIC.tagline.split(",")[1]}</span>
               </h1>
-              <p className="text-lg text-white/70 mt-7 max-w-lg leading-relaxed font-light">
+              <p className="text-base md:text-lg text-white/70 mt-5 md:mt-7 max-w-lg leading-relaxed font-light">
                 Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 mt-9">
@@ -182,16 +182,16 @@ function HomePage() {
           </div>
 
           {/* Trust bar */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="mt-8 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-2.5 md:gap-4">
             {[
               { icon: Users, label: "15,000+ Happy Patients" },
               { icon: Clock, label: "15+ Years Experience" },
               { icon: Shield, label: "NABH Accredited" },
               { icon: Star, label: "4.9/5 Google Rating" },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-3 bg-white/8 backdrop-blur-md rounded-xl px-4 py-3.5 border border-white/10">
-                <Icon className="w-5 h-5 text-gold shrink-0" />
-                <span className="text-sm font-medium text-white/80">{label}</span>
+              <div key={label} className="flex items-center gap-2 md:gap-3 bg-white/8 backdrop-blur-md rounded-xl px-3 md:px-4 py-2.5 md:py-3.5 border border-white/10">
+                <Icon className="w-4 h-4 md:w-5 md:h-5 text-gold shrink-0" />
+                <span className="text-xs md:text-sm font-medium text-white/80">{label}</span>
               </div>
             ))}
           </div>
