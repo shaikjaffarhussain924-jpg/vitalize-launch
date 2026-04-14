@@ -75,7 +75,7 @@ function RootComponent() {
   return (
     <>
       <FloatingHeader />
-      <main className="pt-20 pb-16 md:pb-0">
+      <main className="pb-16 md:pb-0">
         <Outlet />
       </main>
       <Footer />
