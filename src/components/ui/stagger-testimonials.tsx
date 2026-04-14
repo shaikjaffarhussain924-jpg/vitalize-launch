@@ -113,46 +113,81 @@ export function StaggerTestimonials({
   }, []);
 
   return (
-    <div className="relative h-[450px] sm:h-[450px] w-full overflow-hidden hidden sm:block">
-      {/* Desktop: stagger layout */}
-      {testimonialsList.map((testimonial, index) => {
-        const position =
-          testimonialsList.length % 2
-            ? index - (testimonialsList.length + 1) / 2
-            : index - testimonialsList.length / 2;
-        return (
-          <TestimonialCard
-            key={testimonial.tempId}
-            position={position}
-            testimonial={testimonial}
-            handleMove={handleMove}
-            cardSize={cardSize}
+    <>
+      {/* Mobile: simple card carousel */}
+      <div className="sm:hidden">
+        <div className="rounded-2xl border-2 border-gold/30 bg-navy text-navy-foreground p-6 shadow-[0px_8px_0px_4px_oklch(0.62_0.10_65/0.3)]">
+          <img
+            src={testimonialsList[0]?.imgSrc}
+            alt={testimonialsList[0]?.by}
+            className="mb-4 h-12 w-12 rounded-full object-cover border-2 border-gold/30"
           />
-        );
-      })}
-      <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-4">
-        <button
-          onClick={() => handleMove(-1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full transition-colors",
-            "bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold"
-          )}
-          aria-label="Previous testimonial"
-        >
-          <ChevronLeft className="w-5 h-5" />
-        </button>
-        <button
-          onClick={() => handleMove(1)}
-          className={cn(
-            "flex h-14 w-14 items-center justify-center rounded-full transition-colors",
-            "bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold"
-          )}
-          aria-label="Next testimonial"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
+          <p className="text-base italic leading-relaxed text-navy-foreground/90">
+            &ldquo;{testimonialsList[0]?.testimonial}&rdquo;
+          </p>
+          <p className="mt-4 text-sm font-semibold text-gold">
+            — {testimonialsList[0]?.by}
+          </p>
+        </div>
+        <div className="flex justify-center gap-4 mt-6">
+          <button
+            onClick={() => handleMove(-1)}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold transition-colors"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => handleMove(1)}
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold transition-colors"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
-    </div>
+
+      {/* Desktop: stagger layout */}
+      <div className="relative h-[450px] w-full overflow-hidden hidden sm:block">
+        {testimonialsList.map((testimonial, index) => {
+          const position =
+            testimonialsList.length % 2
+              ? index - (testimonialsList.length + 1) / 2
+              : index - testimonialsList.length / 2;
+          return (
+            <TestimonialCard
+              key={testimonial.tempId}
+              position={position}
+              testimonial={testimonial}
+              handleMove={handleMove}
+              cardSize={cardSize}
+            />
+          );
+        })}
+        <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-4">
+          <button
+            onClick={() => handleMove(-1)}
+            className={cn(
+              "flex h-14 w-14 items-center justify-center rounded-full transition-colors",
+              "bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold"
+            )}
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => handleMove(1)}
+            className={cn(
+              "flex h-14 w-14 items-center justify-center rounded-full transition-colors",
+              "bg-card border-2 border-border hover:bg-gold hover:text-gold-foreground hover:border-gold"
+            )}
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
