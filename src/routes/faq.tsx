@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Search } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/interfaces-accordion";
 import { CLINIC, FAQ_DATA } from "@/lib/constants";
 import { useState } from "react";
 
@@ -77,19 +78,22 @@ function FAQPage() {
             </div>
           )}
 
-          <div className="space-y-3">
-            {filteredFaqs.map((faq: { q: string; a: string }, i: number) => (
-              <AnimatedSection key={i} delay={i * 50}>
-                <details className="bg-card rounded-lg border p-4 group">
-                  <summary className="font-medium text-navy cursor-pointer list-none flex justify-between items-center">
-                    {faq.q}
-                    <span className="text-gold group-open:rotate-45 transition-transform text-xl ml-2">+</span>
-                  </summary>
-                  <p className="text-sm text-muted-foreground mt-3">{faq.a}</p>
-                </details>
-              </AnimatedSection>
-            ))}
-          </div>
+          <AnimatedSection>
+            <div className="bg-card rounded-2xl border p-6">
+              <Accordion type="single" collapsible className="w-full">
+                {filteredFaqs.map((faq: { q: string; a: string }, i: number) => (
+                  <AccordionItem key={i} value={`faq-${i}`}>
+                    <AccordionTrigger className="text-navy font-medium text-base">
+                      {faq.q}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground leading-relaxed">
+                      {faq.a}
+                    </AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          </AnimatedSection>
 
           {filteredFaqs.length === 0 && (
             <p className="text-center text-muted-foreground py-8">No questions found. Try a different search term.</p>
