@@ -212,49 +212,28 @@ function HomePage() {
         </div>
       </section>
 
-      {/* SERVICES GRID */}
-      <section className="py-20 md:py-24 relative overflow-hidden">
-        <Glow variant="center" className="h-[400px] opacity-30" />
-        <div className="max-w-7xl mx-auto px-4">
-          <AnimatedSection>
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">What We Offer</p>
-              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Our Specialties</h2>
-              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment.</p>
-            </div>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((service, i) => {
-              const serviceImages = [
-                "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
-                "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
-              ];
-              const themeColors = [
-                "30 50% 25%", "0 40% 30%", "200 40% 25%",
-                "150 40% 20%", "280 30% 30%", "45 50% 30%",
-              ];
-              return (
-                <AnimatedSection key={service.slug} delay={i * 100}>
-                  <Link to="/services/$slug" params={{ slug: service.slug }}>
-                    <DestinationCard
-                      imageUrl={serviceImages[i % serviceImages.length]}
-                      title={service.name}
-                      subtitle={service.description}
-                      stats={`Starting from ${service.price}`}
-                      themeColor={themeColors[i % themeColors.length]}
-                      icon={<Stethoscope className="w-5 h-5" />}
-                    />
-                  </Link>
-                </AnimatedSection>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* SPECIALTIES CAROUSEL */}
+      <Gallery4
+        title="Our Specialties"
+        description="Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment."
+        items={SERVICES.map((service, i) => {
+          const serviceImages = [
+            "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
+          ];
+          return {
+            id: service.slug,
+            title: service.name,
+            description: service.description,
+            href: `/services/${service.slug}`,
+            image: serviceImages[i % serviceImages.length],
+          };
+        })}
+      />
 
       {/* WHY CHOOSE US */}
       <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
