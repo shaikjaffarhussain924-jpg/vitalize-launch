@@ -66,7 +66,7 @@ function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string
   const { count, ref } = useCountUp(end);
   return (
     <div ref={ref} className="text-center">
-      <div className="text-4xl md:text-5xl font-heading font-bold text-gold-gradient">{count.toLocaleString()}{suffix}</div>
+      <div className="text-3xl md:text-5xl font-heading font-bold text-gold-gradient">{count.toLocaleString()}{suffix}</div>
       <div className="text-sm text-navy-foreground/60 mt-2 tracking-wide">{label}</div>
     </div>
   );
