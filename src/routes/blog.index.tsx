@@ -1,8 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { DestinationCard } from "@/components/ui/card-21";
 import { CLINIC, BLOG_POSTS } from "@/lib/constants";
 import { useState } from "react";
+
+const blogImages = [
+  "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
+];
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -35,16 +44,15 @@ function BlogPage() {
         <div className="max-w-7xl mx-auto px-4">
           {/* Featured */}
           <AnimatedSection>
-            <Link to="/blog/$slug" params={{ slug: BLOG_POSTS[0].slug }} className="block mb-12 group">
-              <div className="grid md:grid-cols-2 gap-6 bg-card rounded-2xl border overflow-hidden hover:shadow-lg transition-all">
-                <div className="aspect-video bg-navy/10 flex items-center justify-center text-muted-foreground">Featured Image</div>
-                <div className="p-6 flex flex-col justify-center">
-                  <span className="text-xs font-medium bg-gold/10 text-gold px-2 py-0.5 rounded-full w-fit">{BLOG_POSTS[0].category}</span>
-                  <h2 className="font-heading text-2xl font-bold text-navy mt-3 group-hover:text-gold transition-colors">{BLOG_POSTS[0].title}</h2>
-                  <p className="text-sm text-muted-foreground mt-2">{BLOG_POSTS[0].excerpt}</p>
-                  <div className="mt-4 text-xs text-muted-foreground">{BLOG_POSTS[0].author} • {BLOG_POSTS[0].readTime} read</div>
-                </div>
-              </div>
+            <Link to="/blog/$slug" params={{ slug: BLOG_POSTS[0].slug }} className="block mb-12">
+              <DestinationCard
+                imageUrl={blogImages[0]}
+                title={BLOG_POSTS[0].title}
+                subtitle={BLOG_POSTS[0].excerpt}
+                stats={`${BLOG_POSTS[0].category} • ${BLOG_POSTS[0].readTime} read • ${BLOG_POSTS[0].author}`}
+                themeColor="30 40% 20%"
+                className="[&_a]:aspect-[21/9]"
+              />
             </Link>
           </AnimatedSection>
 
@@ -60,17 +68,14 @@ function BlogPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((post, i) => (
               <AnimatedSection key={post.slug} delay={i * 100}>
-                <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block bg-card rounded-xl overflow-hidden border hover:shadow-lg transition-all">
-                  <div className="aspect-video bg-navy/10 flex items-center justify-center text-muted-foreground">Blog Image</div>
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-medium bg-gold/10 text-gold px-2 py-0.5 rounded-full">{post.category}</span>
-                      <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                    </div>
-                    <h3 className="font-heading font-semibold text-navy group-hover:text-gold transition-colors">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{post.excerpt}</p>
-                    <div className="mt-3 text-xs text-muted-foreground">{post.author} • {post.date}</div>
-                  </div>
+                <Link to="/blog/$slug" params={{ slug: post.slug }}>
+                  <DestinationCard
+                    imageUrl={blogImages[i % blogImages.length]}
+                    title={post.title}
+                    subtitle={post.excerpt}
+                    stats={`${post.category} • ${post.readTime} • ${post.author}`}
+                    themeColor="30 40% 20%"
+                  />
                 </Link>
               </AnimatedSection>
             ))}
