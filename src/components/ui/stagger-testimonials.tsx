@@ -156,12 +156,12 @@ export function StaggerTestimonials({
 }
 
 const defaultTestimonials: StaggerTestimonial[] = [
-  { tempId: 0, testimonial: "The doctors here truly care about your wellbeing. My knee surgery went flawlessly and recovery was quick.", by: "Suresh B., Orthopedics Patient", imgSrc: "https://i.pravatar.cc/150?img=1" },
-  { tempId: 1, testimonial: "I was nervous about my heart procedure, but the cardiology team made me feel completely safe. Forever grateful!", by: "Lakshmi R., Cardiology Patient", imgSrc: "https://i.pravatar.cc/150?img=5" },
-  { tempId: 2, testimonial: "Best dermatology clinic in Hyderabad. My skin has never looked better after their treatment plan.", by: "Priya M., Dermatology Patient", imgSrc: "https://i.pravatar.cc/150?img=9" },
+  { tempId: 0, testimonial: "The doctors here truly care about your wellbeing. My knee surgery went flawlessly and recovery was quick.", by: "Suresh B., Orthopedics Patient", imgSrc: "https://i.pravatar.cc/150?img=11" },
+  { tempId: 1, testimonial: "I was nervous about my heart procedure, but the cardiology team made me feel completely safe. Forever grateful!", by: "Ramesh R., Cardiology Patient", imgSrc: "https://i.pravatar.cc/150?img=12" },
+  { tempId: 2, testimonial: "Best dermatology clinic in Hyderabad. My skin has never looked better after their treatment plan.", by: "Arun M., Dermatology Patient", imgSrc: "https://i.pravatar.cc/150?img=13" },
   { tempId: 3, testimonial: "From consultation to surgery, everything was seamless. The staff is incredibly professional and kind.", by: "Ravi K., General Surgery", imgSrc: "https://i.pravatar.cc/150?img=3" },
-  { tempId: 4, testimonial: "My entire family trusts HealthFirst for all our medical needs. Affordable and world-class care.", by: "Anita S., Family Care", imgSrc: "https://i.pravatar.cc/150?img=10" },
+  { tempId: 4, testimonial: "My entire family trusts HealthFirst for all our medical needs. Affordable and world-class care.", by: "Vikram S., Family Care", imgSrc: "https://i.pravatar.cc/150?img=14" },
   { tempId: 5, testimonial: "The eye care department restored my vision perfectly. I can see clearly for the first time in years!", by: "Mohammed A., Ophthalmology", imgSrc: "https://i.pravatar.cc/150?img=7" },
-  { tempId: 6, testimonial: "Brought my mother here for a hip replacement. The care she received was exceptional — like family.", by: "Deepak V., Orthopedics", imgSrc: "https://i.pravatar.cc/150?img=4" },
-  { tempId: 7, testimonial: "I've been to many clinics, but HealthFirst stands out. Clean, modern, and the doctors listen.", by: "Kavitha N., General Medicine", imgSrc: "https://i.pravatar.cc/150?img=8" },
+  { tempId: 6, testimonial: "Brought my father here for a hip replacement. The care he received was exceptional — like family.", by: "Deepak V., Orthopedics", imgSrc: "https://i.pravatar.cc/150?img=4" },
+  { tempId: 7, testimonial: "I've been to many clinics, but HealthFirst stands out. Clean, modern, and the doctors listen.", by: "Karthik N., General Medicine", imgSrc: "https://i.pravatar.cc/150?img=15" },
 ];

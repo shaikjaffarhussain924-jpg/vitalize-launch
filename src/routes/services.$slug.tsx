@@ -203,8 +203,8 @@ function ServicePage() {
                           <img
                             src={[
                               "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=150&q=80",
-                              "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=150&q=80",
                               "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80",
+                              "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=150&q=80",
                             ][relatedDoctors.indexOf(doc) % 3]}
                             alt={doc.name}
                             className="w-full h-full object-cover"
