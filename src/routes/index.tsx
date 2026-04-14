@@ -456,15 +456,13 @@ function HomePage() {
       <section className="py-20 md:py-24 relative overflow-hidden">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <AnimatedSection>
-            <div className="text-center mb-14">
-              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Real Results</p>
-              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
-              <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
-            </div>
-          </AnimatedSection>
+          <div className="text-center mb-14">
+            <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Real Results</p>
+            <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
+          </div>
           <div className="grid md:grid-cols-2 gap-8">
-            <AnimatedSection>
+            <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
@@ -489,12 +487,12 @@ function HomePage() {
                 </ImageComparison>
               </div>
               <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Dental Restoration</p>
-            </AnimatedSection>
-            <AnimatedSection delay={150}>
+            </div>
+            <div>
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1559757175-7cb057fba93c?w=600&h=450&fit=crop"
+                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=450&fit=crop"
                     alt="Before skin treatment"
                     position="left"
                   />
@@ -515,7 +513,7 @@ function HomePage() {
                 </ImageComparison>
               </div>
               <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Skin Treatment Results</p>
-            </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
