@@ -3,8 +3,18 @@ import { ArrowRight, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { DestinationCard } from "@/components/ui/card-21";
 import { CLINIC, DOCTORS, SERVICES } from "@/lib/constants";
 import { useState } from "react";
+
+const doctorImages = [
+  "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80",
+  "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=600&q=80",
+];
 
 export const Route = createFileRoute("/doctors")({
   head: () => ({
@@ -56,27 +66,19 @@ function DoctorsPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((doc, i) => (
               <AnimatedSection key={doc.id} delay={i * 100}>
-                <div className="bg-card rounded-xl border overflow-hidden group hover:shadow-lg transition-all">
-                  <div className="aspect-[3/4] bg-navy/10 flex items-center justify-center text-muted-foreground relative overflow-hidden">
-                    <span>Doctor Photo</span>
-                    <div className="absolute inset-0 bg-navy/0 group-hover:bg-navy/10 transition-colors" />
-                  </div>
-                  <div className="p-5">
-                    <h3 className="font-heading text-lg font-semibold text-navy">{doc.name}</h3>
-                    <p className="text-sm text-gold font-medium">{doc.designation}</p>
-                    <p className="text-xs text-muted-foreground mt-1">{doc.qualification}</p>
-                    <div className="flex flex-wrap gap-2 mt-3 text-xs text-muted-foreground">
-                      <span className="bg-accent px-2 py-0.5 rounded">{doc.experience} yrs exp</span>
-                      <span className="bg-accent px-2 py-0.5 rounded">{doc.languages}</span>
-                    </div>
-                    <p className="text-[10px] text-muted-foreground mt-2">Reg: {doc.regNo}</p>
-                    <Link to="/book-appointment" className="mt-3 block">
-                      <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground text-sm">
-                        Book Appointment
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
+                <DestinationCard
+                  imageUrl={doctorImages[i % doctorImages.length]}
+                  title={doc.name}
+                  subtitle={`${doc.designation} • ${doc.specialization}`}
+                  stats={`${doc.experience} yrs exp • ${doc.languages} • Reg: ${doc.regNo}`}
+                  themeColor="220 40% 20%"
+                >
+                  <Link to="/book-appointment" className="mt-2 block" onClick={(e) => e.stopPropagation()}>
+                    <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground text-sm rounded-full">
+                      Book Appointment
+                    </Button>
+                  </Link>
+                </DestinationCard>
               </AnimatedSection>
             ))}
           </div>

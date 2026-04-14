@@ -5,6 +5,7 @@ import { LocationMap } from "@/components/ui/expand-map";
 import { Glow } from "@/components/ui/glow";
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
 import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion";
+import { DestinationCard } from "@/components/ui/card-21";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -221,20 +222,34 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {SERVICES.map((service, i) => (
-              <AnimatedSection key={service.slug} delay={i * 100}>
-                <Link to="/services/$slug" params={{ slug: service.slug }} className="group block bg-card rounded-2xl p-7 border premium-card">
-                  <div className="w-14 h-14 rounded-xl bg-gold-light flex items-center justify-center text-gold mb-5 group-hover:bg-gold group-hover:text-gold-foreground transition-all duration-300">
-                    <Stethoscope className="w-7 h-7" />
-                  </div>
-                  <h3 className="font-heading text-xl font-semibold text-navy">{service.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-2 leading-relaxed">{service.description}</p>
-                  <span className="inline-flex items-center gap-1.5 mt-5 text-sm font-medium text-gold group-hover:gap-3 transition-all duration-300">
-                    Learn More <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </Link>
-              </AnimatedSection>
-            ))}
+            {SERVICES.map((service, i) => {
+              const serviceImages = [
+                "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
+              ];
+              const themeColors = [
+                "30 50% 25%", "0 40% 30%", "200 40% 25%",
+                "150 40% 20%", "280 30% 30%", "45 50% 30%",
+              ];
+              return (
+                <AnimatedSection key={service.slug} delay={i * 100}>
+                  <Link to="/services/$slug" params={{ slug: service.slug }}>
+                    <DestinationCard
+                      imageUrl={serviceImages[i % serviceImages.length]}
+                      title={service.name}
+                      subtitle={service.description}
+                      stats={`Starting from ${service.price}`}
+                      themeColor={themeColors[i % themeColors.length]}
+                      icon={<Stethoscope className="w-5 h-5" />}
+                    />
+                  </Link>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -289,35 +304,31 @@ function HomePage() {
               <p className="text-muted-foreground mt-4 leading-relaxed">Experienced specialists dedicated to your health</p>
             </div>
           </AnimatedSection>
-          <div className="flex gap-6 overflow-x-auto pb-4 snap-x">
-            {DOCTORS.slice(0, 3).map((doc, i) => (
-              <AnimatedSection key={doc.id} delay={i * 100} className="min-w-[300px] flex-1 snap-start">
-                <div className="bg-card rounded-2xl border overflow-hidden premium-card">
-                  <div className="aspect-[3/4] overflow-hidden">
-                    <img
-                      src={[
-                        "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
-                        "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
-                        "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
-                      ][i]}
-                      alt={doc.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="font-heading text-lg font-semibold text-navy">{doc.name}</h3>
-                    <p className="text-sm text-gold font-medium mt-1">{doc.designation}</p>
-                    <p className="text-xs text-muted-foreground mt-1.5">{doc.qualification}</p>
-                    <p className="text-xs text-muted-foreground">{doc.experience} years experience</p>
-                    <Link to="/book-appointment" className="mt-4 block">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {DOCTORS.slice(0, 3).map((doc, i) => {
+              const docImages = [
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+              ];
+              return (
+                <AnimatedSection key={doc.id} delay={i * 100}>
+                  <DestinationCard
+                    imageUrl={docImages[i]}
+                    title={doc.name}
+                    subtitle={`${doc.designation} • ${doc.specialization}`}
+                    stats={`${doc.experience} years experience • ${doc.qualification}`}
+                    themeColor="220 40% 20%"
+                  >
+                    <Link to="/book-appointment" className="mt-2 block" onClick={(e) => e.stopPropagation()}>
                       <Button className="w-full bg-gold hover:bg-gold/90 text-gold-foreground text-sm rounded-full">
-                        Book with {doc.name.split(" ")[0]} {doc.name.split(" ")[1]}
+                        Book with {doc.name.split(" ")[0]}
                       </Button>
                     </Link>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                  </DestinationCard>
+                </AnimatedSection>
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <Link to="/doctors">
@@ -512,30 +523,26 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
-            {BLOG_POSTS.slice(0, 3).map((post, i) => (
-              <AnimatedSection key={post.slug} delay={i * 100}>
-                <Link to="/blog/$slug" params={{ slug: post.slug }} className="group block bg-card rounded-2xl overflow-hidden border premium-card">
-                  <img
-                    src={[
-                      "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
-                      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
-                      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
-                    ][i]}
-                    alt={post.title}
-                    className="aspect-video w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="p-6">
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="text-xs font-medium bg-gold-light text-gold px-2.5 py-1 rounded-full">{post.category}</span>
-                      <span className="text-xs text-muted-foreground">{post.readTime}</span>
-                    </div>
-                    <h3 className="font-heading font-semibold text-navy group-hover:text-gold transition-colors duration-300">{post.title}</h3>
-                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2 leading-relaxed">{post.excerpt}</p>
-                    <div className="mt-4 text-xs text-muted-foreground">{post.author} • {post.date}</div>
-                  </div>
-                </Link>
-              </AnimatedSection>
-            ))}
+            {BLOG_POSTS.slice(0, 3).map((post, i) => {
+              const blogImages = [
+                "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600&q=80",
+                "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80",
+              ];
+              return (
+                <AnimatedSection key={post.slug} delay={i * 100}>
+                  <Link to="/blog/$slug" params={{ slug: post.slug }}>
+                    <DestinationCard
+                      imageUrl={blogImages[i]}
+                      title={post.title}
+                      subtitle={post.excerpt}
+                      stats={`${post.category} • ${post.readTime} • ${post.author}`}
+                      themeColor="30 40% 20%"
+                    />
+                  </Link>
+                </AnimatedSection>
+              );
+            })}
           </div>
           <div className="text-center mt-10">
             <Link to="/blog">
