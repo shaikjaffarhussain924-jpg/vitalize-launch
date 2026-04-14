@@ -216,28 +216,29 @@ function BookingPage() {
                       />
                     </div>
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Preferred Date *</label>
-                      <Input type="date" {...register("date")} className="text-base py-5" />
-                      {errors.date && <p className="text-xs text-destructive mt-1">{errors.date.message}</p>}
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-1 block">Time Slot *</label>
-                      <Controller
-                        name="time"
-                        control={control}
-                        render={({ field }) => (
-                          <DropdownSelect
-                            value={field.value}
-                            onChange={field.onChange}
-                            placeholder="Select time"
-                            options={timeOptions}
-                          />
-                        )}
-                      />
-                      {errors.time && <p className="text-xs text-destructive mt-1">{errors.time.message}</p>}
-                    </div>
+                  <div>
+                    <label className="text-sm font-medium mb-2 block">Preferred Date & Time *</label>
+                    <Controller
+                      name="date"
+                      control={control}
+                      render={({ field: dateField }) => (
+                        <Controller
+                          name="time"
+                          control={control}
+                          render={({ field: timeField }) => (
+                            <CalendarScheduler
+                              showCard={false}
+                              selectedDate={dateField.value ? new Date(dateField.value) : undefined}
+                              selectedTime={timeField.value}
+                              onDateChange={(d) => dateField.onChange(d ? format(d, "yyyy-MM-dd") : "")}
+                              onTimeChange={(t) => timeField.onChange(t)}
+                            />
+                          )}
+                        />
+                      )}
+                    />
+                    {errors.date && <p className="text-xs text-destructive mt-1">{errors.date.message}</p>}
+                    {errors.time && <p className="text-xs text-destructive mt-1">{errors.time.message}</p>}
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-1 block">Message (optional)</label>
