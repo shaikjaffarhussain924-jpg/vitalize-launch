@@ -199,7 +199,17 @@ function ServicePage() {
                   <div className="grid sm:grid-cols-2 gap-6">
                     {relatedDoctors.map((doc) => (
                       <div key={doc.id} className="bg-card rounded-xl border p-5 flex gap-4">
-                        <div className="w-16 h-16 rounded-full bg-navy/10 shrink-0 flex items-center justify-center text-xs text-muted-foreground">Photo</div>
+                        <div className="w-16 h-16 rounded-full shrink-0 overflow-hidden">
+                          <img
+                            src={[
+                              "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=150&q=80",
+                              "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=150&q=80",
+                              "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=150&q=80",
+                            ][relatedDoctors.indexOf(doc) % 3]}
+                            alt={doc.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
                         <div>
                           <h3 className="font-semibold text-navy">{doc.name}</h3>
                           <p className="text-xs text-gold">{doc.designation}</p>

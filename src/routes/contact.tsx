@@ -84,8 +84,17 @@ function ContactPage() {
                 <MessageCircle className="w-4 h-4 mr-2" /> Chat on WhatsApp
               </Button>
 
-              <div className="mt-8 aspect-video bg-accent rounded-xl flex items-center justify-center text-muted-foreground border">
-                Google Maps Embed
+              <div className="mt-8 aspect-video relative rounded-xl overflow-hidden border">
+                <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80" alt="Clinic location" className="absolute inset-0 w-full h-full object-cover" />
+                <iframe
+                  src={`https://maps.google.com/maps?q=${encodeURIComponent(CLINIC.address)}&output=embed`}
+                  className="absolute inset-0 w-full h-full"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Clinic location map"
+                />
               </div>
             </div>
 

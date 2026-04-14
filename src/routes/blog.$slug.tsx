@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowLeft, Clock, Share2, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/Breadcrumb";
+import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import { CLINIC, BLOG_POSTS, DOCTORS } from "@/lib/constants";
 
 export const Route = createFileRoute("/blog/$slug")({
@@ -66,8 +67,13 @@ function BlogPostPage() {
             <span>By {post.author}</span>
           </div>
 
-          <div className="aspect-video bg-navy/10 rounded-xl flex items-center justify-center text-muted-foreground mt-8 mb-8">
-            Blog Post Image
+          <div className="aspect-video relative rounded-xl overflow-hidden mt-8 mb-8">
+            <img
+              src={`https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=1200&q=80`}
+              alt={post.title}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.3} className="absolute inset-x-0 bottom-0 h-1/3" />
           </div>
 
           <div className="prose max-w-none text-foreground/90 space-y-4">
