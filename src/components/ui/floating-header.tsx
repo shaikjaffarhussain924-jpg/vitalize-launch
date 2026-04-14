@@ -29,7 +29,7 @@ export function FloatingHeader({ className }: FloatingHeaderProps) {
       <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-2xl px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.2)]">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-navy flex items-center justify-center text-navy-foreground font-heading font-bold text-lg group-hover:bg-gold transition-colors duration-300">
+          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white font-heading font-bold text-lg group-hover:bg-gold/30 transition-colors duration-300">
             H
           </div>
           <div className="hidden sm:block">
