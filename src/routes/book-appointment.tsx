@@ -1,12 +1,18 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle, Shield, Clock, CreditCard } from "lucide-react";
+import { ArrowRight, CheckCircle, Shield, Clock, CreditCard, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GetStartedButton } from "@/components/ui/get-started-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Breadcrumb } from "@/components/Breadcrumb";
 import { CLINIC, SERVICES, DOCTORS } from "@/lib/constants";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { submitToWeb3Forms } from "@/lib/forms";
@@ -38,16 +44,72 @@ export const Route = createFileRoute("/book-appointment")({
   component: BookingPage,
 });
 
+interface DropdownSelectProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  options: { label: string; value: string }[];
+}
+
+function DropdownSelect({ value, onChange, placeholder, options }: DropdownSelectProps) {
+  const selectedLabel = options.find(o => o.value === value)?.label;
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full justify-between h-11 text-sm font-normal"
+        >
+          <span className={selectedLabel ? "text-foreground" : "text-muted-foreground"}>
+            {selectedLabel || placeholder}
+          </span>
+          <ChevronDown className="h-4 w-4 opacity-50" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        className="w-[var(--radix-dropdown-menu-trigger-width)]"
+        align="start"
+      >
+        {options.map((opt) => (
+          <DropdownMenuItem
+            key={opt.value}
+            onClick={() => onChange(opt.value)}
+            className="cursor-pointer"
+          >
+            {opt.label}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 function BookingPage() {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors, isSubmitting }, watch, trigger } = useForm<FormData>({
+  const { register, handleSubmit, formState: { errors, isSubmitting }, watch, trigger, control } = useForm<FormData>({
     resolver: zodResolver(schema),
-    defaultValues: { email: "", message: "", source: "" },
+    defaultValues: { email: "", message: "", source: "", service: "", doctor: "", time: "" },
   });
 
   const timeSlots = ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM"];
+
+  const serviceOptions = SERVICES.map(s => ({ label: s.name, value: s.name }));
+  const doctorOptions = [
+    { label: "Any available", value: "" },
+    ...DOCTORS.map(d => ({ label: `${d.name} — ${d.specialization}`, value: d.name })),
+  ];
+  const timeOptions = timeSlots.map(t => ({ label: t, value: t }));
+  const sourceOptions = [
+    { label: "Google Search", value: "Google Search" },
+    { label: "Facebook/Instagram Ad", value: "Facebook/Instagram Ad" },
+    { label: "WhatsApp", value: "WhatsApp" },
+    { label: "Friend/Family Referral", value: "Friend/Family Referral" },
+    { label: "Doctor Referral", value: "Doctor Referral" },
+    { label: "Other", value: "Other" },
+  ];
 
   const nextStep = async () => {
     const valid = await trigger(["name", "phone", "service", "date", "time"]);
@@ -122,18 +184,34 @@ function BookingPage() {
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium mb-1 block">Service *</label>
-                      <select {...register("service")} className="flex h-11 w-full rounded-md border bg-background px-3 py-2 text-sm">
-                        <option value="">Select service</option>
-                        {SERVICES.map((s) => <option key={s.slug} value={s.name}>{s.name}</option>)}
-                      </select>
+                      <Controller
+                        name="service"
+                        control={control}
+                        render={({ field }) => (
+                          <DropdownSelect
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select service"
+                            options={serviceOptions}
+                          />
+                        )}
+                      />
                       {errors.service && <p className="text-xs text-destructive mt-1">{errors.service.message}</p>}
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1 block">Preferred Doctor</label>
-                      <select {...register("doctor")} className="flex h-11 w-full rounded-md border bg-background px-3 py-2 text-sm">
-                        <option value="">Any available</option>
-                        {DOCTORS.map((d) => <option key={d.id} value={d.name}>{d.name} — {d.specialization}</option>)}
-                      </select>
+                      <Controller
+                        name="doctor"
+                        control={control}
+                        render={({ field }) => (
+                          <DropdownSelect
+                            value={field.value || ""}
+                            onChange={field.onChange}
+                            placeholder="Any available"
+                            options={doctorOptions}
+                          />
+                        )}
+                      />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
@@ -144,10 +222,18 @@ function BookingPage() {
                     </div>
                     <div>
                       <label className="text-sm font-medium mb-1 block">Time Slot *</label>
-                      <select {...register("time")} className="flex h-11 w-full rounded-md border bg-background px-3 py-2 text-sm">
-                        <option value="">Select time</option>
-                        {timeSlots.map((t) => <option key={t} value={t}>{t}</option>)}
-                      </select>
+                      <Controller
+                        name="time"
+                        control={control}
+                        render={({ field }) => (
+                          <DropdownSelect
+                            value={field.value}
+                            onChange={field.onChange}
+                            placeholder="Select time"
+                            options={timeOptions}
+                          />
+                        )}
+                      />
                       {errors.time && <p className="text-xs text-destructive mt-1">{errors.time.message}</p>}
                     </div>
                   </div>
@@ -157,15 +243,18 @@ function BookingPage() {
                   </div>
                   <div>
                     <label className="text-sm font-medium mb-1 block">How did you hear about us?</label>
-                    <select {...register("source")} className="flex h-11 w-full rounded-md border bg-background px-3 py-2 text-sm">
-                      <option value="">Select</option>
-                      <option>Google Search</option>
-                      <option>Facebook/Instagram Ad</option>
-                      <option>WhatsApp</option>
-                      <option>Friend/Family Referral</option>
-                      <option>Doctor Referral</option>
-                      <option>Other</option>
-                    </select>
+                    <Controller
+                      name="source"
+                      control={control}
+                      render={({ field }) => (
+                        <DropdownSelect
+                          value={field.value || ""}
+                          onChange={field.onChange}
+                          placeholder="Select"
+                          options={sourceOptions}
+                        />
+                      )}
+                    />
                   </div>
                   <GetStartedButton type="button" onClick={nextStep} className="w-full bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base py-5">
                     Continue
