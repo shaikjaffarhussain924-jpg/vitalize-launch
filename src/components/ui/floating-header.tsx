@@ -26,14 +26,14 @@ export function FloatingHeader({ className }: FloatingHeaderProps) {
 
   return (
     <header className={cn("w-full z-50 px-4 pt-4 fixed top-0 left-0 right-0", className)}>
-      <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl border border-gold/20 bg-card/85 backdrop-blur-xl px-6 py-3 shadow-[0_8px_32px_-8px_oklch(0.25_0.025_55/0.15)]">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between rounded-2xl border border-white/20 bg-white/10 backdrop-blur-2xl px-6 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.2)]">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-navy flex items-center justify-center text-navy-foreground font-heading font-bold text-lg group-hover:bg-gold transition-colors duration-300">
+          <div className="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white font-heading font-bold text-lg group-hover:bg-gold/30 transition-colors duration-300">
             H
           </div>
           <div className="hidden sm:block">
-            <span className="text-lg font-heading font-bold tracking-tight text-navy">
+            <span className="text-lg font-heading font-bold tracking-tight text-white drop-shadow-sm">
               {CLINIC.name}
             </span>
           </div>
@@ -45,7 +45,7 @@ export function FloatingHeader({ className }: FloatingHeaderProps) {
             <Link
               key={link.label}
               to={link.to as any}
-              className="text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-gold tracking-wide"
+              className="text-sm font-medium text-white/80 transition-colors duration-200 hover:text-gold tracking-wide drop-shadow-sm"
               activeProps={{ className: 'text-gold' }}
             >
               {link.label}
