@@ -102,15 +102,15 @@ function AboutPage() {
             {Array.from({ length: 8 }).map((_, i) => {
               const teamImages = [
                 "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80",
-                "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=400&q=80",
                 "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80",
-                "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=400&q=80",
                 "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80",
-                "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=400&q=80",
                 "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=400&q=80",
                 "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1666214280557-091f29486ab5?auto=format&fit=crop&w=400&q=80",
+                "https://images.unsplash.com/photo-1607990283143-e81e7a2c9349?auto=format&fit=crop&w=400&q=80",
               ];
-              const teamNames = ["Dr. Sharma", "Dr. Priya", "Dr. Rajan", "Dr. Meera", "Dr. Vijay", "Dr. Anita", "Nurse Rekha", "Admin Suresh"];
+              const teamNames = ["Dr. Sharma", "Dr. Rajan", "Dr. Kumar", "Dr. Vijay", "Dr. Anil", "Dr. Suresh", "Technician Ramesh", "Admin Mohan"];
               return (
                 <div key={i} className="aspect-square relative rounded-xl overflow-hidden group">
                   <img src={teamImages[i]} alt={teamNames[i]} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
