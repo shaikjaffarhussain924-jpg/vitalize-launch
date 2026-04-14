@@ -112,7 +112,7 @@ const defaultItems: AccordionItemData[] = [
     id: 1,
     title: 'Expert Consultation',
     imageUrl:
-      'https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop',
   },
   {
     id: 2,
@@ -130,7 +130,7 @@ const defaultItems: AccordionItemData[] = [
     id: 4,
     title: 'Patient Recovery',
     imageUrl:
-      'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&h=450&fit=crop',
   },
   {
     id: 5,

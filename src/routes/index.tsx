@@ -218,12 +218,12 @@ function HomePage() {
         description="Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment."
         items={SERVICES.map((service, i) => {
           const serviceImages = [
-            "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1559757175-5700dde675bc?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1588776813677-77aaf5595b83?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1607990281513-2c110a25e779?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1666214280557-091f29486ab5?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=600&q=80",
+            "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80",
           ];
           return {
             id: service.slug,
@@ -434,12 +434,12 @@ function HomePage() {
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=450&fit=crop"
+                    src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=450&fit=crop"
                     alt="Before dental treatment"
                     position="left"
                   />
                   <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=450&fit=crop"
+                    src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&h=450&fit=crop"
                     alt="After dental treatment"
                     position="right"
                   />
@@ -460,7 +460,7 @@ function HomePage() {
               <div className="rounded-2xl overflow-hidden border shadow-lg">
                 <ImageComparison className="aspect-[4/3] w-full" enableHover>
                   <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&h=450&fit=crop"
+                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop"
                     alt="Before skin treatment"
                     position="left"
                   />
