@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, Phone } from "lucide-react";
+import { ArrowRight, CheckCircle, Clock, Shield, Star, Users, Phone, CreditCard, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/interfaces-accordion";
 import { Input } from "@/components/ui/input";
