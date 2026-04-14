@@ -129,12 +129,12 @@
   }
 
   ::selection {
-    background-color: oklch(0.68 0.06 70 / 0.18);
-    color: oklch(0.18 0.015 45);
+    background-color: oklch(0.62 0.10 65 / 0.2);
+    color: oklch(0.20 0.02 55);
   }
 
   :focus-visible {
-    outline: 1.5px solid oklch(0.68 0.06 70 / 0.4);
+    outline: 1.5px solid oklch(0.62 0.10 65 / 0.4);
     outline-offset: 2px;
   }
 }
@@ -169,8 +169,8 @@
 
 /* Animations */
 @keyframes pulse-whatsapp {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.42 0.08 160 / 0.3); }
-  50% { box-shadow: 0 0 0 12px oklch(0.42 0.08 160 / 0); }
+  0%, 100% { box-shadow: 0 0 0 0 oklch(0.50 0.10 155 / 0.3); }
+  50% { box-shadow: 0 0 0 12px oklch(0.50 0.10 155 / 0); }
 }
 
 @keyframes marquee {
@@ -218,8 +218,8 @@
 /* Refined scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: oklch(0.22 0.02 50 / 0.15); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: oklch(0.22 0.02 50 / 0.3); }
+::-webkit-scrollbar-thumb { background: oklch(0.25 0.025 55 / 0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(0.25 0.025 55 / 0.3); }
 
 html { scroll-behavior: smooth; }
 
@@ -229,7 +229,7 @@ html { scroll-behavior: smooth; }
 }
 .premium-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 16px 48px -12px oklch(0.22 0.02 50 / 0.08), 0 0 0 1px oklch(0.68 0.06 70 / 0.12);
+  box-shadow: 0 16px 48px -12px oklch(0.25 0.025 55 / 0.08), 0 0 0 1px oklch(0.62 0.10 65 / 0.12);
 }
 
 /* Glass-morphism */
@@ -268,7 +268,7 @@ html { scroll-behavior: smooth; }
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, oklch(0.68 0.06 70), oklch(0.75 0.07 75));
+  background: linear-gradient(135deg, oklch(0.55 0.12 55), oklch(0.65 0.10 65));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -284,6 +284,6 @@ html { scroll-behavior: smooth; }
   position: absolute;
   top: -0.25rem;
   left: 1.5rem;
-  color: oklch(0.68 0.06 70 / 0.1);
+  color: oklch(0.62 0.10 65 / 0.12);
   pointer-events: none;
 }
