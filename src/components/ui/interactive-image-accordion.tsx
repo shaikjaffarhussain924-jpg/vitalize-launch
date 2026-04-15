@@ -29,6 +29,7 @@ const AccordionItemPanel = ({
         src={item.imageUrl}
         alt={item.title}
         className="absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
         onError={(e) => {
           (e.target as HTMLImageElement).onerror = null;
           (e.target as HTMLImageElement).src =
