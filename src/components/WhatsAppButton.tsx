@@ -4,7 +4,7 @@ export function WhatsAppButton() {
   return (
     <button
       onClick={() => openWhatsApp("floating")}
-      className="fixed bottom-20 md:bottom-6 right-4 md:right-6 z-40 w-14 md:w-[60px] h-14 md:h-[60px] rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-[0_4px_20px_-4px_oklch(0.48_0.14_155/0.5)] animate-pulse-whatsapp hover:scale-110 transition-all duration-300 group"
+      className="fixed bottom-[4.5rem] md:bottom-6 right-4 md:right-6 z-40 w-12 md:w-[60px] h-12 md:h-[60px] rounded-full bg-cta text-cta-foreground flex items-center justify-center shadow-[0_4px_20px_-4px_oklch(0.48_0.14_155/0.5)] animate-pulse-whatsapp hover:scale-110 transition-all duration-300 group"
       aria-label="Chat with us on WhatsApp"
     >
       {/* Glass ring effect */}
