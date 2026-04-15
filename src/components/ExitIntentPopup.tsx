@@ -3,7 +3,7 @@ import { X, CheckCircle, Clock, Lock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { submitToWeb3Forms } from "@/lib/forms";
+import { submitAppointment } from "@/lib/appointments.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
@@ -53,7 +53,16 @@ export function ExitIntentPopup() {
   };
 
   const onSubmit = async (data: FormData) => {
-    await submitToWeb3Forms({ name: data.name, phone: data.phone }, "Exit Intent - ₹500 OFF Offer");
+    await submitAppointment({
+      data: {
+        name: data.name,
+        phone: data.phone,
+        service: "Exit Intent - ₹500 OFF Offer",
+        preferred_date: "TBD",
+        preferred_time: "TBD",
+        source: "Exit Intent Popup",
+      },
+    });
     setSubmitted(true);
     setTimeout(dismiss, 3000);
   };
