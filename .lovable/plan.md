@@ -1,34 +1,45 @@
 
 
-# Enable Real-Time CRM Updates
+# Performance Fixes for Site Speed
 
-## Problem
-Currently, the CRM admin pages (dashboard, appointments, contacts) only load data once on mount. When a new booking or contact submission arrives, staff must manually refresh the page.
+## Problems Identified
 
-## Solution
-Enable Supabase Realtime on both tables and add client-side subscriptions in the three admin pages so they auto-refresh when data changes.
+1. **Render-blocking Google Fonts** — Two font families (Cormorant Garamond + Outfit) loaded via `@import url()` in CSS, blocking first paint.
+2. **Heavy homepage** — 606-line single component with 12+ sections, multiple heavy UI components (ImageComparison, InteractiveImageAccordion, StaggerTestimonials, MultistepForm with framer-motion), all loaded eagerly.
+3. **Unnecessary third-party scripts on every page** — Meta Pixel (with invalid/null ID causing console errors), GTM, and GA4 all injected in the root route head, even though IDs are placeholder values (`YOUR_PIXEL_ID`, `GTM-XXXXXXX`, `G-XXXXXXXXXX`).
+4. **Multiple Unsplash images loaded eagerly** — ~15+ external images on homepage without `loading="lazy"`.
+5. **Duplicate content rendering** — Two separate booking forms on the same homepage (inline form + MultistepConsultationForm).
+6. **Backdrop-blur overuse** — Heavy `backdrop-blur-xl` and `backdrop-blur-md` on multiple stacked elements causes GPU thrashing, especially on mobile.
 
-## Steps
+## Plan
 
-### 1. Database Migration — Enable Realtime
-Add both tables to the `supabase_realtime` publication:
+### Step 1: Remove placeholder analytics scripts
+Remove Meta Pixel, GTM, and GA4 script injection from `__root.tsx` head since all IDs are placeholders. This eliminates 3 render-blocking scripts and the console error. Users can re-enable once they have real IDs.
 
-```sql
-ALTER PUBLICATION supabase_realtime ADD TABLE public.appointments;
-ALTER PUBLICATION supabase_realtime ADD TABLE public.contact_submissions;
-```
+### Step 2: Optimize font loading
+Replace the CSS `@import url(...)` with `<link rel="preload">` in the root head for the two Google Fonts, using `display=swap` to prevent render blocking.
 
-### 2. Admin Appointments Page (`src/routes/admin.appointments.tsx`)
-Add a Supabase realtime subscription inside the existing `useEffect` that listens for `INSERT`, `UPDATE`, and `DELETE` events on `appointments`. On any change, call the existing `loadAppointments()` function to refresh the list. Clean up subscription on unmount.
+### Step 3: Lazy-load below-fold sections
+Wrap heavy below-fold components with React `lazy()` + `Suspense`:
+- `StaggerTestimonials`
+- `MultistepConsultationForm` (framer-motion heavy)
+- `ImageComparison` sections
+- `InteractiveImageAccordion`
+- `Gallery4`
+- `LocationMap`
 
-### 3. Admin Contacts Page (`src/routes/admin.contacts.tsx`)
-Same pattern — subscribe to `contact_submissions` changes and call `loadContacts()` on any event.
+### Step 4: Add `loading="lazy"` to all images
+Add native lazy loading to all `<img>` tags except the hero image (which should stay eager). This includes doctor photos, blog images, before/after images, and accordion images.
 
-### 4. Admin Dashboard (`src/routes/admin.index.tsx`)
-Subscribe to both `appointments` and `contact_submissions`. On any change, re-fetch dashboard stats via `getDashboardStats()`.
+### Step 5: Remove duplicate booking form
+Remove one of the two booking forms on the homepage (keep the MultistepConsultationForm, remove the inline 4-field form) to reduce DOM size and duplicate server function imports.
 
-## Technical Detail
-Each subscription uses `supabase.channel('channel-name').on('postgres_changes', { event: '*', schema: 'public', table: 'table_name' }, callback).subscribe()` and is cleaned up with `supabase.removeChannel(channel)` in the useEffect return.
+### Step 6: Reduce backdrop-blur usage
+Downgrade `backdrop-blur-xl` to `backdrop-blur-sm` on non-essential decorative elements (trust bar items, accreditation marquee) to reduce GPU compositing cost on mobile.
 
-No new dependencies or RLS changes needed — realtime respects existing RLS policies, and the admin client already authenticates before fetching.
+## Files Changed
+- `src/routes/__root.tsx` — remove placeholder analytics scripts, optimize font loading
+- `src/routes/index.tsx` — lazy-load heavy components, add image lazy loading, remove duplicate form, reduce blur
+- `src/components/ui/interactive-image-accordion.tsx` — add `loading="lazy"` to images
+- `src/components/blocks/gallery4.tsx` — add `loading="lazy"` to images
 
