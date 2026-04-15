@@ -119,11 +119,27 @@ function BookingPage() {
   };
 
   const onSubmit = async (data: FormData) => {
-    const result = await submitAppointment({ data });
-    if (result.success) {
-      setSubmitted(true);
-      setStep(3);
-      setTimeout(() => navigate({ to: "/thank-you" }), 3000);
+    try {
+      const result = await submitAppointment({
+        data: {
+          name: data.name,
+          phone: data.phone,
+          email: data.email || "",
+          service: data.service,
+          doctor: data.doctor,
+          preferred_date: data.date,
+          preferred_time: data.time,
+          message: data.message,
+          source: data.source,
+        },
+      });
+      if (result.success) {
+        setSubmitted(true);
+        setStep(3);
+        setTimeout(() => navigate({ to: "/thank-you" }), 3000);
+      }
+    } catch (err) {
+      console.error("Booking error:", err);
     }
   };
 
