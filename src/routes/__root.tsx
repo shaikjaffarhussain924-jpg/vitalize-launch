@@ -77,7 +77,7 @@ function RootComponent() {
   return (
     <>
       <FloatingHeader />
-      <main className={`overflow-x-clip pb-16 md:pb-0 ${isHome ? '' : 'pt-20'}`}>
+      <main className={`overflow-x-clip pb-14 md:pb-0 ${isHome ? '' : 'pt-20'}`}>
         <Outlet />
       </main>
       <Footer />
