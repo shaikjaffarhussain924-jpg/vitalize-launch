@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
+import { ArrowRight, Star, Shield, Stethoscope, Heart, Users, Clock, Phone, Target, Crown } from "lucide-react";
 import { Glow } from "@/components/ui/glow";
 import { DestinationCard } from "@/components/ui/card-21";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
@@ -16,10 +16,44 @@ import { lazy, Suspense } from "react";
 
 const StaggerTestimonials = lazy(() => import("@/components/ui/stagger-testimonials").then(m => ({ default: m.StaggerTestimonials })));
 const LocationMap = lazy(() => import("@/components/ui/expand-map").then(m => ({ default: m.LocationMap })));
-const ImageComparisonLazy = lazy(() => import("@/components/ui/image-comparison"));
 const InteractiveImageAccordion = lazy(() => import("@/components/ui/interactive-image-accordion").then(m => ({ default: m.InteractiveImageAccordion })));
 const MultistepConsultationForm = lazy(() => import("@/components/ui/multistep-form"));
 const Gallery4 = lazy(() => import("@/components/blocks/gallery4").then(m => ({ default: m.Gallery4 })));
+
+// Lazy wrapper for ImageComparison (named exports)
+const LazyBeforeAfter = lazy(() =>
+  import("@/components/ui/image-comparison").then(m => ({
+    default: function BeforeAfterSection() {
+      return (
+        <div className="grid md:grid-cols-2 gap-8">
+          {[
+            { before: "https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=450&fit=crop", after: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&h=450&fit=crop", beforeAlt: "Before dental treatment", afterAlt: "After dental treatment", label: "Dental Restoration" },
+            { before: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop", after: "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&h=450&fit=crop", beforeAlt: "Before skin treatment", afterAlt: "After skin treatment", label: "Skin Treatment Results" },
+          ].map((item) => (
+            <div key={item.label}>
+              <div className="rounded-2xl overflow-hidden border shadow-lg">
+                <m.ImageComparison className="aspect-[4/3] w-full" enableHover>
+                  <m.ImageComparisonImage src={item.before} alt={item.beforeAlt} position="left" />
+                  <m.ImageComparisonImage src={item.after} alt={item.afterAlt} position="right" />
+                  <m.ImageComparisonSlider className="w-1">
+                    <div className="flex h-full flex-col items-center justify-center">
+                      <div className="h-full w-0.5 bg-gold shadow-[0_0_8px_oklch(0.62_0.10_65/0.5)]" />
+                      <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-gold border-2 border-gold-foreground shadow-lg flex items-center justify-center">
+                        <ArrowRight className="w-3 h-3 text-gold-foreground -rotate-180" />
+                        <ArrowRight className="w-3 h-3 text-gold-foreground" />
+                      </div>
+                    </div>
+                  </m.ImageComparisonSlider>
+                </m.ImageComparison>
+              </div>
+              <p className="text-center text-sm text-muted-foreground mt-3 font-medium">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      );
+    }
+  }))
+);
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,15 +83,6 @@ export const Route = createFileRoute("/")({
   component: HomePage,
 });
 
-// Booking form
-const bookingSchema = z.object({
-  name: z.string().min(2).max(100),
-  phone: z.string().min(10).max(15),
-  service: z.string().min(1),
-  date: z.string().min(1),
-});
-type BookingData = z.infer<typeof bookingSchema>;
-
 function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string; label: string }) {
   const { count, ref } = useCountUp(end);
   return (
@@ -68,29 +93,15 @@ function StatCounter({ end, suffix = "", label }: { end: number; suffix?: string
   );
 }
 
+function LazyFallback() {
+  return <div className="w-full py-16 flex items-center justify-center"><div className="h-8 w-8 border-2 border-gold border-t-transparent rounded-full animate-spin" /></div>;
+}
+
 function HomePage() {
-  const [bookingSubmitted, setBookingSubmitted] = useState(false);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingData>({ resolver: zodResolver(bookingSchema) });
-
-  const onBookingSubmit = async (data: BookingData) => {
-    await submitAppointment({
-      data: {
-        name: data.name,
-        phone: data.phone,
-        service: data.service,
-        preferred_date: data.date,
-        preferred_time: "TBD",
-        source: "Homepage Form",
-      },
-    });
-    setBookingSubmitted(true);
-  };
-
   return (
     <div>
       {/* HERO */}
       <section className="relative min-h-[92vh] md:min-h-[92vh] flex items-center overflow-hidden">
-        {/* Hero background */}
         <div className="absolute inset-0">
           <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/85 via-navy/70 to-navy/40" />
@@ -100,9 +111,8 @@ function HomePage() {
 
         <div className="max-w-7xl mx-auto px-5 md:px-4 py-20 md:py-24 relative z-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left — Text */}
             <div>
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
+              <div className="inline-flex items-center gap-2 bg-white/10 text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10 shadow-[0_2px_8px_rgba(0,0,0,0.2)]">
                 <Shield className="w-4 h-4 text-gold" /> NABH Accredited Hospital
               </div>
               <h1 className="font-heading text-3xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.15] tracking-tight">
@@ -118,7 +128,7 @@ function HomePage() {
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
                   </ShinyButton>
                 </Link>
-                <Button variant="outline" className="border border-white/20 bg-white/10 backdrop-blur-xl text-white hover:bg-white/20 font-semibold text-base px-8 py-6 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.2)] hover:border-white/30" onClick={() => openWhatsApp()}>
+                <Button variant="outline" className="border border-white/20 bg-white/10 text-white hover:bg-white/20 font-semibold text-base px-8 py-6 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-300 hover:border-white/30" onClick={() => openWhatsApp()}>
                   WhatsApp Us
                 </Button>
               </div>
@@ -127,15 +137,14 @@ function HomePage() {
               </a>
             </div>
 
-            {/* Right — Glassmorphism Cards */}
+            {/* Right — Stats Card */}
             <div className="hidden lg:flex flex-col gap-5">
-              {/* Stats Card */}
-              <div className="relative rounded-2xl border border-white/15 bg-white/10 backdrop-blur-xl p-7 shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden">
+              <div className="relative rounded-2xl border border-white/15 bg-white/10 backdrop-blur-sm p-7 shadow-[0_8px_32px_rgba(0,0,0,0.12)] overflow-hidden">
                 <div className="absolute -top-16 -right-16 h-48 w-48 rounded-full bg-gold/15 blur-3xl" />
                 <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-white/5 blur-2xl" />
                 <div className="relative z-10">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/20 backdrop-blur-sm border border-gold/20">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/20 border border-gold/20">
                       <Target className="h-6 w-6 text-gold" />
                     </div>
                     <div>
@@ -159,10 +168,10 @@ function HomePage() {
                     <div><p className="text-lg font-bold text-white">{CLINIC.rating}</p><p className="text-xs text-white/50">Rating</p></div>
                   </div>
                   <div className="mt-5 flex gap-3">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cta/20 px-3 py-1.5 text-xs font-semibold text-cta backdrop-blur-sm border border-cta/20">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cta/20 px-3 py-1.5 text-xs font-semibold text-cta border border-cta/20">
                       <span className="h-1.5 w-1.5 rounded-full bg-cta animate-pulse" /> OPEN NOW
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1.5 text-xs font-semibold text-gold backdrop-blur-sm border border-gold/20">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/15 px-3 py-1.5 text-xs font-semibold text-gold border border-gold/20">
                       <Crown className="h-3 w-3" /> NABH
                     </span>
                   </div>
@@ -170,7 +179,7 @@ function HomePage() {
               </div>
 
               {/* Accreditations marquee */}
-              <div className="rounded-2xl border border-white/15 bg-white/8 backdrop-blur-xl p-5 shadow-lg overflow-hidden">
+              <div className="rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm p-5 shadow-lg overflow-hidden">
                 <p className="text-xs text-white/40 mb-3 uppercase tracking-[0.15em] font-medium">Accreditations & Affiliations</p>
                 <div className="overflow-hidden">
                   <div className="animate-marquee flex gap-8">
@@ -186,7 +195,7 @@ function HomePage() {
             </div>
           </div>
 
-          {/* Trust bar */}
+          {/* Trust bar — replaced backdrop-blur-md with text-shadow approach */}
           <div className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { icon: Users, label: "15,000+ Happy Patients" },
@@ -194,7 +203,7 @@ function HomePage() {
               { icon: Shield, label: "NABH Accredited" },
               { icon: Star, label: "4.9/5 Google Rating" },
             ].map(({ icon: Icon, label }) => (
-              <div key={label} className="flex items-center gap-3 bg-white/8 backdrop-blur-md rounded-xl px-4 py-3.5 border border-white/10">
+              <div key={label} className="flex items-center gap-3 bg-white/8 rounded-xl px-4 py-3.5 border border-white/10">
                 <Icon className="w-5 h-5 text-gold shrink-0" />
                 <span className="text-sm font-medium text-white/80">{label}</span>
               </div>
@@ -218,27 +227,29 @@ function HomePage() {
       </section>
 
       {/* SPECIALTIES CAROUSEL */}
-      <Gallery4
-        title="Our Specialties"
-        description="Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment."
-        items={SERVICES.map((service, i) => {
-          const serviceImages = [
-            "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1666214280557-091f29486ab5?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80",
-          ];
-          return {
-            id: service.slug,
-            title: service.name,
-            description: service.description,
-            href: `/services/${service.slug}`,
-            image: serviceImages[i % serviceImages.length],
-          };
-        })}
-      />
+      <Suspense fallback={<LazyFallback />}>
+        <Gallery4
+          title="Our Specialties"
+          description="Comprehensive medical care across 6+ specialties with experienced doctors and modern equipment."
+          items={SERVICES.map((service, i) => {
+            const serviceImages = [
+              "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=600&q=80",
+              "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=600&q=80",
+              "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=80",
+              "https://images.unsplash.com/photo-1666214280557-091f29486ab5?auto=format&fit=crop&w=600&q=80",
+              "https://images.unsplash.com/photo-1638202993928-7267aad84c31?auto=format&fit=crop&w=600&q=80",
+              "https://images.unsplash.com/photo-1651008376811-b90baee60c1f?auto=format&fit=crop&w=600&q=80",
+            ];
+            return {
+              id: service.slug,
+              title: service.name,
+              description: service.description,
+              href: `/services/${service.slug}`,
+              image: serviceImages[i % serviceImages.length],
+            };
+          })}
+        />
+      </Suspense>
 
       {/* WHY CHOOSE US */}
       <section className="py-16 md:py-24 bg-cream relative grain overflow-hidden">
@@ -331,13 +342,15 @@ function HomePage() {
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
-            <InteractiveImageAccordion
-              heading="Comprehensive Care Under One Roof"
-              description="From expert consultations to advanced diagnostics and surgical excellence — experience seamless, world-class healthcare at every step of your journey."
-              ctaText="Book Free Consultation"
-              ctaHref="/book-appointment"
-              defaultActive={2}
-            />
+            <Suspense fallback={<LazyFallback />}>
+              <InteractiveImageAccordion
+                heading="Comprehensive Care Under One Roof"
+                description="From expert consultations to advanced diagnostics and surgical excellence — experience seamless, world-class healthcare at every step of your journey."
+                ctaText="Book Free Consultation"
+                ctaHref="/book-appointment"
+                defaultActive={2}
+              />
+            </Suspense>
           </AnimatedSection>
         </div>
       </section>
@@ -363,50 +376,9 @@ function HomePage() {
             <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">What Our Patients Say</h2>
             <p className="text-muted-foreground mt-3">{CLINIC.rating}/5 based on {CLINIC.reviewCount}+ verified reviews</p>
           </div>
-          <StaggerTestimonials />
-        </div>
-      </section>
-
-      {/* BOOKING FORM */}
-      <section className="py-16 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,oklch(0.72_0.10_75/0.06),transparent_50%)]" />
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <AnimatedSection>
-            <div className="text-center mb-12">
-              <p className="text-xs uppercase tracking-[0.25em] text-gold font-medium mb-3">Get Started</p>
-              <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold leading-tight">Book Your Free Consultation</h2>
-              <p className="text-navy-foreground/60 mt-4 leading-relaxed">Fill in your details and we'll get back to you within 2 hours</p>
-            </div>
-          </AnimatedSection>
-
-          {bookingSubmitted ? (
-            <div className="text-center py-8">
-              <CheckCircle className="w-16 h-16 text-cta mx-auto mb-4" />
-              <h3 className="text-2xl font-heading font-bold">Appointment Requested!</h3>
-              <p className="text-navy-foreground/60 mt-2">We'll call you shortly to confirm your slot.</p>
-              <Link to="/thank-you" className="mt-4 inline-block">
-                <Button className="bg-cta hover:bg-cta/90 text-cta-foreground rounded-full">Continue on WhatsApp →</Button>
-              </Link>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit(onBookingSubmit)} className="max-w-4xl mx-auto">
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <Input placeholder="Full Name *" {...register("name")} className="bg-navy-foreground/8 border-navy-foreground/15 text-navy-foreground placeholder:text-navy-foreground/35 text-base py-5 rounded-xl focus:ring-gold/50 focus:border-gold/50" />
-                <Input placeholder="Phone Number *" type="tel" {...register("phone")} className="bg-navy-foreground/8 border-navy-foreground/15 text-navy-foreground placeholder:text-navy-foreground/35 text-base py-5 rounded-xl focus:ring-gold/50 focus:border-gold/50" />
-                <select {...register("service")} className="flex h-11 w-full rounded-xl border bg-navy-foreground/8 border-navy-foreground/15 px-3 py-2 text-sm text-navy-foreground transition-colors focus:ring-2 focus:ring-gold/50">
-                  <option value="">Select Service *</option>
-                  {SERVICES.map((s) => <option key={s.slug} value={s.name}>{s.name}</option>)}
-                </select>
-                <Input type="date" {...register("date")} className="bg-navy-foreground/8 border-navy-foreground/15 text-navy-foreground text-base py-5 rounded-xl focus:ring-gold/50 focus:border-gold/50" />
-              </div>
-              <div className="mt-6 text-center">
-                <Button type="submit" disabled={isSubmitting} className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-10 py-5 rounded-full shadow-[0_6px_24px_-6px_oklch(0.72_0.10_75/0.4)] hover:shadow-[0_8px_30px_-6px_oklch(0.72_0.10_75/0.5)] hover:scale-[1.02]">
-                  {isSubmitting ? "Submitting..." : "Book Free Consultation →"}
-                </Button>
-              </div>
-              <p className="text-center text-xs text-navy-foreground/40 mt-4 tracking-[0.1em] uppercase">Your data is secure · Complimentary consultation · Transparent pricing</p>
-            </form>
-          )}
+          <Suspense fallback={<LazyFallback />}>
+            <StaggerTestimonials />
+          </Suspense>
         </div>
       </section>
 
@@ -434,60 +406,9 @@ function HomePage() {
             <h2 className="font-heading text-3xl md:text-[2.75rem] font-bold text-navy leading-tight">Before & After</h2>
             <p className="text-muted-foreground mt-4 max-w-2xl mx-auto leading-relaxed">Drag the slider to see real patient transformations achieved at our clinic.</p>
           </div>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <div className="rounded-2xl overflow-hidden border shadow-lg">
-                <ImageComparison className="aspect-[4/3] w-full" enableHover>
-                  <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&h=450&fit=crop"
-                    alt="Before dental treatment"
-                    position="left"
-                  />
-                  <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=600&h=450&fit=crop"
-                    alt="After dental treatment"
-                    position="right"
-                  />
-                  <ImageComparisonSlider className="w-1">
-                    <div className="flex h-full flex-col items-center justify-center">
-                      <div className="h-full w-0.5 bg-gold shadow-[0_0_8px_oklch(0.62_0.10_65/0.5)]" />
-                      <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-gold border-2 border-gold-foreground shadow-lg flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3 text-gold-foreground -rotate-180" />
-                        <ArrowRight className="w-3 h-3 text-gold-foreground" />
-                      </div>
-                    </div>
-                  </ImageComparisonSlider>
-                </ImageComparison>
-              </div>
-              <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Dental Restoration</p>
-            </div>
-            <div>
-              <div className="rounded-2xl overflow-hidden border shadow-lg">
-                <ImageComparison className="aspect-[4/3] w-full" enableHover>
-                  <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop"
-                    alt="Before skin treatment"
-                    position="left"
-                  />
-                  <ImageComparisonImage
-                    src="https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?w=600&h=450&fit=crop"
-                    alt="After skin treatment"
-                    position="right"
-                  />
-                  <ImageComparisonSlider className="w-1">
-                    <div className="flex h-full flex-col items-center justify-center">
-                      <div className="h-full w-0.5 bg-gold shadow-[0_0_8px_oklch(0.62_0.10_65/0.5)]" />
-                      <div className="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-gold border-2 border-gold-foreground shadow-lg flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3 text-gold-foreground -rotate-180" />
-                        <ArrowRight className="w-3 h-3 text-gold-foreground" />
-                      </div>
-                    </div>
-                  </ImageComparisonSlider>
-                </ImageComparison>
-              </div>
-              <p className="text-center text-sm text-muted-foreground mt-3 font-medium">Skin Treatment Results</p>
-            </div>
-          </div>
+          <Suspense fallback={<LazyFallback />}>
+            <LazyBeforeAfter />
+          </Suspense>
         </div>
       </section>
       <div className="text-center -mt-10 mb-16">
@@ -540,7 +461,7 @@ function HomePage() {
         </div>
       </section>
 
-      {/* CONSULTATION FORM */}
+      {/* CONSULTATION FORM — single booking form kept */}
       <section className="py-16 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
@@ -550,10 +471,11 @@ function HomePage() {
               <p className="text-muted-foreground mt-3 max-w-xl mx-auto">Fill out this quick form and our team will reach out to schedule your appointment.</p>
             </div>
           </AnimatedSection>
-          <MultistepConsultationForm />
+          <Suspense fallback={<LazyFallback />}>
+            <MultistepConsultationForm />
+          </Suspense>
         </div>
       </section>
-
 
       <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
@@ -564,11 +486,13 @@ function HomePage() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-10">
-            <LocationMap
-              location={CLINIC.address}
-              coordinates="17.4326° N, 78.4071° E"
-              className="w-full"
-            />
+            <Suspense fallback={<LazyFallback />}>
+              <LocationMap
+                location={CLINIC.address}
+                coordinates="17.4326° N, 78.4071° E"
+                className="w-full"
+              />
+            </Suspense>
             <div className="flex flex-col justify-center space-y-5">
               <div>
                 <h3 className="font-heading text-2xl font-semibold text-navy">{CLINIC.name}</h3>
