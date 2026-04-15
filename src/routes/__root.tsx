@@ -74,6 +74,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const location = useLocation();
   const isHome = location.pathname === '/';
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  if (isAdmin) {
+    return <Outlet />;
+  }
+
   return (
     <>
       <FloatingHeader />
