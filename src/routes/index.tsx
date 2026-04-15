@@ -84,7 +84,7 @@ function HomePage() {
   return (
     <div>
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[92vh] md:min-h-[92vh] flex items-center overflow-hidden">
         {/* Hero background */}
         <div className="absolute inset-0">
           <img src={heroClinic} alt="Luxury clinic interior" className="w-full h-full object-cover" width={1920} height={1080} />
@@ -93,21 +93,21 @@ function HomePage() {
           <ProgressiveBlur direction="bottom" blurLayers={4} blurIntensity={0.6} className="absolute inset-x-0 bottom-0 h-24" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-5 md:px-4 py-20 md:py-24 relative z-20 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left — Text */}
             <div>
               <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white/90 px-4 py-2 rounded-full text-sm font-medium mb-8 border border-white/10">
                 <Shield className="w-4 h-4 text-gold" /> NABH Accredited Hospital
               </div>
-              <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.1] tracking-tight">
+              <h1 className="font-heading text-3xl md:text-5xl lg:text-[3.5rem] font-bold text-white leading-[1.15] tracking-tight">
                 {CLINIC.tagline.split(",")[0]},<br />
                 <span className="text-gold">{CLINIC.tagline.split(",")[1]}</span>
               </h1>
-              <p className="text-lg text-white/70 mt-7 max-w-lg leading-relaxed font-light">
+              <p className="text-base md:text-lg text-white/70 mt-6 md:mt-7 max-w-lg leading-relaxed font-light">
                 Trusted by {CLINIC.patientCount}+ patients in {CLINIC.city}. World-class doctors, modern technology, and compassionate care — all under one roof.
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mt-9">
+              <div className="flex flex-col sm:flex-row gap-3 mt-8 md:mt-9">
                 <Link to="/book-appointment">
                   <ShinyButton className="bg-gold hover:bg-gold/90 text-gold-foreground font-semibold text-base px-8 py-4 rounded-full shadow-[0_6px_24px_-6px_oklch(0.62_0.10_65/0.5)]">
                     Book Free Consultation <ArrowRight className="w-4 h-4 ml-1 inline" />
@@ -182,7 +182,7 @@ function HomePage() {
           </div>
 
           {/* Trust bar */}
-          <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="mt-10 md:mt-14 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
             {[
               { icon: Users, label: "15,000+ Happy Patients" },
               { icon: Clock, label: "15+ Years Experience" },
@@ -236,7 +236,7 @@ function HomePage() {
       />
 
       {/* WHY CHOOSE US */}
-      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-16 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="top" className="h-[300px] opacity-20" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -276,7 +276,7 @@ function HomePage() {
       </section>
 
       {/* DOCTOR SPOTLIGHT */}
-      <section className="py-20 md:py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -322,7 +322,7 @@ function HomePage() {
       </section>
 
       {/* INTERACTIVE IMAGE ACCORDION */}
-      <section className="py-20 md:py-24 bg-cream relative overflow-hidden grain">
+      <section className="py-16 md:py-24 bg-cream relative overflow-hidden grain">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -337,7 +337,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
+      <section className="py-14 md:py-24 bg-navy text-navy-foreground relative overflow-hidden grain">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,oklch(0.72_0.10_75/0.08),transparent_60%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
@@ -350,7 +350,7 @@ function HomePage() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="py-20 md:py-24 bg-cream relative grain overflow-hidden">
+      <section className="py-16 md:py-24 bg-cream relative grain overflow-hidden">
         <Glow variant="bottom" className="h-[350px] opacity-25" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-8">
@@ -363,7 +363,7 @@ function HomePage() {
       </section>
 
       {/* BOOKING FORM */}
-      <section className="py-20 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-navy text-navy-foreground relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_80%,oklch(0.72_0.10_75/0.06),transparent_50%)]" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
@@ -421,7 +421,7 @@ function HomePage() {
       />
 
       {/* BEFORE/AFTER COMPARISON */}
-      <section className="py-20 md:py-24 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <Glow variant="center" className="h-[400px] opacity-40" />
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <div className="text-center mb-14">
@@ -494,7 +494,7 @@ function HomePage() {
       </div>
 
       {/* BLOG TEASER */}
-      <section className="py-20 md:py-24 bg-cream relative grain">
+      <section className="py-16 md:py-24 bg-cream relative grain">
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -536,7 +536,7 @@ function HomePage() {
       </section>
 
       {/* CONSULTATION FORM */}
-      <section className="py-20 md:py-24 bg-muted/30">
+      <section className="py-16 md:py-24 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
@@ -550,7 +550,7 @@ function HomePage() {
       </section>
 
 
-      <section className="py-20 md:py-24">
+      <section className="py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4">
           <AnimatedSection>
             <div className="text-center mb-14">
