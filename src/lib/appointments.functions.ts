@@ -86,13 +86,12 @@ export const updateAppointment = createServerFn({ method: "POST" })
       throw new Error("Unauthorized");
     }
 
-    const updates: Record<string, string> = {};
-    if (data.status) updates.status = data.status;
-    if (data.staff_notes !== undefined) updates.staff_notes = data.staff_notes;
-
     const { error } = await supabaseAdmin
       .from("appointments")
-      .update(updates)
+      .update({
+        ...(data.status && { status: data.status }),
+        ...(data.staff_notes !== undefined && { staff_notes: data.staff_notes }),
+      })
       .eq("id", data.id);
 
     if (error) {
