@@ -1,19 +1,29 @@
 
 
-# Plan: Create Admin Account & Assign Role
+# Fix: Assign Admin Role to Your Account
 
-## Steps
+## Problem
+The CRM backend code is complete and functional. The only missing piece is that your user account has no role in the `user_roles` table, so every CRM request is blocked by the authorization check.
 
-1. **Enable auto-confirm** for email signups temporarily (so you don't need to verify email)
-2. **You sign up** at `/admin/login` using the "Sign Up" tab with your credentials:
-   - Email: `shaikjaffarhussain924@gmail.com`
-   - Password: `poison909090`
-3. **Assign admin role** — after signup, I'll look up your user ID and insert an `admin` role into the `user_roles` table
-4. **Disable auto-confirm** after setup (optional, for security)
+## Solution (1 step)
+Insert the admin role for your existing user account:
 
-## Technical Details
+```sql
+INSERT INTO user_roles (user_id, role) 
+VALUES ('1e7d07bb-477e-4acd-8c55-882eaee6dad1', 'admin');
+```
 
-- Use `cloud--configure_auth` to enable auto-confirm temporarily
-- After you sign up, query `auth.users` to get your user ID
-- Insert into `user_roles` via the insert tool: `INSERT INTO user_roles (user_id, role) VALUES ('<your-id>', 'admin')`
+After this, log out and back in at `/admin/login` — the CRM dashboard will show your appointments and contacts.
+
+## What's Already Built
+| Feature | Server Function | Status |
+|---------|----------------|--------|
+| Book appointment | `submitAppointment` | Working |
+| View appointments (admin) | `getAppointments` | Working (needs role) |
+| Update appointment (admin) | `updateAppointment` | Working (needs role) |
+| Submit contact form | `submitContact` | Working |
+| View contacts (admin) | `getContacts` | Working (needs role) |
+| Update contact (admin) | `updateContact` | Working (needs role) |
+| Dashboard stats | `getDashboardStats` | Working (needs role) |
+| Auto-confirm trigger | DB trigger | Working |
 
