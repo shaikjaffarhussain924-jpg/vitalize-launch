@@ -1,28 +1,19 @@
 
 
-# Plan: Enable Admin User Creation
+# Plan: Create Admin Account & Assign Role
 
-## Problem
-The `/admin/login` page only has a login form — there's no way to create the first admin account. We need a way to register a user and assign them the admin role.
+## Steps
 
-## Approach
+1. **Enable auto-confirm** for email signups temporarily (so you don't need to verify email)
+2. **You sign up** at `/admin/login` using the "Sign Up" tab with your credentials:
+   - Email: `shaikjaffarhussain924@gmail.com`
+   - Password: `poison909090`
+3. **Assign admin role** — after signup, I'll look up your user ID and insert an `admin` role into the `user_roles` table
+4. **Disable auto-confirm** after setup (optional, for security)
 
-**Option A (Recommended — simplest):** I create the admin user directly in the database using the auth tools, then insert the admin role. You just tell me what email and password you want.
+## Technical Details
 
-**Option B:** Add a signup form to the login page so you can register, then I assign the role afterward.
-
-## Steps (Option A)
-
-1. You provide the email and password you want for your admin account
-2. I create the user via the backend auth system
-3. I insert a row into `user_roles` linking that user to the `admin` role
-4. You log in at `/admin/login` and access the dashboard
-
-## Steps (Option B)
-
-1. Add a signup tab/toggle to `src/routes/admin.login.tsx` with email + password registration
-2. After you sign up, I insert the admin role for your user ID
-3. Future staff accounts can be created the same way, with you assigning roles from the admin panel later
-
-No other files change. The rest of the CRM is already built and waiting.
+- Use `cloud--configure_auth` to enable auto-confirm temporarily
+- After you sign up, query `auth.users` to get your user ID
+- Insert into `user_roles` via the insert tool: `INSERT INTO user_roles (user_id, role) VALUES ('<your-id>', 'admin')`
 
