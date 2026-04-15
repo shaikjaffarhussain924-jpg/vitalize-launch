@@ -5,7 +5,6 @@ import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { MobileCTABar } from "@/components/MobileCTABar";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
 import { CLINIC } from "@/lib/constants";
-import { META_PIXEL_SCRIPT, GTM_SCRIPT, GA4_SCRIPT } from "@/lib/analytics";
 
 import appCss from "../styles.css?url";
 
@@ -44,12 +43,7 @@ export const Route = createRootRoute({
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-    ],
-    scripts: [
-      { children: META_PIXEL_SCRIPT },
-      { children: GTM_SCRIPT },
-      { src: `https://www.googletagmanager.com/gtag/js?id=${CLINIC.ga4Id}`, async: true },
-      { children: GA4_SCRIPT },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Outfit:wght@200;300;400;500;600;700&display=swap" },
     ],
   }),
   shellComponent: RootShell,

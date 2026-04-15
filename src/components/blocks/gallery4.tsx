@@ -107,6 +107,7 @@ const Gallery4 = ({
                         src={item.image}
                         alt={item.title}
                         className="aspect-[3/2] w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
                       />
                     </div>
                     <div className="p-6">
