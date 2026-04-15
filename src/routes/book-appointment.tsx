@@ -17,7 +17,7 @@ import { CLINIC, SERVICES, DOCTORS } from "@/lib/constants";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { submitToWeb3Forms } from "@/lib/forms";
+import { submitAppointment } from "@/lib/appointments.functions";
 import { useState } from "react";
 
 const schema = z.object({
@@ -119,10 +119,12 @@ function BookingPage() {
   };
 
   const onSubmit = async (data: FormData) => {
-    await submitToWeb3Forms(data as any, "Booking Page - New Appointment");
-    setSubmitted(true);
-    setStep(3);
-    setTimeout(() => navigate({ to: "/thank-you" }), 3000);
+    const result = await submitAppointment({ data });
+    if (result.success) {
+      setSubmitted(true);
+      setStep(3);
+      setTimeout(() => navigate({ to: "/thank-you" }), 3000);
+    }
   };
 
   return (
