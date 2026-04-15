@@ -22,7 +22,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { submitToWeb3Forms } from "@/lib/forms";
+import { submitAppointment } from "@/lib/appointments.functions";
 import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/")({
@@ -77,7 +77,16 @@ function HomePage() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<BookingData>({ resolver: zodResolver(bookingSchema) });
 
   const onBookingSubmit = async (data: BookingData) => {
-    await submitToWeb3Forms(data, "Homepage Booking Form");
+    await submitAppointment({
+      data: {
+        name: data.name,
+        phone: data.phone,
+        service: data.service,
+        preferred_date: data.date,
+        preferred_time: "TBD",
+        source: "Homepage Form",
+      },
+    });
     setBookingSubmitted(true);
   };
 

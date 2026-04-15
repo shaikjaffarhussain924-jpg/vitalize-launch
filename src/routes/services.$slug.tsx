@@ -11,7 +11,7 @@ import { trackViewContent } from "@/lib/analytics";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { submitToWeb3Forms } from "@/lib/forms";
+import { submitAppointment } from "@/lib/appointments.functions";
 import { useState, useEffect } from "react";
 
 export const Route = createFileRoute("/services/$slug")({
@@ -82,7 +82,16 @@ function ServicePage() {
   const otherServices = SERVICES.filter((s) => s.slug !== slug);
 
   const onSidebarSubmit = async (data: any) => {
-    await submitToWeb3Forms({ ...data, service: service.name }, `${service.name} Page Booking`);
+    await submitAppointment({
+      data: {
+        name: data.name,
+        phone: data.phone,
+        service: service.name,
+        preferred_date: data.date,
+        preferred_time: "TBD",
+        source: `${service.name} Page`,
+      },
+    });
     setSidebarSubmitted(true);
   };
 

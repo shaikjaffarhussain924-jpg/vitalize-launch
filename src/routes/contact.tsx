@@ -10,7 +10,7 @@ import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { submitToWeb3Forms } from "@/lib/forms";
+import { submitContact } from "@/lib/contacts.functions";
 import { useState } from "react";
 
 const schema = z.object({
@@ -37,8 +37,10 @@ function ContactPage() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data: any) => {
-    await submitToWeb3Forms(data, "Contact Page Inquiry");
-    setSubmitted(true);
+    const result = await submitContact({ data });
+    if (result.success) {
+      setSubmitted(true);
+    }
   };
 
   return (
