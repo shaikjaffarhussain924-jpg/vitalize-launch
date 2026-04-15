@@ -113,30 +113,30 @@ const defaultItems: AccordionItemData[] = [
     id: 1,
     title: 'Expert Consultation',
     imageUrl:
-      'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&h=450&fit=crop&q=75&fm=webp',
   },
   {
     id: 2,
     title: 'Advanced Diagnostics',
     imageUrl:
-      'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&h=450&fit=crop&q=75&fm=webp',
   },
   {
     id: 3,
     title: 'Surgical Excellence',
     imageUrl:
-      'https://images.unsplash.com/photo-1551190822-a9ce113ac100?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1551190822-a9ce113ac100?w=600&h=450&fit=crop&q=75&fm=webp',
   },
   {
     id: 4,
     title: 'Patient Recovery',
     imageUrl:
-      'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=600&h=450&fit=crop&q=75&fm=webp',
   },
   {
     id: 5,
     title: 'Modern Facilities',
     imageUrl:
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=450&fit=crop',
+      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=450&fit=crop&q=75&fm=webp',
   },
 ];

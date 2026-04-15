@@ -3,7 +3,7 @@ import { ArrowRight, Star, Shield, Stethoscope, Heart, Users, Clock, Phone, Targ
 import { Glow } from "@/components/ui/glow";
 import { DestinationCard } from "@/components/ui/card-21";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
-import heroClinic from "@/assets/hero-clinic.jpg";
+import heroClinic from "@/assets/hero-clinic.webp";
 import { Button } from "@/components/ui/button";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ShinyButton } from "@/components/ui/shiny-button";
