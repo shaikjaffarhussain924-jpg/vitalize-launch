@@ -5,7 +5,7 @@ import { getCallLink, openWhatsApp } from "@/lib/whatsapp";
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-navy-foreground relative">
+    <footer className="bg-navy text-navy-foreground relative pb-16 md:pb-0">
       {/* Top gradient border */}
       <div className="h-[2px] bg-gradient-to-r from-navy via-gold to-navy" />
 
