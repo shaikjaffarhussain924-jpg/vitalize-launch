@@ -46,7 +46,16 @@ function AdminContacts() {
     }
   };
 
-  useEffect(() => { loadContacts(); }, []);
+  useEffect(() => {
+    loadContacts();
+    const channel = supabase
+      .channel('admin-contacts')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'contact_submissions' }, () => {
+        loadContacts();
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, []);
 
   const filtered = contacts.filter((c) => {
     const matchSearch = !search || c.name.toLowerCase().includes(search.toLowerCase()) || c.phone.includes(search);

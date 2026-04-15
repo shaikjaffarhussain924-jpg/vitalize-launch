@@ -17,23 +17,29 @@ function AdminDashboard() {
   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        if (!session) return;
+  const loadStats = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) return;
+      const result = await getDashboardStats({
+        headers: { Authorization: `Bearer ${session.access_token}` },
+      });
+      setStats(result);
+    } catch (err) {
+      console.error("Dashboard stats error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-        const result = await getDashboardStats({
-          headers: { Authorization: `Bearer ${session.access_token}` },
-        });
-        setStats(result);
-      } catch (err) {
-        console.error("Dashboard stats error:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    load();
+  useEffect(() => {
+    loadStats();
+    const channel = supabase
+      .channel('admin-dashboard')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'appointments' }, () => { loadStats(); })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'contact_submissions' }, () => { loadStats(); })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const cards = [

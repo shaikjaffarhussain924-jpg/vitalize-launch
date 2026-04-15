@@ -47,7 +47,16 @@ function AdminAppointments() {
     }
   };
 
-  useEffect(() => { loadAppointments(); }, []);
+  useEffect(() => {
+    loadAppointments();
+    const channel = supabase
+      .channel('admin-appointments')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'appointments' }, () => {
+        loadAppointments();
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, []);
 
   const filtered = appointments.filter((a) => {
     const matchSearch = !search || a.name.toLowerCase().includes(search.toLowerCase()) || a.phone.includes(search);
