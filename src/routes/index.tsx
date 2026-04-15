@@ -1,29 +1,25 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Star, Shield, Stethoscope, Heart, Sparkles, Users, Award, Clock, CheckCircle, Phone, Target, Crown } from "lucide-react";
-import { StaggerTestimonials } from "@/components/ui/stagger-testimonials";
-import { LocationMap } from "@/components/ui/expand-map";
 import { Glow } from "@/components/ui/glow";
-import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
-import { InteractiveImageAccordion } from "@/components/ui/interactive-image-accordion";
 import { DestinationCard } from "@/components/ui/card-21";
 import { ProgressiveBlur } from "@/components/ui/progressive-blur";
 import heroClinic from "@/assets/hero-clinic.jpg";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import MultistepConsultationForm from "@/components/ui/multistep-form";
 import { ShinyButton } from "@/components/ui/shiny-button";
 import { BorderRotate } from "@/components/ui/animated-gradient-border";
 import { Logos3 } from "@/components/blocks/logos3";
-import { Gallery4 } from "@/components/blocks/gallery4";
 import { CLINIC, SERVICES, DOCTORS, BLOG_POSTS } from "@/lib/constants";
 import { openWhatsApp, getCallLink } from "@/lib/whatsapp";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { submitAppointment } from "@/lib/appointments.functions";
-import { useState, useEffect } from "react";
+import { lazy, Suspense } from "react";
+
+const StaggerTestimonials = lazy(() => import("@/components/ui/stagger-testimonials").then(m => ({ default: m.StaggerTestimonials })));
+const LocationMap = lazy(() => import("@/components/ui/expand-map").then(m => ({ default: m.LocationMap })));
+const ImageComparisonLazy = lazy(() => import("@/components/ui/image-comparison"));
+const InteractiveImageAccordion = lazy(() => import("@/components/ui/interactive-image-accordion").then(m => ({ default: m.InteractiveImageAccordion })));
+const MultistepConsultationForm = lazy(() => import("@/components/ui/multistep-form"));
+const Gallery4 = lazy(() => import("@/components/blocks/gallery4").then(m => ({ default: m.Gallery4 })));
 
 export const Route = createFileRoute("/")({
   head: () => ({
