@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { MobileCTABar } from "@/components/MobileCTABar";
 import { ExitIntentPopup } from "@/components/ExitIntentPopup";
+import { Toaster } from "@/components/ui/sonner";
 import { CLINIC } from "@/lib/constants";
 
 import appCss from "../styles.css?url";
@@ -71,7 +72,12 @@ function RootComponent() {
   const isAdmin = location.pathname.startsWith('/admin');
 
   if (isAdmin) {
-    return <Outlet />;
+    return (
+      <>
+        <Outlet />
+        <Toaster richColors position="top-right" closeButton />
+      </>
+    );
   }
 
   return (
@@ -84,6 +90,7 @@ function RootComponent() {
       <WhatsAppButton />
       <MobileCTABar />
       <ExitIntentPopup />
+      <Toaster richColors position="top-right" closeButton />
     </>
   );
 }
