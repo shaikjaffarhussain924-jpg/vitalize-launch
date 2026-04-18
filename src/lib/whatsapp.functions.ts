@@ -1,0 +1,114 @@
+import { createServerFn } from "@tanstack/react-start";
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { supabaseAdmin } from "@/integrations/supabase/client.server";
+
+function normalizePhone(input: string): string {
+  return input.replace(/[^\d]/g, "");
+}
+
+export const getWhatsAppThread = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { phone: string }) => {
+    if (!input?.phone || typeof input.phone !== "string") {
+      throw new Error("phone is required");
+    }
+    return { phone: normalizePhone(input.phone) };
+  })
+  .handler(async ({ data, context }) => {
+    const { supabase } = context;
+    const { data: messages, error } = await supabase
+      .from("whatsapp_messages")
+      .select("*")
+      .eq("phone", data.phone)
+      .order("created_at", { ascending: true });
+    if (error) throw new Error(error.message);
+    return { messages: messages ?? [] };
+  });
+
+export const sendWhatsAppMessage = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: { phone: string; body: string; leadId?: string; leadType?: "appointment" | "contact" }) => {
+    if (!input?.phone || typeof input.phone !== "string") throw new Error("phone is required");
+    if (!input?.body || typeof input.body !== "string" || input.body.length > 4000) throw new Error("body required (<=4000 chars)");
+    return {
+      phone: normalizePhone(input.phone),
+      body: input.body,
+      leadId: input.leadId,
+      leadType: input.leadType,
+    };
+  })
+  .handler(async ({ data }) => {
+    const token = process.env.META_WA_ACCESS_TOKEN;
+    const phoneId = process.env.META_WA_PHONE_NUMBER_ID;
+
+    if (!token || !phoneId) {
+      // Store locally even if Meta not yet configured, marked as failed
+      await supabaseAdmin.from("whatsapp_messages").insert({
+        phone: data.phone,
+        direction: "out",
+        body: data.body,
+        status: "failed",
+        error_message: "META_WA_ACCESS_TOKEN or META_WA_PHONE_NUMBER_ID not set",
+        lead_id: data.leadId ?? null,
+        lead_type: data.leadType ?? null,
+      });
+      return { success: false, error: "WhatsApp credentials not configured. Add them in project secrets." };
+    }
+
+    try {
+      const res = await fetch(`https://graph.facebook.com/v20.0/${phoneId}/messages`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messaging_product: "whatsapp",
+          to: data.phone,
+          type: "text",
+          text: { body: data.body },
+        }),
+      });
+
+      const json = await res.json();
+
+      if (!res.ok) {
+        const errMsg = json?.error?.message || `Meta API error ${res.status}`;
+        await supabaseAdmin.from("whatsapp_messages").insert({
+          phone: data.phone,
+          direction: "out",
+          body: data.body,
+          status: "failed",
+          error_message: errMsg,
+          lead_id: data.leadId ?? null,
+          lead_type: data.leadType ?? null,
+        });
+        return { success: false, error: errMsg };
+      }
+
+      const waId = json?.messages?.[0]?.id ?? null;
+      await supabaseAdmin.from("whatsapp_messages").insert({
+        phone: data.phone,
+        direction: "out",
+        body: data.body,
+        status: "sent",
+        wa_message_id: waId,
+        lead_id: data.leadId ?? null,
+        lead_type: data.leadType ?? null,
+      });
+
+      return { success: true, wa_message_id: waId };
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : "Unknown error";
+      await supabaseAdmin.from("whatsapp_messages").insert({
+        phone: data.phone,
+        direction: "out",
+        body: data.body,
+        status: "failed",
+        error_message: errMsg,
+        lead_id: data.leadId ?? null,
+        lead_type: data.leadType ?? null,
+      });
+      return { success: false, error: errMsg };
+    }
+  });
