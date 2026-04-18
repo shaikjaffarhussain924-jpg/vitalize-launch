@@ -119,6 +119,45 @@ export type Database = {
         }
         Relationships: []
       }
+      whatsapp_messages: {
+        Row: {
+          body: string
+          created_at: string
+          direction: string
+          error_message: string | null
+          id: string
+          lead_id: string | null
+          lead_type: string | null
+          phone: string
+          status: string
+          wa_message_id: string | null
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          direction: string
+          error_message?: string | null
+          id?: string
+          lead_id?: string | null
+          lead_type?: string | null
+          phone: string
+          status?: string
+          wa_message_id?: string | null
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          direction?: string
+          error_message?: string | null
+          id?: string
+          lead_id?: string | null
+          lead_type?: string | null
+          phone?: string
+          status?: string
+          wa_message_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
