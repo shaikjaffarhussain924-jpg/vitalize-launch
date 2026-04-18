@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Search, X, Phone, Mail, Calendar, Clock, MessageSquare } from "lucide-react";
+import { WhatsAppThread } from "@/components/admin/WhatsAppThread";
 import type { Database } from "@/integrations/supabase/types";
 
 type Appointment = Database["public"]["Tables"]["appointments"]["Row"];
@@ -264,6 +265,14 @@ function AdminAppointments() {
                   >
                     Save Notes
                   </Button>
+                </div>
+
+                {/* WhatsApp chat */}
+                <div>
+                  <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
+                    <MessageSquare className="w-3 h-3" /> WhatsApp Conversation
+                  </p>
+                  <WhatsAppThread phone={selected.phone} leadId={selected.id} leadType="appointment" />
                 </div>
               </div>
             </div>
