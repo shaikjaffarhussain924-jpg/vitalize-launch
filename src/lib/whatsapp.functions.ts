@@ -12,9 +12,10 @@ function normalizePhone(input: string): string {
 }
 
 function altPhones(phone: string): string[] {
-  // Backwards-compat: also match the old un-prefixed 10-digit format
+  // Match all stored variants: 10-digit local, 12-digit with 91 prefix
   const set = new Set<string>([phone]);
   if (phone.startsWith("91") && phone.length === 12) set.add(phone.slice(2));
+  if (phone.length === 10) set.add("91" + phone);
   return Array.from(set);
 }
 
