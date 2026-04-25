@@ -3,7 +3,19 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 function normalizePhone(input: string): string {
-  return input.replace(/[^\d]/g, "");
+  let digits = input.replace(/[^\d]/g, "");
+  // Strip leading 0 (common in IN local format)
+  if (digits.startsWith("0")) digits = digits.replace(/^0+/, "");
+  // Default to India country code if missing (10-digit local number)
+  if (digits.length === 10) digits = "91" + digits;
+  return digits;
+}
+
+function altPhones(phone: string): string[] {
+  // Backwards-compat: also match the old un-prefixed 10-digit format
+  const set = new Set<string>([phone]);
+  if (phone.startsWith("91") && phone.length === 12) set.add(phone.slice(2));
+  return Array.from(set);
 }
 
 export const getWhatsAppThread = createServerFn({ method: "POST" })
