@@ -71,11 +71,12 @@ export function WhatsAppThread({ phone, leadId, leadType }: Props) {
     setLoading(true);
     load();
 
+    const variants = phoneVariants(normalizedPhone);
     const channel = supabase
       .channel(`wa-thread-${normalizedPhone}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "whatsapp_messages", filter: `phone=eq.${normalizedPhone}` },
+        { event: "*", schema: "public", table: "whatsapp_messages", filter: `phone=in.(${variants.join(",")})` },
         () => { load(); }
       )
       .subscribe();
