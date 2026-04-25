@@ -3,7 +3,19 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
 function normalizePhone(input: string): string {
-  return input.replace(/[^\d]/g, "");
+  let digits = input.replace(/[^\d]/g, "");
+  // Strip leading 0 (common in IN local format)
+  if (digits.startsWith("0")) digits = digits.replace(/^0+/, "");
+  // Default to India country code if missing (10-digit local number)
+  if (digits.length === 10) digits = "91" + digits;
+  return digits;
+}
+
+function altPhones(phone: string): string[] {
+  // Backwards-compat: also match the old un-prefixed 10-digit format
+  const set = new Set<string>([phone]);
+  if (phone.startsWith("91") && phone.length === 12) set.add(phone.slice(2));
+  return Array.from(set);
 }
 
 export const getWhatsAppThread = createServerFn({ method: "POST" })
@@ -16,10 +28,11 @@ export const getWhatsAppThread = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     const { supabase } = context;
+    const phones = altPhones(data.phone);
     const { data: messages, error } = await supabase
       .from("whatsapp_messages")
       .select("*")
-      .eq("phone", data.phone)
+      .in("phone", phones)
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
     return { messages: messages ?? [] };
@@ -73,7 +86,16 @@ export const sendWhatsAppMessage = createServerFn({ method: "POST" })
       const json = await res.json();
 
       if (!res.ok) {
-        const errMsg = json?.error?.message || `Meta API error ${res.status}`;
+        const code = json?.error?.code;
+        let errMsg = json?.error?.message || `Meta API error ${res.status}`;
+        if (code === 131030) {
+          errMsg = `Recipient +${data.phone} is not in your Meta WhatsApp test recipient list. While the app is in development mode, add this number under WhatsApp → API Setup → "To" → Manage phone number list, then verify it via the OTP Meta sends. Or publish your Meta app to message any number.`;
+        } else if (code === 131026) {
+          errMsg = `+${data.phone} is not a valid WhatsApp number, or hasn't messaged your business in the last 24 hours (free-form messages require a 24h window — use a template message otherwise).`;
+        } else if (code === 190 || code === 102) {
+          errMsg = `WhatsApp access token is invalid or expired. Generate a new permanent token in Meta and update the META_WA_ACCESS_TOKEN secret.`;
+        }
+        console.error("[WhatsApp send failed]", { phone: data.phone, code, status: res.status, message: json?.error?.message });
         await supabaseAdmin.from("whatsapp_messages").insert({
           phone: data.phone,
           direction: "out",
