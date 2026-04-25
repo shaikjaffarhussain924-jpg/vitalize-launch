@@ -16,7 +16,17 @@ interface Props {
 }
 
 function normalizePhone(input: string): string {
-  return input.replace(/[^\d]/g, "");
+  let digits = input.replace(/[^\d]/g, "");
+  if (digits.startsWith("0")) digits = digits.replace(/^0+/, "");
+  if (digits.length === 10) digits = "91" + digits;
+  return digits;
+}
+
+function phoneVariants(phone: string): string[] {
+  const set = new Set<string>([phone]);
+  if (phone.startsWith("91") && phone.length === 12) set.add(phone.slice(2));
+  if (phone.length === 10) set.add("91" + phone);
+  return Array.from(set);
 }
 
 function formatTime(iso: string) {
