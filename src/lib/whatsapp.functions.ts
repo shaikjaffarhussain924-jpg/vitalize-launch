@@ -86,7 +86,16 @@ export const sendWhatsAppMessage = createServerFn({ method: "POST" })
       const json = await res.json();
 
       if (!res.ok) {
-        const errMsg = json?.error?.message || `Meta API error ${res.status}`;
+        const code = json?.error?.code;
+        let errMsg = json?.error?.message || `Meta API error ${res.status}`;
+        if (code === 131030) {
+          errMsg = `Recipient +${data.phone} is not in your Meta WhatsApp test recipient list. While the app is in development mode, add this number under WhatsApp → API Setup → "To" → Manage phone number list, then verify it via the OTP Meta sends. Or publish your Meta app to message any number.`;
+        } else if (code === 131026) {
+          errMsg = `+${data.phone} is not a valid WhatsApp number, or hasn't messaged your business in the last 24 hours (free-form messages require a 24h window — use a template message otherwise).`;
+        } else if (code === 190 || code === 102) {
+          errMsg = `WhatsApp access token is invalid or expired. Generate a new permanent token in Meta and update the META_WA_ACCESS_TOKEN secret.`;
+        }
+        console.error("[WhatsApp send failed]", { phone: data.phone, code, status: res.status, message: json?.error?.message });
         await supabaseAdmin.from("whatsapp_messages").insert({
           phone: data.phone,
           direction: "out",
