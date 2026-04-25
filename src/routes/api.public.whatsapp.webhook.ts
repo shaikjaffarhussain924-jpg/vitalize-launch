@@ -28,7 +28,7 @@ async function autoLinkLead(phone: string): Promise<{ lead_id: string | null; le
   return { lead_id: null, lead_type: null };
 }
 
-export const Route = createFileRoute("/api/whatsapp/webhook")({
+export const Route = createFileRoute("/api/public/whatsapp/webhook")({
   server: {
     handlers: {
       // Meta verification handshake
