@@ -28,10 +28,11 @@ export const getWhatsAppThread = createServerFn({ method: "POST" })
   })
   .handler(async ({ data, context }) => {
     const { supabase } = context;
+    const phones = altPhones(data.phone);
     const { data: messages, error } = await supabase
       .from("whatsapp_messages")
       .select("*")
-      .eq("phone", data.phone)
+      .in("phone", phones)
       .order("created_at", { ascending: true });
     if (error) throw new Error(error.message);
     return { messages: messages ?? [] };
